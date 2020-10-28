@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name">EHL</string>
+    <string name="txt_Alumno">Alumno</string>
+    <string name="txtv_Maestro">Maestro</string>
+    <string name="txtv_maestroA">Maestro</string>
+    <string name="txtv_maestroB">Maestro</string>
+    <string name="txtv_maestroT">Maestro</string>
+    <string name="txtv_maestroM">Maestro</string>
+    <string name="txtv_maestroC">Maestro</string>
+    <string name="txtv_maestroEC">Maestro</string>
+    <string name="txtv_AñadirAlumno">Añadir Alumno</string>
+    <string name="txtv_Alumnos">/ Alumnos</string>
+    <string name="txtv_boleta">/ Boleta</string>
+    <string name="txtv_actividadM"> Actividad/ Crear memorama</string>
+    <string name="txtv_actividadC"> Actividad/ Crear CQuiz</string>
+    <string name="txtv_actividadEC"> Actividad/ Editar CQuiz</string>
+    <string name="txtv_trabajos">/ Trabajos</string>
+    <string name="txtv_AñadirM">Añadir</string>
+    <string name="txtv_AñadirC">Añadir</string>
+    <string name="txtv_añadirNP">Añadir nuevo par</string>
+    <string name="txtv_añadirNPR">Añadir nueva pregunta</string>
+    <string name="txtv_añadirNPRE">Añadir nueva pregunta</string>
+    <string name="btn_alumnos">Alumnos</string>
+    <string name="btn_trabajos">Trabajos</string>
+    <string name="btn_ajustes">Ajustes</string>
+    <string name="calificaciones">Calificaciones</string>
+    <string name="asistencias">Asistencias</string>
+    <string name="nivel_de_conocimiento">Nivel de conocimiento</string>
+    <string name="control_parental">Control parental</string>
+</resources>

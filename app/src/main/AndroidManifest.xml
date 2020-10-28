@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="mx.tec.EHL">
+
+    <application
+        android:allowBackup="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.AppCompat.NoActionBar">
+        <activity android:name=".Alumno.MainActivity_Alumno_Ajustes" />
+        <activity android:name=".Alumno.MainActivity_Alumno_Grupos" />
+        <activity android:name=".Profesor.activity_main_maestro_ajustes" />
+        <activity android:name=".ControlParental.MainActivityControlParental_NiveldeConocimiento" />
+        <activity android:name=".ControlParental.MainActivityControlParental_Asistencia" />
+        <activity android:name=".ControlParental.MainActivityControlParental_Calificaciones" />
+        <activity android:name=".ControlParental.MainActivityControlParental" />
+        <activity android:name=".Profesor.activity_main_maestro_edicioncquiz" />
+        <activity android:name=".Profesor.activity_main_maestro_creacioncquiz" />
+        <activity android:name=".Profesor.activity_main_maestro_creacionmemorama" />
+        <activity android:name=".Profesor.activity_main_maestro_trabajos" />
+        <activity android:name=".Profesor.activity_main_maestro_boleta" />
+        <activity android:name=".Profesor.activity_main_maestro_alumnos" />
+        <activity android:name=".Profesor.activity_main_maestro" />
+        <activity android:name=".Alumno.MainActivity_Alumno_Actividades" />
+        <activity android:name=".Alumno.MainActivity_Alumno" />
+        <activity android:name=".MainActivity"/>
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+    </application>
+
+</manifest>

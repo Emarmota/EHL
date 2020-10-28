@@ -1,0 +1,26 @@
+<resources>
+    <!-- Base application theme. -->
+    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
+        <!-- Customize your theme here. -->
+        <item name="colorPrimary">@color/colorPrimary</item>
+        <item name="colorPrimaryDark">@color/colorSecundary</item>
+        <item name="colorAccent">@color/colorAccent</item>
+    </style>
+
+    <style name="btn_sinrellenomenu" parent="android:Widget.Button">
+        <item name="android:background">@drawable/button_nofill</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+
+    <style name="btn_sinrelleno" parent="android:Widget.Button">
+        <item name="android:background">@drawable/button_nofill</item>
+        <item name="android:textColor">#FFFFFF</item>
+        <item name="android:textSize">19sp</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="btn_nada" parent="android:Widget.Button">
+        <item name="android:background">@drawable/button_nada</item>
+        <item name="android:textColor">#FFFFFF</item>
+    </style>
+</resources>
