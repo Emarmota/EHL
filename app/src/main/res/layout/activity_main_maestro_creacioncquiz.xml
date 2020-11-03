@@ -18,7 +18,7 @@
         tools:listitem="@layout/adapter_activity_maestro_trabajos_edicioncquiz" />
 
     <ImageView
-        android:id="@+id/imageView17"
+        android:id="@+id/btn_backcrecquiz"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -50,13 +50,13 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.085"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView17" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_backcrecquiz" />
 
     <TextView
         android:id="@+id/txtv_actividadC"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
+        android:layout_marginStart="40dp"
         android:layout_marginTop="8dp"
         android:text="@string/txtv_actividadC"
         android:textColor="#FFFFFF"

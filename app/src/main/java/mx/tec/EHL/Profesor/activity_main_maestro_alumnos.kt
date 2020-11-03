@@ -1,10 +1,13 @@
 package mx.tec.EHL.Profesor
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import mx.tec.EHL.Adapter.ProfesorAdapter
+import mx.tec.EHL.PopUpClass
 import mx.tec.EHL.R
 
 class activity_main_maestro_alumnos : AppCompatActivity() {
@@ -23,6 +26,18 @@ class activity_main_maestro_alumnos : AppCompatActivity() {
             adapter = activityAdapter
         }
 
+        val popupButton =
+            findViewById<ImageView>(R.id.imageView8)
+        popupButton.setOnClickListener { v ->
+            val popUpClass = PopUpClass()
+            popUpClass.showPopupWindow(v)
+        }
+
+        val btnback=findViewById<ImageView>(R.id.btn_backmmalum)
+        btnback.setOnClickListener{
+            val intent= Intent(this@activity_main_maestro_alumnos, activity_main_maestro::class.java)
+            startActivity(intent)
+        }
 
 
 

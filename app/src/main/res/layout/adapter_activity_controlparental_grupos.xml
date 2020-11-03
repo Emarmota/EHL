@@ -9,7 +9,7 @@
         android:id="@+id/cardView4"
         android:layout_width="412dp"
         android:layout_height="49dp"
-        app:cardBackgroundColor="#632A2424"
+        app:cardBackgroundColor="#2EFFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">

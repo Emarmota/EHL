@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:background="#83FFFFFF"
+    android:gravity="center"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#9EF8EDED"
+        android:backgroundTint="#FFFFFF"
+        app:cardCornerRadius="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+            <TextView
+                android:id="@+id/titleTextAñadirPregunta"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:padding="10dp"
+                android:text="@string/textTitleAñadirPregunta"
+                android:textColor="#050505"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+
+            <TextView
+                android:id="@+id/textViewIngresaNuevaPregunta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/textViewIngresaNuevaPregunta"
+                android:textColor="#050505"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextTextIngresarNuevaPregunta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="#050505" />
+
+            <TextView
+                android:id="@+id/textViewIngresaRespuesta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/textViewIngresaRespuesta"
+                android:textColor="#050505"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/editTextIngresaReespuesta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="#050505" />
+
+            <Button
+                android:id="@+id/ButtonAñadir"
+                style="@style/btn_sinrelleno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/textButtonAñadir"
+                android:textColor="#050505" />
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

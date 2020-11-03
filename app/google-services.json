@@ -1,0 +1,48 @@
+{
+  "project_info": {
+    "project_number": "1077618633895",
+    "firebase_url": "https://my-project-d35b1.firebaseio.com",
+    "project_id": "my-project-d35b1",
+    "storage_bucket": "my-project-d35b1.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:1077618633895:android:2be4549c894d18bf94bf82",
+        "android_client_info": {
+          "package_name": "mx.tec.EHL"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "1077618633895-1o5km4k5tleb36tokisicnqn1e5fa33s.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "mx.tec.EHL",
+            "certificate_hash": "3563bd642883b7e2a4159ba74d5aead7da2cc33d"
+          }
+        },
+        {
+          "client_id": "1077618633895-o6jp4qo3qbvntt5prnuo1ukddvrc4atg.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDghDvxhw_1p8R5SWQaIr0R0wacGeUXtuA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "1077618633895-o6jp4qo3qbvntt5prnuo1ukddvrc4atg.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

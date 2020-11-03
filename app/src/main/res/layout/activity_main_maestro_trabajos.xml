@@ -8,7 +8,7 @@
     tools:context=".Profesor.activity_main_maestro_trabajos">
 
     <ImageView
-        android:id="@+id/imageView10"
+        android:id="@+id/btn_backmmt"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.085"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView10" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_backmmt" />
 
     <TextView
         android:id="@+id/txtv_trabajos"
@@ -57,9 +57,10 @@
         android:id="@+id/txtv_AñadirM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="225dp"
-        android:layout_marginTop="173dp"
-        android:text="@string/txtv_AñadirM"
+        android:layout_marginStart="136dp"
+        android:layout_marginTop="172dp"
+        android:text="Añadir memorama"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
@@ -67,10 +68,12 @@
 
     <TextView
         android:id="@+id/txtv_AñadirC"
-        android:layout_width="83dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/txtv_AñadirC"
+        android:layout_width="173dp"
+        android:layout_height="43dp"
+        android:layout_marginStart="4dp"
+        android:layout_marginTop="4dp"
+        android:text="Añadir CQuiz"
+        android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="@+id/txtv_AñadirM"
@@ -120,5 +123,16 @@
         tools:listitem="@layout/adapter_activity_maestro_trabajos">
 
     </androidx.recyclerview.widget.RecyclerView>
+
+    <ImageView
+        android:id="@+id/radioButtonAsignar"
+        android:layout_width="36dp"
+        android:layout_height="41dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintEnd_toEndOf="@+id/rvPadre"
+        app:layout_constraintHorizontal_bias="0.685"
+        app:layout_constraintStart_toStartOf="@+id/rvPadre"
+        app:layout_constraintTop_toTopOf="@+id/rvPadre"
+        app:srcCompat="@android:drawable/ic_notification_overlay" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

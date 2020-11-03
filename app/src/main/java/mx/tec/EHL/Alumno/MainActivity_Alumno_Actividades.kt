@@ -17,7 +17,7 @@ class MainActivity_Alumno_Actividades : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_alumno_actividades)
 
-        val imageView4=findViewById<ImageView>(R.id.imageView4)
+        val imageView4=findViewById<ImageView>(R.id.btn_backcpa)
         imageView4.setOnClickListener{
             val intent= Intent(this@MainActivity_Alumno_Actividades,MainActivity_Alumno::class.java)
             startActivity(intent)

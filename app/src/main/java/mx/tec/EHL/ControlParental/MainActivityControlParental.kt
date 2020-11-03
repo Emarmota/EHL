@@ -5,6 +5,7 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import mx.tec.EHL.MainActivity
 import mx.tec.EHL.R
 import mx.tec.EHL.Profesor.activity_main_maestro
 
@@ -30,9 +31,9 @@ class MainActivityControlParental : AppCompatActivity() {
             startActivity(intent)
         }
 
-        val imageView2=findViewById<ImageView>(R.id.imageView2)
-        imageView2.setOnClickListener{
-            val intent= Intent(this@MainActivityControlParental, activity_main_maestro::class.java)
+        val btnback=findViewById<ImageView>(R.id.btn_backcp)
+        btnback.setOnClickListener{
+            val intent= Intent(this@MainActivityControlParental, MainActivity::class.java)
             startActivity(intent)
         }
     }

@@ -7,7 +7,6 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import mx.tec.EHL.Adapter.ControlParentalAdapter
-import mx.tec.EHL.DataBase.Tablas.ControlParental
 import mx.tec.EHL.R
 
 class MainActivityControlParental_Calificaciones : AppCompatActivity() {
@@ -24,8 +23,8 @@ class MainActivityControlParental_Calificaciones : AppCompatActivity() {
         }
 
 
-        val imageView4=findViewById<ImageView>(R.id.imageView4)
-        imageView4.setOnClickListener{
+        val btnback=findViewById<ImageView>(R.id.btn_backcpa)
+        btnback.setOnClickListener{
             val intent= Intent(this@MainActivityControlParental_Calificaciones, MainActivityControlParental::class.java)
             startActivity(intent)
         }

@@ -7,7 +7,7 @@
     <androidx.cardview.widget.CardView
         android:layout_width="409dp"
         android:layout_height="47dp"
-        app:cardBackgroundColor="#636C6C6C"
+        app:cardBackgroundColor="#63FFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/cardView4">

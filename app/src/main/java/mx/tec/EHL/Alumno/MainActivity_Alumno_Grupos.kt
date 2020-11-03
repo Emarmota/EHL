@@ -1,7 +1,9 @@
 package mx.tec.EHL.Alumno
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import mx.tec.EHL.Adapter.AlumnoAdapter
@@ -18,6 +20,11 @@ class MainActivity_Alumno_Grupos : AppCompatActivity() {
         list_Activity_alumno.apply {
             layoutManager = LinearLayoutManager(applicationContext)
             adapter = activityAdapter
+        }
+        val imageView4=findViewById<ImageView>(R.id.btn_backag)
+        imageView4.setOnClickListener{
+            val intent= Intent(this@MainActivity_Alumno_Grupos,MainActivity_Alumno::class.java)
+            startActivity(intent)
         }
     }
 }

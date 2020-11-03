@@ -2,9 +2,11 @@ package mx.tec.EHL.Profesor
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import mx.tec.EHL.Adapter.ProfesorAdapter
+import mx.tec.EHL.PopUpClassAñadirPregunta
 import mx.tec.EHL.R
 
 class activity_main_maestro_creacioncquiz : AppCompatActivity() {
@@ -19,6 +21,13 @@ class activity_main_maestro_creacioncquiz : AppCompatActivity() {
         rvPadre.apply {
             layoutManager = LinearLayoutManager(applicationContext)
             adapter = activityAdapter
+        }
+
+        val popupButton10 =
+            findViewById<ImageView>(R.id.imageView19)
+        popupButton10.setOnClickListener { v ->
+            val popUpClass = PopUpClassAñadirPregunta()
+            popUpClass.showPopupWindow(v)
         }
     }
 }

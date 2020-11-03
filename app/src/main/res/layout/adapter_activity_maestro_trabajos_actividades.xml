@@ -24,7 +24,7 @@
                 android:layout_marginStart="60dp"
                 android:layout_marginTop="12dp"
                 android:paddingBottom="5sp"
-                android:text="actviidad 1"
+                android:text="actividad 1"
                 android:textColor="#FFFFFF"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"

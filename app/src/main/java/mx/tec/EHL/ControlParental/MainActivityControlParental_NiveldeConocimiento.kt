@@ -15,9 +15,9 @@ class MainActivityControlParental_NiveldeConocimiento : AppCompatActivity() {
         setContentView(R.layout.activity_main_control_parental__nivelde_conocimiento)
 
 
-        val imageView4 = findViewById<ImageView>(R.id.imageView4)
-        imageView4.setOnClickListener {
-            val intent = Intent(this@MainActivityControlParental_NiveldeConocimiento, activity_main_maestro::class.java)
+        val btnback = findViewById<ImageView>(R.id.btn_backcpa)
+        btnback.setOnClickListener {
+            val intent = Intent(this@MainActivityControlParental_NiveldeConocimiento, MainActivityControlParental::class.java)
             startActivity(intent)
         }
     }

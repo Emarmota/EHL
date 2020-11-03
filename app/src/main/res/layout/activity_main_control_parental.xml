@@ -8,7 +8,7 @@
     tools:context=".Profesor.activity_main_maestro">
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/btn_backcp"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView2" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_backcp" />
 
     <Button
         android:id="@+id/btn_alumnos"

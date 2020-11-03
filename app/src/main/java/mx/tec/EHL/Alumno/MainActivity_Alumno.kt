@@ -4,9 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
-import android.widget.ImageButton
 import android.widget.ImageView
-import mx.tec.EHL.ControlParental.MainActivityControlParental
 import mx.tec.EHL.MainActivity
 import mx.tec.EHL.R
 
@@ -28,6 +26,12 @@ class MainActivity_Alumno : AppCompatActivity() {
         val btn_Ajustes=findViewById<Button>(R.id.btn_Ajustes)
         btn_Ajustes.setOnClickListener{
             val intent= Intent(this@MainActivity_Alumno, MainActivity_Alumno_Ajustes::class.java)
+            startActivity(intent)
+        }
+
+        val imageView4=findViewById<ImageView>(R.id.btn_backcpa)
+        imageView4.setOnClickListener{
+            val intent= Intent(this@MainActivity_Alumno,MainActivity::class.java)
             startActivity(intent)
         }
 

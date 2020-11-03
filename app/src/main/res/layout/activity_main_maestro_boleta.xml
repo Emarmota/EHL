@@ -8,7 +8,7 @@
     tools:context=".Profesor.activity_main_maestro_boleta">
 
     <ImageView
-        android:id="@+id/imageView9"
+        android:id="@+id/btn_backmmb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -40,14 +40,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.085"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView9" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_backmmb" />
 
     <TextView
         android:id="@+id/txtv_boleta"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="4dp"
         android:text="@string/txtv_boleta"
         android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"

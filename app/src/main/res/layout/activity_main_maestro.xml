@@ -8,7 +8,7 @@
     tools:context=".Profesor.activity_main_maestro">
 
     <ImageButton
-        android:id="@+id/imageButton2"
+        android:id="@+id/btn_backmm"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -32,6 +32,7 @@
         android:id="@+id/txtv_Maestro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginTop="52dp"
         android:fontFamily="sans-serif"
         android:text="@string/txtv_Maestro"
         android:textColor="@color/colorPrimary"
@@ -40,7 +41,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.049"
         app:layout_constraintStart_toStartOf="parent"
-        tools:layout_editor_absoluteY="108dp" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_backmm" />
 
     <Button
         android:id="@+id/btn_alumnos"
@@ -75,4 +76,14 @@
         app:layout_constraintHorizontal_bias="0.504"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_trabajos" />
+
+    <ImageView
+        android:id="@+id/img_master_menu"
+        android:layout_width="76dp"
+        android:layout_height="71dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="100dp"
+        app:layout_constraintStart_toEndOf="@+id/txtv_Maestro"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_launcher_foreground" />
 </androidx.constraintlayout.widget.ConstraintLayout>

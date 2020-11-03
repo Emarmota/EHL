@@ -18,7 +18,7 @@
         app:srcCompat="@drawable/logo" />
 
     <ImageView
-        android:id="@+id/imageView25"
+        android:id="@+id/btn_backag"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="28dp"
@@ -40,7 +40,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.085"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imageView25" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_backag" />
 
     <TextView
         android:id="@+id/txtv_Actividades2"
