@@ -1,7 +1,6 @@
 package mx.tec.EHL.Alumno
 
 import android.Manifest
-import android.app.Activity
 import android.app.DownloadManager
 import android.content.Context
 import android.content.Intent
@@ -11,12 +10,10 @@ import android.os.Build
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.os.Environment
-import android.provider.MediaStore
 import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import com.google.firebase.ktx.Firebase
-import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
 import mx.tec.EHL.PopUpClassCambiarContraseñaAlumno
 import mx.tec.EHL.PopUpClassContacto
@@ -40,7 +37,7 @@ class MainActivity_Alumno_Ajustes : AppCompatActivity() {
         }
 
 
-        val btn_ayuda = findViewById<Button>(R.id.btn_ayudaalum)
+        val btn_ayuda = findViewById<Button>(R.id.btn_ayuda)
         btn_ayuda.setOnClickListener{
             if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
                 if(checkSelfPermission(Manifest.permission.WRITE_EXTERNAL_STORAGE) ==
@@ -74,7 +71,7 @@ class MainActivity_Alumno_Ajustes : AppCompatActivity() {
     fun startdowloadFile(){
         val storageRef = storage.reference
         var uri = ""
-        storageRef.child("files/Scan2.pdf").downloadUrl.addOnSuccessListener {
+        storageRef.child("files/DocumentoDeAyuda.pdf").downloadUrl.addOnSuccessListener {
             uri = it.toString()
             downloadFile(uri) }
     }

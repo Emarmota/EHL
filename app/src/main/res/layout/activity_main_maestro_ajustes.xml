@@ -65,7 +65,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtv_Alumnos2" />
 
     <Button
-        android:id="@+id/btn_ayudaalum"
+        android:id="@+id/btn_ayuda"
         style="@style/btn_sinrelleno"
         android:layout_width="270dp"
         android:layout_height="52dp"
@@ -86,7 +86,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.588"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/btn_ayudaalum" />
+        app:layout_constraintTop_toBottomOf="@+id/btn_ayuda" />
 
     <Button
         android:id="@+id/btn_cambiarimagen"
