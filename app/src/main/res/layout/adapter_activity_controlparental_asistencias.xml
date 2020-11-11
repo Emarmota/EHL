@@ -20,8 +20,8 @@
 
             <TextView
                 android:id="@+id/txtv_Grupo"
-                android:layout_width="117dp"
-                android:layout_height="25dp"
+                android:layout_width="47dp"
+                android:layout_height="23dp"
                 android:layout_marginStart="84dp"
                 android:layout_marginTop="12dp"
                 android:paddingBottom="5sp"
@@ -30,6 +30,16 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Grupo:" />
+
+            <TextView
+                android:id="@+id/txt_primario"
+                android:layout_width="117dp"
+                android:layout_height="25dp"
+                android:layout_marginStart="16dp"
+                android:paddingBottom="5sp"
+                android:textColor="#FFFFFF"
+                app:layout_constraintStart_toEndOf="@+id/txtv_Grupo"
+                app:layout_constraintTop_toTopOf="@+id/txtv_Grupo" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -59,10 +69,10 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <TextView
-                android:id="@+id/txt_calificacion"
+                android:id="@+id/txt_secundario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="88dp"
+                android:layout_marginStart="52dp"
                 android:layout_marginTop="12dp"
                 android:text="N/A"
                 android:textColor="#FFFFFF"

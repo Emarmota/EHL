@@ -40,27 +40,24 @@ class MainActivityControlParental_Calificaciones : AppCompatActivity() {
             )
             startActivity(intent)
         }
+        val textNombre = findViewById<TextView>(R.id.textNombre) //nombre del alumno
+
 
         var queue = Volley.newRequestQueue(this)
         val uri = "http://192.168.50.22:3000/api/controlParentalCalificaciones/"+sharedPref.getString(Constant.PREF_USERNAME)+"/"+sharedPref.getString(Constant.PREF_USERNAME)
-        //val uri = "http://192.168.50.22:3000/api/inicioSesion/c/c"
         val listener = Response.Listener<JSONArray> { response ->
             val lista = Array(response.length(),{ arrayListOf<String>( ) })
             var elemento : JSONObject
-            println("MENSAJE"+response.toString())
-            println("tipo "+response.javaClass.name)
             for(i in 0 until response.length()){
                 elemento = response.getJSONObject(i)
+                textNombre.text =  elemento.getString("nombreCompleto")
                 lista.set(i, arrayListOf(
-                    elemento.getString("nombreCompleto"),
                     elemento.getString("nombreGrupo"),
                     elemento.getString("nombreActividad"),
                     elemento.getString("calificacion")
                 )
                 )
             }
-            val textNombre = findViewById<TextView>(R.id.textNombre) //nombre del alumno
-            textNombre.text = lista.get(0).get(0)
 
             activityAdapter = ControlParentalAdapter(
                 this,
@@ -74,8 +71,6 @@ class MainActivityControlParental_Calificaciones : AppCompatActivity() {
                 layoutManager = LinearLayoutManager(applicationContext)
                 adapter = activityAdapter
             }
-
-
         }
         val error = Response.ErrorListener { error ->
             Log.e("MENSAJE_ERROR", error.message!!)

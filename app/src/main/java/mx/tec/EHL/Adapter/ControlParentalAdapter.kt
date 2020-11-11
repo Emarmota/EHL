@@ -26,7 +26,7 @@ class ControlParentalAdapter (val context : Context, val elementos: Array<ArrayL
             }
         }
         fun bindData(elemento: ArrayList<String>){
-            txt_primario !!.text = elemento[1]
+            txt_primario !!.text = elemento[0]
             txt_secundario !!.text = "10"
 
 
@@ -45,7 +45,7 @@ class ControlParentalAdapter (val context : Context, val elementos: Array<ArrayL
         holder.bindData(elem)
         if(layoutInflaterChild != null){
             val elementosChild = Array(1,{ arrayListOf<String>( ) })
-            elementosChild.set(0, elem.slice(2..3) as ArrayList<String>)
+            elementosChild.set(0, elem.slice(1..2) as ArrayList<String>)
             SetRecycler(elementosChild, holder.recyclerViewChild,layoutInflaterChild!!)
         }
     }
