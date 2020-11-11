@@ -45,13 +45,19 @@ class MainActivity : AppCompatActivity() {
             //val uri = "http://192.168.50.22:3000/api/inicioSesion/c/c"
             val listener = Response.Listener<JSONArray> {response ->
                 Log.e("MENSAJE_EXITO",response.toString())
-                InicioSesion(response.getJSONObject(0).getString("perfil"))
+                try{
+                    InicioSesion(response.getJSONObject(0).getString("perfil"))
+                }
+                catch (e : Exception){
+                    Toast.makeText(this,"No existe el usuario",Toast.LENGTH_SHORT).show()
+
+                }
 
             }
             val error = Response.ErrorListener {error ->
                 Log.e("MENSAJE_ERROR",error.message!!)
             }
-            val request = JsonArrayRequest(Request.Method.GET, uri, listener,error)
+            val request = JsonArrayRequest(Request.Method.GET, uri,null, listener,error)
             queue.add(request)
 
         }
@@ -77,9 +83,7 @@ class MainActivity : AppCompatActivity() {
             val intent= Intent(this@MainActivity,MainActivityControlParental::class.java)
             startActivity(intent)
         }
-        else{
-            Toast.makeText(this,"No existe el usuario",Toast.LENGTH_SHORT).show()
-        }
+
     }
     private fun saveSession(username: String, pass: String){
         sharedPref.put(Constant.PREF_USERNAME, username)

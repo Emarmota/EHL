@@ -98,10 +98,9 @@
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPadre"
-        android:layout_width="313dp"
-        android:layout_height="446dp"
+        android:layout_width="352dp"
+        android:layout_height="426dp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.297"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout"
         tools:listitem="@layout/adapter_activity_controlparental_grupos" />

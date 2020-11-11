@@ -7,7 +7,6 @@ import android.widget.Button
 import android.widget.ImageView
 import mx.tec.EHL.MainActivity
 import mx.tec.EHL.R
-import mx.tec.EHL.Profesor.activity_main_maestro
 
 class MainActivityControlParental : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
