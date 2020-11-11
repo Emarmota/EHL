@@ -28,7 +28,6 @@ class ControlParentalAdapterChild(val context: Context, val elementos:  Array<Ar
             catch(e: Exception){ }
         }
         fun bindData(elemento: ArrayList<String>){
-            println(elemento)
             txt_primario !!.text = elemento[0]
             txt_secundario !!.text = elemento[1]
 

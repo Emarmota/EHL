@@ -52,9 +52,10 @@ class MainActivityControlParental_Calificaciones : AppCompatActivity() {
                 elemento = response.getJSONObject(i)
                 textNombre.text =  elemento.getString("nombreCompleto")
                 lista.set(i, arrayListOf(
-                    elemento.getString("nombreGrupo"),
-                    elemento.getString("nombreActividad"),
-                    elemento.getString("calificacion")
+                        elemento.getString("nombreGrupo"),
+                        elemento.getString("promedio"),
+                        elemento.getString("nombreActividad"),
+                        elemento.getString("calificacion")
                 )
                 )
             }
