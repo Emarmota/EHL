@@ -44,7 +44,9 @@ class ControlParentalAdapter (val context : Context, val elementos: Array<ArrayL
         val elem = elementos!![position]
         holder.bindData(elem)
         if(layoutInflaterChild != null){
-            SetRecycler(elem.slice(2..3) as ArrayList<String>, holder.recyclerViewChild,layoutInflaterChild!!)
+            val elementosChild = Array(1,{ arrayListOf<String>( ) })
+            elementosChild.set(0, elem.slice(2..3) as ArrayList<String>)
+            SetRecycler(elementosChild, holder.recyclerViewChild,layoutInflaterChild!!)
         }
     }
 
@@ -62,7 +64,7 @@ class ControlParentalAdapter (val context : Context, val elementos: Array<ArrayL
     }
 
 
-    private fun SetRecycler(elementos: ArrayList<String>, recyclerView: RecyclerView?, layoutInflaterChild:Int){
+    private fun SetRecycler(elementos: Array<ArrayList<String>>, recyclerView: RecyclerView?, layoutInflaterChild:Int){
         val childRecyclerAdapter = ControlParentalAdapterChild(context, elementos, object: ControlParentalAdapter.OnAdapterListener{}, layoutInflaterChild)
         recyclerView!!.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
         recyclerView!!.adapter = childRecyclerAdapter
