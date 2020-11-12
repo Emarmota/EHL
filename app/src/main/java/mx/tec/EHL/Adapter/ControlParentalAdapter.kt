@@ -8,10 +8,11 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import mx.tec.EHL.R
+import java.lang.Exception
 import java.util.*
 import kotlin.collections.ArrayList
 
-class ControlParentalAdapter (val context : Context, val elementos: Array<ArrayList<String>>?,var listener: OnAdapterListener, var layoutInflater: Int, var layoutInflaterChild:Int?) : RecyclerView.Adapter<ControlParentalAdapter.ActivityViewHolder>(){
+class ControlParentalAdapter (val context : Context, var elementos: ArrayList<ArrayList<String>>?,var listener: OnAdapterListener, var layoutInflater: Int, var layoutInflaterChild:Int?) : RecyclerView.Adapter<ControlParentalAdapter.ActivityViewHolder>(){
     class ActivityViewHolder(val view: View, val child : Boolean) : RecyclerView.ViewHolder(view){
         var recyclerViewChild : RecyclerView? = null
         var txt_primario : TextView? = null
@@ -25,10 +26,10 @@ class ControlParentalAdapter (val context : Context, val elementos: Array<ArrayL
 
             }
         }
-        fun bindData(elemento: ArrayList<String>){
-            txt_primario !!.text = elemento[0]
-            txt_secundario !!.text = elemento[1]
-
+        fun bindData(elemento: ArrayList<String>?){
+            println("ENTRADA: "+elemento )
+            txt_primario !!.text = elemento?.get(0)
+            txt_secundario !!.text = elemento?.get(1)
 
         }
     }
@@ -42,33 +43,51 @@ class ControlParentalAdapter (val context : Context, val elementos: Array<ArrayL
 
     override fun onBindViewHolder(holder: ActivityViewHolder, position: Int) {
         val elem = elementos!![position]
-        holder.bindData(elem)
+        if(elem.isNotEmpty()){
+            println("PRIMEROS: "+elem)
+            holder.bindData(elem)
+        }
+        println("ELEM: "+elem)
 
 
-        if(layoutInflaterChild != null){
-            val elementosChild = Array(1,{ arrayListOf<String>( ) })
-
-            for(i in 0..elementos.size-1 ){
-                /*
-                    0 -> Grupo1
-                    1 -> Grupo1
-                    2 -> Grupo2
-                 */
+        if(layoutInflaterChild != null && elem.isNotEmpty() ){
+            var elementosChild = arrayListOf( arrayListOf<String>())
+            var newElementos = arrayListOf( arrayListOf<String>())
+            for(i in 0..elementos!!.size-1 ){
                 if(i == 0){
-                    println(elementos[i][0] + "  "+i)
-                    elementosChild.set(0, elem.slice(2..3) as ArrayList<String>)
+                    //println(elementos!![i]+"ANTES    V:"+ elem)
+                    newElementos.add(elementos!![i])
+                    elementosChild.add(elem.slice(2..3) as ArrayList<String>)
+                    //println(newElementos[i]+"DESPUES")
 
                 }else{
-                    elementosChild.set(0, elem.slice(2..3) as ArrayList<String>)
-
-                }
-                if(i != 0 && elementos[i-1][0] != elementos[i][0] ){
-                    SetRecycler(elementosChild, holder.recyclerViewChild,layoutInflaterChild!!)
+                    println(elementos!![i-1][0] + "    "+ elementos!![i][0])
+                    if(i != 0 && elementos!![i-1][0] != elementos!![i][0] ){
+                        //println("BREAK")
+                        for(j in i..elementos!!.size-1 ) {
+                            newElementos.add(elementos!![j])
+                        }
+                        //SetRecycler(elementosChild, holder.recyclerViewChild,layoutInflaterChild!!)
+                        break
+                    }else{
+                        //println(elementos!![i]+"ANTES")
+                        elementosChild.add(elem.slice(2..3) as ArrayList<String>)
+                    }
                 }
             }
-            SetRecycler(elementosChild, holder.recyclerViewChild,layoutInflaterChild!!)
+            elementos = newElementos
+            for(j in 0..elementos!!.size-1 ) {
+                println(elementos!![j]+" -> nuevos elementos")
+                if(elementos!![j].isNullOrEmpty()){
+                    println(j.toString()+" -> NUMERO")
+                    elementos!![j].drop(j)
+                }
+            }
+            println(elementos!!.javaClass.name+ "  <---- NOMBRE DEL TIPO DE DATOS")
+            for(j in 0..elementos!!.size-1 ) {
+                println(elementos!![j]+" -> nuevos elementos")
 
-
+            }
         }
     }
 

@@ -41,6 +41,8 @@ class ControlParentalAdapterChild(val context: Context, val elementos:  Array<Ar
 
     override fun onBindViewHolder(holder: ActivityViewHolder, position: Int) {
         val elem = elementos!![position]
+
+
         holder.bindData(elem)
         if(holder.button1 != null){
             holder.button1!!.setOnClickListener { println("BOTON 1") }
