@@ -12,9 +12,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
-import com.android.volley.toolbox.JsonObjectRequest
 import com.android.volley.toolbox.Volley
-import kotlinx.android.synthetic.main.activity_main_control_parental__calificaciones.view.*
 import mx.tec.EHL.Adapter.ControlParentalAdapter
 import mx.tec.EHL.Helper.Constant
 import mx.tec.EHL.Helper.PreferencesHelper
@@ -35,8 +33,8 @@ class MainActivityControlParental_Calificaciones : AppCompatActivity() {
         val btnback=findViewById<ImageView>(R.id.btn_backcpa)
         btnback.setOnClickListener{
             val intent= Intent(
-                this@MainActivityControlParental_Calificaciones,
-                MainActivityControlParental::class.java
+                    this@MainActivityControlParental_Calificaciones,
+                    MainActivityControlParental::class.java
             )
             startActivity(intent)
         }
@@ -46,28 +44,40 @@ class MainActivityControlParental_Calificaciones : AppCompatActivity() {
         var queue = Volley.newRequestQueue(this)
         val uri = "http://192.168.50.22:3000/api/controlParentalCalificaciones/"+sharedPref.getString(Constant.PREF_USERNAME)+"/"+sharedPref.getString(Constant.PREF_USERNAME)
         val listener = Response.Listener<JSONArray> { response ->
-            //val lista = Array(response.length(),{ arrayListOf<String>( ) })
+            //var lista = Array(response.length(),{ arrayListOf<String>( ) })
             val lista : ArrayList<ArrayList<String>>
-            lista = arrayListOf( arrayListOf<String>())
+            lista = arrayListOf(arrayListOf())
             var elemento : JSONObject
             for(i in 0 until response.length()){
                 elemento = response.getJSONObject(i)
                 textNombre.text =  elemento.getString("nombreCompleto")
-                lista.add(i, arrayListOf(
-                        elemento.getString("nombreGrupo"),
-                        elemento.getString("promedio"),
-                        elemento.getString("nombreActividad"),
-                        elemento.getString("calificacion")
-                )
-                )
+                if(i == 0){
+                    lista.set(i,
+                            arrayListOf(
+                                    elemento.getString("nombreGrupo"),
+                                    elemento.getString("promedio"),
+                                    elemento.getString("nombreActividad"),
+                                    elemento.getString("calificacion")
+                            )
+                    )
+                }else{
+                    lista.add(i,
+                            arrayListOf(
+                                    elemento.getString("nombreGrupo"),
+                                    elemento.getString("promedio"),
+                                    elemento.getString("nombreActividad"),
+                                    elemento.getString("calificacion")
+                            )
+                    )
+                }
             }
 
             activityAdapter = ControlParentalAdapter(
-                this,
-                lista,
-                object : ControlParentalAdapter.OnAdapterListener {},
-                R.layout.adapter_activity_controlparental_grupos,
-                R.layout.adapter_activity_controlparental_grupos_calificaciones
+                    this,
+                    lista,
+                    object : ControlParentalAdapter.OnAdapterListener {},
+                    R.layout.adapter_activity_controlparental_grupos,
+                    R.layout.adapter_activity_controlparental_grupos_calificaciones
             )
             val list_Activity_alumno = findViewById<RecyclerView>(R.id.rvPadre)
             list_Activity_alumno.apply {
@@ -78,7 +88,7 @@ class MainActivityControlParental_Calificaciones : AppCompatActivity() {
         val error = Response.ErrorListener { error ->
             Log.e("MENSAJE_ERROR", error.message!!)
         }
-        val request = JsonArrayRequest(Request.Method.GET,uri,null,listener, error)
+        val request = JsonArrayRequest(Request.Method.GET, uri, null, listener, error)
         queue.add(request)
 
 

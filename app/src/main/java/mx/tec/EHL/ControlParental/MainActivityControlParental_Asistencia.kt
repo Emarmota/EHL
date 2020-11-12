@@ -39,16 +39,26 @@ class MainActivityControlParental_Asistencia : AppCompatActivity() {
         val listener = Response.Listener<JSONArray> { response ->
             //var lista = Array(response.length(),{ arrayListOf<String>( ) })
             val lista : ArrayList<ArrayList<String>>
-            lista = arrayListOf( arrayListOf<String>())
+            lista = arrayListOf( arrayListOf())
             var elemento : JSONObject
             for(i in 0 until response.length()){
                 elemento = response.getJSONObject(i)
                 textNombre.text =  elemento.getString("nombreCompleto")
-                lista.set(i, arrayListOf(
-                    elemento.getString("nombreGrupo"),
-                    elemento.getString("faltas")
-                )
-                )
+                if(i == 0){
+                    lista.set(i,
+                            arrayListOf(
+                                    elemento.getString("nombreGrupo"),
+                                    elemento.getString("faltas")
+                            )
+                    )
+                }else{
+                    lista.add(i,
+                            arrayListOf(
+                                    elemento.getString("nombreGrupo"),
+                                    elemento.getString("faltas")
+                            )
+                    )
+                }
             }
             activityAdapter = ControlParentalAdapter(
                 this,

@@ -11,7 +11,7 @@ import mx.tec.EHL.R
 import java.lang.Exception
 import java.util.ArrayList
 
-class ControlParentalAdapterChild(val context: Context, val elementos:  Array<ArrayList<String>>?, var listener: ControlParentalAdapter.OnAdapterListener, var layoutInflater: Int) : RecyclerView.Adapter<ControlParentalAdapterChild.ActivityViewHolder>(){
+class ControlParentalAdapterChild(val context: Context, val elementos:  ArrayList<ArrayList<String>>?, var listener: ControlParentalAdapter.OnAdapterListener, var layoutInflater: Int) : RecyclerView.Adapter<ControlParentalAdapterChild.ActivityViewHolder>(){
 
     class ActivityViewHolder(val view: View) : RecyclerView.ViewHolder(view){
         var button1 : RadioButton? = null
@@ -41,8 +41,6 @@ class ControlParentalAdapterChild(val context: Context, val elementos:  Array<Ar
 
     override fun onBindViewHolder(holder: ActivityViewHolder, position: Int) {
         val elem = elementos!![position]
-
-
         holder.bindData(elem)
         if(holder.button1 != null){
             holder.button1!!.setOnClickListener { println("BOTON 1") }

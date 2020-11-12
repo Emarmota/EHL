@@ -8,11 +8,13 @@ import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import mx.tec.EHL.R
-import java.lang.Exception
-import java.util.*
 import kotlin.collections.ArrayList
 
 class ControlParentalAdapter (val context : Context, var elementos: ArrayList<ArrayList<String>>?,var listener: OnAdapterListener, var layoutInflater: Int, var layoutInflaterChild:Int?) : RecyclerView.Adapter<ControlParentalAdapter.ActivityViewHolder>(){
+
+    var elementosChild : ArrayList<ArrayList<String>>? = null
+    var cantChild : ArrayList<Int>? = null
+    var start = false
     class ActivityViewHolder(val view: View, val child : Boolean) : RecyclerView.ViewHolder(view){
         var recyclerViewChild : RecyclerView? = null
         var txt_primario : TextView? = null
@@ -27,9 +29,8 @@ class ControlParentalAdapter (val context : Context, var elementos: ArrayList<Ar
             }
         }
         fun bindData(elemento: ArrayList<String>?){
-            println("ENTRADA: "+elemento )
-            txt_primario !!.text = elemento?.get(0)
-            txt_secundario !!.text = elemento?.get(1)
+            txt_primario !!.text = elemento!![0]
+            txt_secundario !!.text = elemento!![1]
 
         }
     }
@@ -43,52 +44,27 @@ class ControlParentalAdapter (val context : Context, var elementos: ArrayList<Ar
 
     override fun onBindViewHolder(holder: ActivityViewHolder, position: Int) {
         val elem = elementos!![position]
-        if(elem.isNotEmpty()){
-            println("PRIMEROS: "+elem)
-            holder.bindData(elem)
-        }
-        println("ELEM: "+elem)
+        holder.bindData(elem)
 
-
-        if(layoutInflaterChild != null && elem.isNotEmpty() ){
-            var elementosChild = arrayListOf( arrayListOf<String>())
-            var newElementos = arrayListOf( arrayListOf<String>())
-            for(i in 0..elementos!!.size-1 ){
-                if(i == 0){
-                    //println(elementos!![i]+"ANTES    V:"+ elem)
-                    newElementos.add(elementos!![i])
-                    elementosChild.add(elem.slice(2..3) as ArrayList<String>)
-                    //println(newElementos[i]+"DESPUES")
-
+        if(layoutInflaterChild != null ) {
+            //println(elementos!![position]+" -> NUEVOS ELEMENTOS    " + position + "    "+((cantChild!![position]) + ((cantChild!![position+1]) - (elementos!!.size-1)))+ "    "+elementosChild!![position])
+            val logic = ((cantChild!![position]) + ((cantChild!![position+1]) - (elementos!!.size-1)))
+            var auxMatrix : ArrayList<ArrayList<String>>?
+            auxMatrix  = arrayListOf(arrayListOf())
+            for( i in (cantChild!![position])..logic  ){
+                if(i == (cantChild!![position])){
+                    auxMatrix!![0] = elementosChild!![i]
                 }else{
-                    println(elementos!![i-1][0] + "    "+ elementos!![i][0])
-                    if(i != 0 && elementos!![i-1][0] != elementos!![i][0] ){
-                        //println("BREAK")
-                        for(j in i..elementos!!.size-1 ) {
-                            newElementos.add(elementos!![j])
-                        }
-                        //SetRecycler(elementosChild, holder.recyclerViewChild,layoutInflaterChild!!)
-                        break
-                    }else{
-                        //println(elementos!![i]+"ANTES")
-                        elementosChild.add(elem.slice(2..3) as ArrayList<String>)
-                    }
+                    auxMatrix!!.add(elementosChild!![i])
                 }
             }
-            elementos = newElementos
-            for(j in 0..elementos!!.size-1 ) {
-                println(elementos!![j]+" -> nuevos elementos")
-                if(elementos!![j].isNullOrEmpty()){
-                    println(j.toString()+" -> NUMERO")
-                    elementos!![j].drop(j)
-                }
+            auxMatrix!!.removeAll(listOf("",null))
+            for(i in 0..auxMatrix!!.size-1){
+                println("MATRIZ AUX : "+auxMatrix!![i])
             }
-            println(elementos!!.javaClass.name+ "  <---- NOMBRE DEL TIPO DE DATOS")
-            for(j in 0..elementos!!.size-1 ) {
-                println(elementos!![j]+" -> nuevos elementos")
-
-            }
+            SetRecycler(auxMatrix!!,holder.recyclerViewChild, layoutInflaterChild!!)
         }
+
     }
 
     interface OnAdapterListener {
@@ -101,11 +77,66 @@ class ControlParentalAdapter (val context : Context, var elementos: ArrayList<Ar
     }
 
     override fun getItemCount(): Int {
+        if(start == false){
+            DataOrder()
+        }
+
         return elementos!!.size
+    }
+    private fun DataOrder(){
+
+        if(layoutInflaterChild != null ){
+            var newElementos = arrayListOf( arrayListOf<String>())
+            elementosChild = arrayListOf(arrayListOf())
+            cantChild = arrayListOf(0,1)
+            var countNew = 0
+            var childCount = 0
+            var cantChildAux = 0
+            var cantChildRepet = 1
+            for(i in 0..elementos!!.size-1){
+                if(i == 0){
+                    newElementos.set(countNew++,elementos!![i])
+                    elementosChild!!.set(childCount++, elementos!![i].slice(2..3) as ArrayList<String>)
+                    cantChildAux++
+                }else{
+                    if(i != 0 && elementos!![i-1][0] != elementos!![i][0] ){
+                        newElementos.add(countNew++,elementos!![i])
+                        elementosChild!!.add(childCount++, elementos!![i].slice(2..3) as ArrayList<String>)
+                        cantChildAux = 1
+                        cantChildRepet++
+                    }else{
+                        elementosChild!!.add(childCount++, elementos!![i].slice(2..3) as ArrayList<String>)
+                        cantChildAux++
+                    }
+                }
+                if(cantChildRepet == 1){
+                    cantChild!!.set(cantChildRepet, cantChildAux)
+                }else{
+                    cantChild!!.add(cantChildRepet, cantChildAux)
+                }
+            }
+            elementos = newElementos
+            start = true
+            /*
+            val eliminar = arrayListOf<Int>()
+
+            for(j in 0..elementos!!.size-1 ) {
+                //println(elementos!![j]+" -> nuevos elementos")
+                if(elementos!![j].isNullOrEmpty()){
+                    eliminar.add(j)
+                }
+            }
+            for(k in 0..eliminar.size-1){
+                elementos!!.removeAt(eliminar[k]-k);
+            }
+
+             */
+
+        }
     }
 
 
-    private fun SetRecycler(elementos: Array<ArrayList<String>>, recyclerView: RecyclerView?, layoutInflaterChild:Int){
+    private fun SetRecycler(elementos: ArrayList<ArrayList<String>>, recyclerView: RecyclerView?, layoutInflaterChild:Int){
         val childRecyclerAdapter = ControlParentalAdapterChild(context, elementos, object: ControlParentalAdapter.OnAdapterListener{}, layoutInflaterChild)
         recyclerView!!.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
         recyclerView!!.adapter = childRecyclerAdapter
