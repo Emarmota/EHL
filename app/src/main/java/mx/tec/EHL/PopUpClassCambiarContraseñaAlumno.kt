@@ -74,7 +74,7 @@ class PopUpClassCambiarContraseñaAlumno(context: Context) {
 
             }else{
                 var queue = Volley.newRequestQueue(context)
-                val uri = "http://"+R.string.ip_connection+"/api/alumnoAjustes/"+sharedPref.getInt(Constant.PREF_ID)+"/"+test27.text.toString()
+                val uri = "http://"+context.getString(R.string.ip_connection)+"/api/alumnoAjustes/"+sharedPref.getInt(Constant.PREF_ID)+"/"+test27.text.toString()
                 val listener = Response.Listener<JSONArray> { response ->
                 }
                 val error = Response.ErrorListener { error ->
@@ -83,6 +83,7 @@ class PopUpClassCambiarContraseñaAlumno(context: Context) {
                 val request = JsonArrayRequest(Request.Method.GET,uri,null,listener, error)
                 queue.add(request)
 
+                sharedPref.put(Constant.PREF_PASSWORD, test27.text.toString())
 
                 Toast.makeText(view.context, "Su nueva contraseña es: " + test27.text.toString(), Toast.LENGTH_SHORT).show()
                 popupWindow.dismiss()

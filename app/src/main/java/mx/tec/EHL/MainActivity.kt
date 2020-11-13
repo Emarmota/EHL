@@ -41,8 +41,9 @@ class MainActivity : AppCompatActivity() {
 
         val buttonIngresar=findViewById<Button>(R.id.buttonIngresar)
         buttonIngresar.setOnClickListener{
-            val uri = "http://"+R.string.ip_connection+"/api/inicioSesion/"+editTextTextPersonName.text.toString()+"/"+editTextTextPassword.text.toString()
-            //val uri = "http://192.168.50.22:3000/api/inicioSesion/c/c"
+            println(getString(R.string.ip_connection))
+            val uri = "http://"+getString(R.string.ip_connection)+"/api/inicioSesion/"+editTextTextPersonName.text.toString()+"/"+editTextTextPassword.text.toString()
+            //val uri = "http://+getString(R.string.ip_connection)+/api/inicioSesion/c/c"
             val listener = Response.Listener<JSONArray> {response ->
                 Log.e("MENSAJE_EXITO",response.toString())
                 try{

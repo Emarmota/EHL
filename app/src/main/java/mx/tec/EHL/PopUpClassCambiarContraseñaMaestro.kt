@@ -70,7 +70,7 @@ class PopUpClassCambiarContraseñaMaestro(context:Context) {
 
             }else{
                 var queue = Volley.newRequestQueue(context)
-                val uri = "http://"+R.string.ip_connection+"/api/maestroAjustes/"+sharedPref.getInt(Constant.PREF_ID)+"/"+test17.text.toString()
+                val uri = "http://"+context.getString(R.string.ip_connection)+"/api/maestroAjustes/"+sharedPref.getInt(Constant.PREF_ID)+"/"+test17.text.toString()
                 val listener = Response.Listener<JSONArray> { response ->
                 }
                 val error = Response.ErrorListener { error ->
@@ -79,6 +79,7 @@ class PopUpClassCambiarContraseñaMaestro(context:Context) {
                 val request = JsonArrayRequest(Request.Method.GET,uri,null,listener, error)
                 queue.add(request)
 
+                sharedPref.put(Constant.PREF_PASSWORD, test17.text.toString())
 
                 Toast.makeText(view.context, "Su nueva contraseña es: " + test17.text.toString(), Toast.LENGTH_SHORT).show()
                 popupWindow.dismiss()

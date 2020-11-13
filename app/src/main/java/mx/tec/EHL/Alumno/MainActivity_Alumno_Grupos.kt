@@ -34,7 +34,7 @@ class MainActivity_Alumno_Grupos : AppCompatActivity() {
 
 
         var queue = Volley.newRequestQueue(this)
-        val uri = "http://"+R.string.ip_connection+"/api/alumnoGrupos/"+sharedPref.getInt(Constant.PREF_ID)
+        val uri = "http://"+getString(R.string.ip_connection)+"/api/alumnoGrupos/"+sharedPref.getInt(Constant.PREF_ID)
         val listener = Response.Listener<JSONArray> { response ->
             //var lista = Array(response.length(),{ arrayListOf<String>( ) })
             val lista : ArrayList<ArrayList<String>>
