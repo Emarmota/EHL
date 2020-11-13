@@ -46,7 +46,8 @@ class MainActivity : AppCompatActivity() {
             val listener = Response.Listener<JSONArray> {response ->
                 Log.e("MENSAJE_EXITO",response.toString())
                 try{
-                    InicioSesion(response.getJSONObject(0).getString("perfil"))
+
+                    InicioSesion(response.getJSONObject(0).getString("perfil"),response.getJSONObject(0).getInt("id"))
                 }
                 catch (e : Exception){
                     Toast.makeText(this,"No existe el usuario",Toast.LENGTH_SHORT).show()
@@ -67,26 +68,26 @@ class MainActivity : AppCompatActivity() {
     }
 
 
-    fun InicioSesion(tipoUsuario : String){
+    fun InicioSesion(tipoUsuario : String, id : Int){
         if(tipoUsuario == "Maestro"){
-            saveSession(editTextTextPersonName!!.text.toString(), editTextTextPassword!!.text.toString())
+            saveSession(id, editTextTextPassword?.text.toString())
             val intent= Intent(this@MainActivity,activity_main_maestro::class.java)
             startActivity(intent)
         }
         else if(tipoUsuario == "Alumno"){
-            saveSession(editTextTextPersonName!!.text.toString(), editTextTextPassword!!.text.toString())
+            saveSession(id, editTextTextPassword?.text.toString())
             val intent= Intent(this@MainActivity,MainActivity_Alumno::class.java)
             startActivity(intent)
         }
         else if(tipoUsuario == "ControlParental"){
-            saveSession(editTextTextPersonName!!.text.toString(), editTextTextPassword!!.text.toString())
+            saveSession(id, editTextTextPassword?.text.toString())
             val intent= Intent(this@MainActivity,MainActivityControlParental::class.java)
             startActivity(intent)
         }
 
     }
-    private fun saveSession(username: String, pass: String){
-        sharedPref.put(Constant.PREF_USERNAME, username)
+    private fun saveSession(id: Int,pass: String){
+        sharedPref.put(Constant.PREF_ID, id)
         sharedPref.put(Constant.PREF_PASSWORD, pass)
     }
 }

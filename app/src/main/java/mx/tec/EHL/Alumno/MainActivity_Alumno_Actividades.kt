@@ -38,7 +38,7 @@ class MainActivity_Alumno_Actividades : AppCompatActivity() {
         val textNombre = findViewById<TextView>(R.id.textNombre) //nombre del alumno
 
         var queue = Volley.newRequestQueue(this)
-        val uri = "http://192.168.50.22:3000/api/alumnoActividades/"+sharedPref.getString(Constant.PREF_USERNAME)+"/"+sharedPref.getString(Constant.PREF_PASSWORD)
+        val uri = "http://192.168.50.22:3000/api/alumnoActividades/"+sharedPref.getInt(Constant.PREF_ID)
         val listener = Response.Listener<JSONArray> { response ->
             //var lista = Array(response.length(),{ arrayListOf<String>( ) })
             val lista : ArrayList<ArrayList<String>>

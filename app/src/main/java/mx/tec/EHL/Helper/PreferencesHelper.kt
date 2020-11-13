@@ -17,9 +17,16 @@ class PreferencesHelper (context: Context){
         editor.putString( key, value)
             .apply()
     }
+    fun put(key: String, value: Int){
+        editor.putInt( key, value)
+                .apply()
+    }
 
     fun getString(key: String): String?{
         return  sharedpref.getString(key, null)
+    }
+    fun getInt(key: String): Int?{
+        return  sharedpref.getInt(key, -1)
     }
 
 

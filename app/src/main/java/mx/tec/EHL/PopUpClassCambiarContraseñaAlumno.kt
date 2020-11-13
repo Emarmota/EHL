@@ -74,7 +74,7 @@ class PopUpClassCambiarContraseñaAlumno(context: Context) {
 
             }else{
                 var queue = Volley.newRequestQueue(context)
-                val uri = "http://192.168.50.22:3000/api/alumnoAjustes/"+sharedPref.getString(Constant.PREF_USERNAME)+"/"+sharedPref.getString(Constant.PREF_PASSWORD)+"/"+test27.text.toString()
+                val uri = "http://192.168.50.22:3000/api/alumnoAjustes/"+sharedPref.getInt(Constant.PREF_ID)+"/"+test27.text.toString()
                 val listener = Response.Listener<JSONArray> { response ->
                 }
                 val error = Response.ErrorListener { error ->
