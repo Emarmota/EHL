@@ -41,9 +41,6 @@ class MainActivityControlParental_NiveldeConocimiento : AppCompatActivity() {
         var queue = Volley.newRequestQueue(this)
         val uri = "http://192.168.50.22:3000/api/controlParentalNivelConocimiento/"+sharedPref.getString(Constant.PREF_USERNAME)+"/"+sharedPref.getString(Constant.PREF_USERNAME)
         val listener = Response.Listener<JSONArray> { response ->
-            //var lista = Array(response.length(),{ arrayListOf<String>( ) })
-            val lista : ArrayList<ArrayList<String>>
-            lista = arrayListOf(arrayListOf())
             var elemento : JSONObject
             for(i in 0 until response.length()){
                 elemento = response.getJSONObject(i)
