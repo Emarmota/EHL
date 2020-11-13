@@ -80,7 +80,6 @@ class ControlParentalAdapter (val context : Context, var elementos: ArrayList<Ar
         if(start == false){
             DataOrder()
         }
-
         return elementos!!.size
     }
     private fun DataOrder(){
@@ -117,20 +116,6 @@ class ControlParentalAdapter (val context : Context, var elementos: ArrayList<Ar
             }
             elementos = newElementos
             start = true
-            /*
-            val eliminar = arrayListOf<Int>()
-
-            for(j in 0..elementos!!.size-1 ) {
-                //println(elementos!![j]+" -> nuevos elementos")
-                if(elementos!![j].isNullOrEmpty()){
-                    eliminar.add(j)
-                }
-            }
-            for(k in 0..eliminar.size-1){
-                elementos!!.removeAt(eliminar[k]-k);
-            }
-
-             */
 
         }
     }
