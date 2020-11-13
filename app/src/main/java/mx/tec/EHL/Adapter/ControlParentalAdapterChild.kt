@@ -21,7 +21,6 @@ class ControlParentalAdapterChild(val context: Context, val elementos:  ArrayLis
         init {
             txt_primario = view.findViewById(R.id.txt_primario)
             txt_secundario = view.findViewById(R.id.txt_secundario)
-
             try{ button1 = view.findViewById<RadioButton>(R.id.radioButton) }
             catch(e: Exception){ }
             try{ button2 = view.findViewById<RadioButton>(R.id.radioButton2) }
@@ -30,8 +29,6 @@ class ControlParentalAdapterChild(val context: Context, val elementos:  ArrayLis
         fun bindData(elemento: ArrayList<String>){
             txt_primario !!.text = elemento[0]
             txt_secundario !!.text = elemento[1]
-
-
         }
     }
 

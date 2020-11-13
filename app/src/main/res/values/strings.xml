@@ -42,7 +42,7 @@
     <string name="textViewCorreoGmail">ayudaEHL@gmail.com</string>
     <string name="textViewCorreoSec">hola@newsec.tech</string>
     <string name="textTitleCambiarContraseñaAlumno">Cambiar contraseña</string>
-    <string name="textViewIngresarContraseñaAlumno">Ingresar contraseña:</string>
+    <string name="textViewIngresarContraseñaAlumno">Ingresar contraseña actual:</string>
     <string name="textViewIngresarNuevaContraseñaAlumno">Ingresar nueva contraseña:</string>
     <string name="textViewIngresarConfirmarNuevaContraseñaAlumno">Confirmar nueva contraseña:</string>
     <string name="textViewSacarFoto">Sacar una foto</string>

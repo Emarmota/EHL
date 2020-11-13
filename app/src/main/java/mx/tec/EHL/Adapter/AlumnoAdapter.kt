@@ -4,36 +4,64 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import mx.tec.EHL.R
 
-class AlumnoAdapter (val context : Context, var listener: OnAdapterListener, var layoutInflater: Int, var layoutInflaterChild:Int?) : RecyclerView.Adapter<AlumnoAdapter.ActivityViewHolder>(){
+class AlumnoAdapter (val context : Context, var elementos: ArrayList<ArrayList<String>>?, var listener: OnAdapterListener, var layoutInflater: Int, var layoutInflaterChild:Int?) : RecyclerView.Adapter<AlumnoAdapter.ActivityViewHolder>(){
+    var elementosChild : ArrayList<ArrayList<String>>? = null
+    var cantChild : ArrayList<Int>? = null
+    var start = false
+
     class ActivityViewHolder(val view: View, val child : Boolean) : RecyclerView.ViewHolder(view){
         var recyclerViewChild : RecyclerView? = null
-
+        var txt_primario : TextView? = null
+        var txt_secundario : TextView? = null
         init {
+            txt_primario = view.findViewById(R.id.txt_primario)
+            txt_secundario = view.findViewById(R.id.txt_secundario)
             if(child){
                 recyclerViewChild = view.findViewById(R.id.rvHijo)
             }else{
 
             }
         }
+        fun bindData(elemento: ArrayList<String>?){
+            txt_primario !!.text = elemento!![0]
+            txt_secundario !!.text = elemento!![1]
+
+        }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityViewHolder {
         if(layoutInflaterChild != null){
             return ActivityViewHolder(LayoutInflater.from(parent.context).inflate(layoutInflater, parent, false),true)
-
         }else{
             return ActivityViewHolder(LayoutInflater.from(parent.context).inflate(layoutInflater, parent, false),false)
         }
     }
 
     override fun onBindViewHolder(holder: ActivityViewHolder, position: Int) {
-        if(layoutInflaterChild != null){
-            SetRecycler(holder.recyclerViewChild,layoutInflaterChild!!)
-        }else{
+        val elem = elementos!![position]
+        holder.bindData(elem)
 
+        if(layoutInflaterChild != null ) {
+            //println(elementos!![position]+" -> NUEVOS ELEMENTOS    " + position + "    "+((cantChild!![position]) + ((cantChild!![position+1]) - (elementos!!.size-1)))+ "    "+elementosChild!![position])
+            val logic = ((cantChild!![position]) + ((cantChild!![position+1]) - (elementos!!.size-1)))
+            var auxMatrix : ArrayList<ArrayList<String>>?
+            auxMatrix  = arrayListOf(arrayListOf())
+            for( i in (cantChild!![position])..logic  ){
+                if(i == (cantChild!![position])){
+                    auxMatrix!![0] = elementosChild!![i]
+                }else{
+                    auxMatrix!!.add(elementosChild!![i])
+                }
+            }
+            auxMatrix!!.removeAll(listOf("",null))
+            for(i in 0..auxMatrix!!.size-1){
+                println("MATRIZ AUX : "+auxMatrix!![i])
+            }
+            SetRecycler(auxMatrix!!,holder.recyclerViewChild, layoutInflaterChild!!)
         }
     }
 
@@ -47,12 +75,51 @@ class AlumnoAdapter (val context : Context, var listener: OnAdapterListener, var
     }
 
     override fun getItemCount(): Int {
-        return 4
+        if(start == false){
+            DataOrder()
+        }
+        return elementos!!.size
     }
 
+    private fun DataOrder(){
+        if(layoutInflaterChild != null ){
+            var newElementos = arrayListOf( arrayListOf<String>())
+            elementosChild = arrayListOf(arrayListOf())
+            cantChild = arrayListOf(0,1)
+            var countNew = 0
+            var childCount = 0
+            var cantChildAux = 0
+            var cantChildRepet = 1
+            for(i in 0..elementos!!.size-1){
+                if(i == 0){
+                    newElementos.set(countNew++,elementos!![i])
+                    elementosChild!!.set(childCount++, elementos!![i].slice(2..3) as ArrayList<String>)
+                    cantChildAux++
+                }else{
+                    if(i != 0 && elementos!![i-1][0] != elementos!![i][0] ){
+                        newElementos.add(countNew++,elementos!![i])
+                        elementosChild!!.add(childCount++, elementos!![i].slice(2..3) as ArrayList<String>)
+                        cantChildAux = 1
+                        cantChildRepet++
+                    }else{
+                        elementosChild!!.add(childCount++, elementos!![i].slice(2..3) as ArrayList<String>)
+                        cantChildAux++
+                    }
+                }
+                if(cantChildRepet == 1){
+                    cantChild!!.set(cantChildRepet, cantChildAux)
+                }else{
+                    cantChild!!.add(cantChildRepet, cantChildAux)
+                }
+            }
+            elementos = newElementos
+            start = true
 
-    private fun SetRecycler(recyclerView: RecyclerView?, layoutInflaterChild:Int){
-        val childRecyclerAdapter = AlumnoAdapterChild(context, object: AlumnoAdapter.OnAdapterListener{}, layoutInflaterChild)
+        }
+    }
+
+    private fun SetRecycler(elementos: ArrayList<ArrayList<String>>, recyclerView: RecyclerView?, layoutInflaterChild:Int){
+        val childRecyclerAdapter = AlumnoAdapterChild(context,elementos, object: AlumnoAdapter.OnAdapterListener{}, layoutInflaterChild)
         recyclerView!!.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
         recyclerView!!.adapter = childRecyclerAdapter
     }
