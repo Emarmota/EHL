@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">EHL</string>
+
+    <string name="ip_connection">192.168.50.22:3000</string>
+
+
+
     <string name="txt_Alumno">Alumno</string>
     <string name="txtv_Maestro">Maestro</string>
     <string name="txtv_maestroA">Maestro</string>
