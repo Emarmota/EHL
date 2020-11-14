@@ -51,8 +51,6 @@ class PopUpClass {
             Toast.makeText(view.context, "El alumno " + test4.text.toString() +" ha sido agregado", Toast.LENGTH_SHORT)
                 .show()
         }
-
-
         //Handler for clicking on the inactive zone of the window
         popupView.setOnTouchListener { v, event -> //Close the window when clicked
             popupWindow.dismiss()

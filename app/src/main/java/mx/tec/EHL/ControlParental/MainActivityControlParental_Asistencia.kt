@@ -33,7 +33,7 @@ class MainActivityControlParental_Asistencia : AppCompatActivity() {
             startActivity(intent)
         }
         val textNombre = findViewById<TextView>(R.id.textNombre) //nombre del alumno
-
+/*
         var queue = Volley.newRequestQueue(this)
         val uri = "http://192.168.50.22:3000/api/controlParentalAsistencias/"+sharedPref.getString(Constant.PREF_USERNAME)+"/"+sharedPref.getString(Constant.PREF_USERNAME)
         val listener = Response.Listener<JSONArray> { response ->
@@ -78,7 +78,7 @@ class MainActivityControlParental_Asistencia : AppCompatActivity() {
         }
         val request = JsonArrayRequest(Request.Method.GET,uri,null,listener, error)
         queue.add(request)
-
+*/
     }
 
 }
