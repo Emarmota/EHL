@@ -25,13 +25,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
                 android:layout_marginTop="12dp"
-                android:text="Grupo"
+                android:text="Grupo:"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
-                tools:text="Grupo" />
+                tools:text="Grupo:" />
+
+            <TextView
+                android:id="@+id/txt_primario"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="43dp"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                android:textStyle="bold"
+                app:layout_constraintStart_toEndOf="@+id/textGrupo"
+                app:layout_constraintTop_toTopOf="@+id/textGrupo" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
@@ -49,7 +60,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/textGrupo3"
+                android:id="@+id/textV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="80dp"
@@ -61,15 +72,13 @@
                 tools:text="Maestro:" />
 
             <TextView
-                android:id="@+id/textAlumno"
+                android:id="@+id/txt_secundario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
-                android:text="AlumnoA"
                 android:textColor="#FFFFFF"
-                app:layout_constraintStart_toEndOf="@+id/textGrupo3"
-                app:layout_constraintTop_toTopOf="@+id/textGrupo3"
-                tools:text="AlumnoA" />
+                app:layout_constraintStart_toEndOf="@+id/textV"
+                app:layout_constraintTop_toTopOf="@+id/textV" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>

@@ -66,7 +66,7 @@ class activity_main_maestro_ajustes : AppCompatActivity() {
         val popupButton =
             findViewById<Button>(R.id.btn_cambiarContrasena)
         popupButton.setOnClickListener { v ->
-            val popUpClass = PopUpClassCambiarContraseñaMaestro()
+            val popUpClass = PopUpClassCambiarContraseñaMaestro(this)
             popUpClass.showPopupWindow(v)
         }
 

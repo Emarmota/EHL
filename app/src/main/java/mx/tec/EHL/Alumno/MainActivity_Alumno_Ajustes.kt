@@ -56,7 +56,7 @@ class MainActivity_Alumno_Ajustes : AppCompatActivity() {
         val popupButton4 =
             findViewById<Button>(R.id.btn_cambiarContrasena)
         popupButton4.setOnClickListener { v ->
-            val popUpClass = PopUpClassCambiarContraseñaAlumno()
+            val popUpClass = PopUpClassCambiarContraseñaAlumno(this)
             popUpClass.showPopupWindow(v)
         }
 

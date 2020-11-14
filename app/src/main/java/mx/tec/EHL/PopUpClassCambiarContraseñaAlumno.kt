@@ -2,13 +2,27 @@ package mx.tec.EHL
 
 
 import android.content.Context
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.Volley
+import mx.tec.EHL.Adapter.AlumnoAdapter
+import mx.tec.EHL.Helper.Constant
+import mx.tec.EHL.Helper.PreferencesHelper
+import org.json.JSONArray
+import org.json.JSONObject
 
 
-class PopUpClassCambiarContraseñaAlumno {
+class PopUpClassCambiarContraseñaAlumno(context: Context) {
+    val sharedPref by lazy { PreferencesHelper(context) }
+    val context = context
     //PopupWindow display method
     fun showPopupWindow(view: View) {
 
@@ -34,28 +48,49 @@ class PopUpClassCambiarContraseñaAlumno {
         //Initialize the elements of our window, install the handler
         val test21 = popupView.findViewById<TextView>(R.id.titleTextCambiarContraseñaAlumno)
         test21.setText(R.string.textTitleCambiarContraseñaAlumno)
+
         val test22 = popupView.findViewById<TextView>(R.id.textViewIngresarContraseñaAlumno)
         test22.setText(R.string.textViewIngresarContraseñaAlumno)
+
         val test23 = popupView.findViewById<EditText>(R.id.editTextTextIngresarContraseñaAlumno)
+
         val test24 = popupView.findViewById<TextView>(R.id.textViewIngresarNuevaContraseñaAlumno)
         test24.setText(R.string.textViewIngresarNuevaContraseñaAlumno)
+
         val test25 = popupView.findViewById<EditText>(R.id.editTextIngresarContraseñaAlumno)
+
         val test26 = popupView.findViewById<TextView>(R.id.textViewConfirmarNuevaContraseñaAlumno)
         test26.setText(R.string.textViewIngresarConfirmarNuevaContraseñaAlumno)
+
         val test27 = popupView.findViewById<EditText>(R.id.editTextConfirmarNuevaContraseñaAlumno)
 
-        val buttonHecho =
-            popupView.findViewById<Button>(R.id.ButtonHechoAlumno)
+        val buttonHecho = popupView.findViewById<Button>(R.id.ButtonHechoAlumno)
         buttonHecho.setOnClickListener { //As an example, display the message
-            Toast.makeText(view.context, "Su nueva contraseña es: " + test27.text.toString(), Toast.LENGTH_SHORT)
-                .show()
+            if(test23.text.toString() != sharedPref.getString(Constant.PREF_PASSWORD)){
+                Toast.makeText(context, "La contraseña actual no es correcta",Toast.LENGTH_SHORT)
+
+            }else if (test25.text.toString() != test27.text.toString()){
+                Toast.makeText(context, "Confirmacion de contraseña incorrecta",Toast.LENGTH_SHORT)
+
+            }else{
+                var queue = Volley.newRequestQueue(context)
+                val uri = "http://"+context.getString(R.string.ip_connection)+"/api/alumnoAjustes/"+sharedPref.getInt(Constant.PREF_ID)+"/"+test27.text.toString()
+                val listener = Response.Listener<JSONArray> { response ->
+                }
+                val error = Response.ErrorListener { error ->
+                    Log.e("MENSAJE_ERROR", error.message!!)
+                }
+                val request = JsonArrayRequest(Request.Method.GET,uri,null,listener, error)
+                queue.add(request)
+
+                sharedPref.put(Constant.PREF_PASSWORD, test27.text.toString())
+
+                Toast.makeText(view.context, "Su nueva contraseña es: " + test27.text.toString(), Toast.LENGTH_SHORT).show()
+                popupWindow.dismiss()
+            }
+
         }
 
 
-        //Handler for clicking on the inactive zone of the window
-        popupView.setOnTouchListener { v, event -> //Close the window when clicked
-            popupWindow.dismiss()
-            true
-        }
     }
 }

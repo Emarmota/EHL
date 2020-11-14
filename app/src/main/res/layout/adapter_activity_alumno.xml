@@ -19,7 +19,7 @@
             android:layout_height="match_parent">
 
             <TextView
-                android:id="@+id/txtv_Grupo"
+                android:id="@+id/txt_primario"
                 android:layout_width="117dp"
                 android:layout_height="25dp"
                 android:layout_marginStart="84dp"
@@ -32,14 +32,14 @@
                 tools:text="Actividad" />
 
             <TextView
-                android:id="@+id/txt_grade"
+                android:id="@+id/txt_secundario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="36dp"
                 android:layout_marginTop="12dp"
                 android:text="N/A"
                 android:textColor="#FFFFFF"
-                app:layout_constraintStart_toEndOf="@+id/txtv_Grupo"
+                app:layout_constraintStart_toEndOf="@+id/txt_primario"
                 app:layout_constraintTop_toTopOf="parent" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>

@@ -42,7 +42,7 @@ class MainActivityControlParental_Calificaciones : AppCompatActivity() {
 
 
         var queue = Volley.newRequestQueue(this)
-        val uri = "http://192.168.50.22:3000/api/controlParentalCalificaciones/"+sharedPref.getString(Constant.PREF_USERNAME)+"/"+sharedPref.getString(Constant.PREF_USERNAME)
+        val uri = "http://"+getString(R.string.ip_connection)+"/api/controlParentalCalificaciones/"+sharedPref.getInt(Constant.PREF_ID)
         val listener = Response.Listener<JSONArray> { response ->
             //var lista = Array(response.length(),{ arrayListOf<String>( ) })
             val lista : ArrayList<ArrayList<String>>

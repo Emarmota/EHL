@@ -1,5 +1,10 @@
 <resources>
     <string name="app_name">EHL</string>
+
+    <string name="ip_connection">192.168.50.22:3000</string>
+
+
+
     <string name="txt_Alumno">Alumno</string>
     <string name="txtv_Maestro">Maestro</string>
     <string name="txtv_maestroA">Maestro</string>
@@ -42,7 +47,7 @@
     <string name="textViewCorreoGmail">ayudaEHL@gmail.com</string>
     <string name="textViewCorreoSec">hola@newsec.tech</string>
     <string name="textTitleCambiarContraseñaAlumno">Cambiar contraseña</string>
-    <string name="textViewIngresarContraseñaAlumno">Ingresar contraseña:</string>
+    <string name="textViewIngresarContraseñaAlumno">Ingresar contraseña actual:</string>
     <string name="textViewIngresarNuevaContraseñaAlumno">Ingresar nueva contraseña:</string>
     <string name="textViewIngresarConfirmarNuevaContraseñaAlumno">Confirmar nueva contraseña:</string>
     <string name="textViewSacarFoto">Sacar una foto</string>
