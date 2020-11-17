@@ -112,7 +112,7 @@
         app:layout_constraintTop_toBottomOf="@+id/rvPadre" />
 
     <EditText
-        android:id="@+id/editTextTextPersonName2"
+        android:id="@+id/edt_nombre"
         android:layout_width="193dp"
         android:layout_height="38dp"
         android:layout_marginStart="8dp"

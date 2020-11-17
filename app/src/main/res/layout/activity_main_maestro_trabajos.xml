@@ -159,9 +159,9 @@
         android:id="@+id/txtv_AñadirM"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="136dp"
-        android:layout_marginTop="150dp"
-        android:text="Añadir memorama"
+        android:layout_marginStart="228dp"
+        android:layout_marginTop="140dp"
+        android:text="Añadir guía"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
@@ -172,17 +172,17 @@
         android:id="@+id/txtv_AñadirC"
         android:layout_width="173dp"
         android:layout_height="43dp"
-        android:layout_marginStart="4dp"
+        android:layout_marginStart="188dp"
         android:layout_marginTop="4dp"
         android:text="Añadir CQuiz"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintStart_toStartOf="@+id/txtv_AñadirM"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvPadre" />
 
     <ImageView
-        android:id="@+id/btnAddMemorama"
+        android:id="@+id/btnAddGuia"
         android:layout_width="30dp"
         android:layout_height="30dp"
         android:layout_marginStart="12dp"
@@ -223,16 +223,5 @@
         tools:listitem="@layout/adapter_activity_maestro_trabajos">
 
     </androidx.recyclerview.widget.RecyclerView>
-
-    <ImageView
-        android:id="@+id/radioButtonAsignar"
-        android:layout_width="36dp"
-        android:layout_height="41dp"
-        android:layout_marginTop="56dp"
-        app:layout_constraintEnd_toEndOf="@+id/rvPadre"
-        app:layout_constraintHorizontal_bias="0.691"
-        app:layout_constraintStart_toStartOf="@+id/rvPadre"
-        app:layout_constraintTop_toTopOf="@+id/rvPadre"
-        app:srcCompat="@android:drawable/ic_notification_overlay" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
