@@ -1,7 +1,10 @@
 <resources>
     <string name="app_name">EHL</string>
 
+    <!--
     <string name="ip_connection">192.168.100.2:3000</string>
+    -->
+    <string name="ip_connection">192.168.50.22:3000</string>
 
 
     <string-array name="gruposlocal">
@@ -48,7 +51,7 @@
     <string name="textViewAñadirApPaterno">Ingresar contraseña:</string>
     <string name="textViewAñadirApMaterno">Ingresar apellido materno del alumno:</string>
     <string name="textViewAñadirGrupoAlumno">Ingresar grupo alumno:</string>
-    <string name="textButton">Ingresar</string>
+    <string name="agregarAlumnoButton">Agregar</string>
     <string name="textButtonHecho">Hecho</string>
     <string name="textTitleContacto">Contacto: </string>
     <string name="textViewCorreoGmail">ayudaEHL@gmail.com</string>

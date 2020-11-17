@@ -103,12 +103,12 @@
             </FrameLayout>
 
             <Button
-                android:id="@+id/messageButton"
+                android:id="@+id/agregarButton"
                 style="@style/btn_sinrelleno"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="30dp"
-                android:text="@string/textButton"
+                android:text="@string/agregarAlumnoButton"
                 android:textColor="#050505" />
 
         </LinearLayout>

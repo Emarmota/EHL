@@ -7,6 +7,108 @@
     android:background="@drawable/fondo"
     tools:context=".Profesor.activity_main_maestro_trabajos">
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:cardBackgroundColor="#2EFFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtv_AñadirM">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textActivity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="68dp"
+                android:layout_marginTop="12dp"
+                android:text="Titulo"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Titulo" />
+
+            <TextView
+                android:id="@+id/textView2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="104dp"
+                android:layout_marginTop="16dp"
+                android:text="Asignar"
+                app:layout_constraintStart_toEndOf="@+id/textActivity"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Asignar" />
+
+            <TextView
+                android:id="@+id/textView4"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="16dp"
+                android:text="Editar"
+                app:layout_constraintStart_toEndOf="@+id/textView2"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Editar" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        app:cardBackgroundColor="#2EFFFFFF"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/txtv_AñadirC">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textActivity2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="68dp"
+                android:layout_marginTop="12dp"
+                android:text="Titulo"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Titulo" />
+
+            <TextView
+                android:id="@+id/textView22"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="104dp"
+                android:layout_marginTop="16dp"
+                android:text="Asignar"
+                app:layout_constraintStart_toEndOf="@+id/textActivity2"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Asignar" />
+
+            <TextView
+                android:id="@+id/textView42"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="16dp"
+                android:text="Editar"
+                app:layout_constraintStart_toEndOf="@+id/textView22"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Editar" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </androidx.cardview.widget.CardView>
+
     <ImageView
         android:id="@+id/btn_backmmt"
         android:layout_width="wrap_content"
@@ -58,7 +160,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="136dp"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="150dp"
         android:text="Añadir memorama"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
@@ -101,11 +203,10 @@
         android:layout_width="360dp"
         android:layout_height="186dp"
         android:layout_marginStart="30dp"
-        android:layout_marginTop="16dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtv_AñadirM"
+        app:layout_constraintTop_toBottomOf="@+id/cardView"
         tools:listitem="@layout/adapter_activity_maestro_trabajos">
 
     </androidx.recyclerview.widget.RecyclerView>
@@ -114,12 +215,11 @@
         android:id="@+id/rvPadre2"
         android:layout_width="364dp"
         android:layout_height="214dp"
-        android:layout_marginTop="8dp"
         android:layout_marginEnd="30dp"
         app:layout_constraintEnd_toEndOf="@+id/rvPadre"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/rvPadre"
-        app:layout_constraintTop_toBottomOf="@+id/txtv_AñadirC"
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
         tools:listitem="@layout/adapter_activity_maestro_trabajos">
 
     </androidx.recyclerview.widget.RecyclerView>

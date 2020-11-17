@@ -16,7 +16,7 @@ class activity_main_maestro_creacioncquiz : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_maestro_creacioncquiz)
 
-        activityAdapter = ProfesorAdapter(this,object: ProfesorAdapter.OnAdapterListener{},R.layout.adapter_activity_maestro_trabajos_edicioncquiz,R.layout.adapter_activity_maestro_trabajos_edicioncquiz_respuestas)
+        activityAdapter = ProfesorAdapter(this,null, object: ProfesorAdapter.OnAdapterListener{},R.layout.adapter_activity_maestro_trabajos_edicioncquiz,R.layout.adapter_activity_maestro_trabajos_edicioncquiz_respuestas)
         val rvPadre = findViewById<RecyclerView>(R.id.rvPadre)
         rvPadre.apply {
             layoutManager = LinearLayoutManager(applicationContext)
