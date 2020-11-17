@@ -32,6 +32,7 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
         val btnback=findViewById<ImageView>(R.id.btn_backmmt)
         btnback.setOnClickListener{
             val intent= Intent(this@activity_main_maestro_trabajos, activity_main_maestro::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
 

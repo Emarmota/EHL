@@ -21,7 +21,7 @@
         android:id="@+id/imageView7"
         android:layout_width="56dp"
         android:layout_height="48dp"
-        android:layout_marginTop="28dp"
+        android:layout_marginTop="32dp"
         android:layout_marginEnd="28dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent"
@@ -31,14 +31,13 @@
         android:id="@+id/textv_maestroA"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="12dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="4dp"
         android:fontFamily="sans-serif"
         android:text="@string/txtv_maestroA"
         android:textColor="@color/colorPrimary"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.085"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/btn_backmmalum" />
 
@@ -46,44 +45,41 @@
         android:id="@+id/txtv_Alumnos"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="48dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="1dp"
         android:text="@string/txtv_Alumnos"
         android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textv_maestroA" />
 
+
     <TextView
         android:id="@+id/txtv_AñadirAlumno"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="128dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginStart="188dp"
+        android:layout_marginTop="132dp"
         android:text="@string/txtv_AñadirAlumno"
         android:textColor="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintEnd_toStartOf="@+id/imageView8"
-        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-
     <ImageView
         android:id="@+id/imageView8"
-        android:layout_width="30dp"
-        android:layout_height="30dp"
-        android:layout_marginTop="52dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.926"
-        app:layout_constraintStart_toStartOf="parent"
+        android:layout_width="16dp"
+        android:layout_height="25dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="56dp"
+        app:layout_constraintStart_toEndOf="@+id/txtv_AñadirAlumno"
         app:layout_constraintTop_toBottomOf="@+id/imageView7"
         app:srcCompat="@drawable/add_blue_ehl" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPadre"
-        android:layout_width="356dp"
-        android:layout_height="505dp"
+        android:layout_width="349dp"
+        android:layout_height="427dp"
         android:layout_marginStart="29dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="29dp"
@@ -92,5 +88,16 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtv_AñadirAlumno"
         tools:listitem="@layout/adapter_activity_maestro_alumnos" />
+
+    <Button
+        android:id="@+id/button"
+        style="@style/btn_sinrelleno"
+        android:layout_width="116dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="28dp"
+        android:text="Confirmar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/rvPadre" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

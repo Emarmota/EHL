@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="1dp"
         android:text="@string/txtv_trabajos"
         android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
@@ -130,7 +130,7 @@
         android:layout_height="41dp"
         android:layout_marginTop="56dp"
         app:layout_constraintEnd_toEndOf="@+id/rvPadre"
-        app:layout_constraintHorizontal_bias="0.685"
+        app:layout_constraintHorizontal_bias="0.691"
         app:layout_constraintStart_toStartOf="@+id/rvPadre"
         app:layout_constraintTop_toTopOf="@+id/rvPadre"
         app:srcCompat="@android:drawable/ic_notification_overlay" />

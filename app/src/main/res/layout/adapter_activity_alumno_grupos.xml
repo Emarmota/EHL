@@ -8,10 +8,9 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView2"
-        android:layout_width="match_parent"
+        android:layout_width="379dp"
         android:layout_height="50dp"
         app:cardBackgroundColor="#2EFFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
@@ -23,11 +22,11 @@
                 android:id="@+id/textGrupo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="12dp"
                 android:text="Grupo:"
                 android:textColor="@color/colorPrimary"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
@@ -39,7 +38,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="43dp"
                 android:textColor="@color/colorPrimary"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toEndOf="@+id/textGrupo"
                 app:layout_constraintTop_toTopOf="@+id/textGrupo" />
@@ -63,7 +62,7 @@
                 android:id="@+id/textV"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="80dp"
+                android:layout_marginStart="32dp"
                 android:layout_marginTop="16dp"
                 android:text="Maestro:"
                 android:textColor="#FFFFFF"

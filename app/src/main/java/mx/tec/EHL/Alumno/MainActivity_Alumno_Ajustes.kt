@@ -63,6 +63,7 @@ class MainActivity_Alumno_Ajustes : AppCompatActivity() {
         val imageView4=findViewById<ImageView>(R.id.btn_back_maa)
         imageView4.setOnClickListener{
             val intent= Intent(this@MainActivity_Alumno_Ajustes,MainActivity_Alumno::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
     }

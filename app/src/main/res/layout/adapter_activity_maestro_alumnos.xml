@@ -8,7 +8,7 @@
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
         android:layout_width="match_parent"
-        android:layout_height="50dp"
+        android:layout_height="32dp"
         app:cardBackgroundColor="#2EFFFFFF"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -22,11 +22,11 @@
                 android:id="@+id/txt_primario"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="68dp"
-                android:layout_marginTop="12dp"
+                android:layout_marginStart="40dp"
+                android:layout_marginTop="5dp"
                 android:text="Grupo 1"
                 android:textColor="@color/colorPrimary"
-                android:textSize="20sp"
+                android:textSize="18sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,8 +34,8 @@
                 android:id="@+id/textView5"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="152dp"
-                android:layout_marginTop="16dp"
+                android:layout_marginStart="204dp"
+                android:layout_marginTop="8dp"
                 android:text="Falta"
                 app:layout_constraintStart_toEndOf="@+id/txt_primario"
                 app:layout_constraintTop_toTopOf="parent" />

@@ -18,6 +18,7 @@ import mx.tec.EHL.Helper.Constant
 import mx.tec.EHL.Helper.PreferencesHelper
 import org.json.JSONArray
 import org.json.JSONObject
+import java.lang.NullPointerException
 
 
 class PopUpClassCambiarContraseñaAlumno(context: Context) {
@@ -66,7 +67,7 @@ class PopUpClassCambiarContraseñaAlumno(context: Context) {
 
         val buttonHecho = popupView.findViewById<Button>(R.id.ButtonHechoAlumno)
         buttonHecho.setOnClickListener { //As an example, display the message
-            if(test23.text.toString() != sharedPref.getString(Constant.PREF_PASSWORD)){
+            if(test23.text.toString() == sharedPref.getString(Constant.PREF_PASSWORD)){
                 Toast.makeText(context, "La contraseña actual no es correcta",Toast.LENGTH_SHORT)
 
             }else if (test25.text.toString() != test27.text.toString()){
@@ -78,7 +79,10 @@ class PopUpClassCambiarContraseñaAlumno(context: Context) {
                 val listener = Response.Listener<JSONArray> { response ->
                 }
                 val error = Response.ErrorListener { error ->
-                    Log.e("MENSAJE_ERROR", error.message!!)
+                    try {
+                        Log.e("MENSAJE_ERROR", error.message!!)
+                    }
+                    catch (e: NullPointerException){}
                 }
                 val request = JsonArrayRequest(Request.Method.GET,uri,null,listener, error)
                 queue.add(request)

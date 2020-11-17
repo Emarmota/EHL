@@ -19,6 +19,7 @@ import mx.tec.EHL.Helper.PreferencesHelper
 import mx.tec.EHL.R
 import org.json.JSONArray
 import org.json.JSONObject
+import java.lang.NullPointerException
 
 class MainActivity_Alumno_Actividades : AppCompatActivity() {
 
@@ -32,6 +33,7 @@ class MainActivity_Alumno_Actividades : AppCompatActivity() {
         val imageView4=findViewById<ImageView>(R.id.btn_backcpa)
         imageView4.setOnClickListener{
             val intent= Intent(this@MainActivity_Alumno_Actividades,MainActivity_Alumno::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
 
@@ -72,7 +74,10 @@ class MainActivity_Alumno_Actividades : AppCompatActivity() {
             }
         }
         val error = Response.ErrorListener { error ->
-            Log.e("MENSAJE_ERROR", error.message!!)
+            try {
+                Log.e("MENSAJE_ERROR", error.message!!)
+            }
+            catch (e: NullPointerException){}
         }
         val request = JsonArrayRequest(Request.Method.GET,uri,null,listener, error)
         queue.add(request)

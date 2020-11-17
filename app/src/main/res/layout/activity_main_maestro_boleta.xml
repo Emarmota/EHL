@@ -56,8 +56,9 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="378dp"
         android:layout_height="520dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="20dp"
+        app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtv_boleta"
-        tools:layout_editor_absoluteX="17dp"
         tools:listitem="@layout/adapter_activity_maestro_boleta_alumno" />
 </androidx.constraintlayout.widget.ConstraintLayout>

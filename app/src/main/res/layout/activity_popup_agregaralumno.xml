@@ -34,15 +34,15 @@
 
 
             <TextView
-                android:id="@+id/textViewAñadirAlumno"
+                android:id="@+id/tv_nombrealum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/textViewAñadirAlumno"
+                android:text="Ingresar nombre completo:"
                 android:textColor="#050505"
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName2"
+                android:id="@+id/txt_NombreAlum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -50,15 +50,15 @@
                 android:textColor="#050505" />
 
             <TextView
-                android:id="@+id/textViewAñadirApPaterno"
+                android:id="@+id/tv_usuarioalum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/textViewAñadirApPaterno"
+                android:text="Ingresar Usuario:"
                 android:textColor="#050505"
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName3"
+                android:id="@+id/txt_usuarioalum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -66,15 +66,15 @@
                 android:textColor="#050505" />
 
             <TextView
-                android:id="@+id/textViewAñadirApMaterno"
+                android:id="@+id/yv_contraseñaalum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/textViewAñadirApMaterno"
+                android:text="Ingresar contraseña: "
                 android:textColor="#050505"
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/editTextTextPersonName4"
+                android:id="@+id/txt_contraseñaalum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -82,26 +82,32 @@
                 android:textColor="#050505" />
 
             <TextView
-                android:id="@+id/textViewAñadirGrupoAlumno"
+                android:id="@+id/tv_ingresargrupo"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/textViewAñadirGrupoAlumno"
                 android:textColor="#050505"
                 android:textSize="18sp" />
 
-            <EditText
-                android:id="@+id/editTextTextPersonName5"
+            <FrameLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textColor="#050505" />
+                android:layout_height="42dp"
+                android:background="#FFFFFF">
+
+                <Spinner
+                    android:id="@+id/spinner_grupo"
+                    style="@style/spinner_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp" />
+            </FrameLayout>
 
             <Button
                 android:id="@+id/messageButton"
                 style="@style/btn_sinrelleno"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="30dp"
                 android:text="@string/textButton"
                 android:textColor="#050505" />
 

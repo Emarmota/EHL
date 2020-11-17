@@ -9,8 +9,8 @@
     android:paddingRight="10dp">
 
     <androidx.cardview.widget.CardView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_width="244dp"
+        android:layout_height="514dp"
         android:background="#9EF8EDED"
         android:backgroundTint="#FFFFFF"
         app:cardCornerRadius="5dp">
@@ -34,15 +34,44 @@
 
 
             <TextView
-                android:id="@+id/textViewIngresaNuevaPregunta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/textViewIngresaNuevaPregunta"
+                android:text="Ingresa pregunta:"
                 android:textColor="#050505"
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/editTextTextIngresarNuevaPregunta"
+                android:id="@+id/txt_pregunta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="#050505" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ingresa respuesta correcta:"
+                android:textColor="#050505"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/txt_respuestacorrecta"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:textColor="#050505" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Ingresa respuesta:"
+                android:textColor="#050505"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/txt_resp1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"
@@ -53,12 +82,12 @@
                 android:id="@+id/textViewIngresaRespuesta"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="@string/textViewIngresaRespuesta"
+                android:text="Ingresa respuesta:"
                 android:textColor="#050505"
                 android:textSize="18sp" />
 
             <EditText
-                android:id="@+id/editTextIngresaReespuesta"
+                android:id="@+id/txt_resp2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ems="10"

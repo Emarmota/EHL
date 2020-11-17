@@ -12,6 +12,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.activity_main_maestro.*
 import mx.tec.EHL.ControlParental.MainActivityControlParental_Asistencia
 import mx.tec.EHL.ControlParental.MainActivityControlParental_NiveldeConocimiento
+import mx.tec.EHL.Helper.PreferencesHelper
 import mx.tec.EHL.MainActivity
 import mx.tec.EHL.R
 
@@ -20,9 +21,13 @@ class activity_main_maestro : AppCompatActivity() {
     val storage = Firebase.storage("gs://my-project-d35b1.appspot.com")
     val storageRef = storage.reference
 
+    lateinit var sharedpref: PreferencesHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_maestro)
+
+        sharedpref = PreferencesHelper(this)
         loadWithGlide()
 
         val btn_alumnos=findViewById<Button>(R.id.btn_alumnos)
@@ -46,6 +51,8 @@ class activity_main_maestro : AppCompatActivity() {
         val btnback=findViewById<ImageView>(R.id.btn_backmm)
         btnback.setOnClickListener{
             val intent= Intent(this@activity_main_maestro, MainActivity::class.java)
+            sharedpref.clear()
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
     }

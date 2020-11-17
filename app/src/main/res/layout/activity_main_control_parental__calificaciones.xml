@@ -46,8 +46,8 @@
         android:id="@+id/txtv_Actividades"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="52dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginStart="76dp"
+        android:layout_marginTop="4dp"
         android:text="/ Calificaciones"
         android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
@@ -56,7 +56,7 @@
     <FrameLayout
         android:id="@+id/frameLayout"
         android:layout_width="352dp"
-        android:layout_height="54dp"
+        android:layout_height="32dp"
         android:layout_marginStart="28dp"
         android:layout_marginTop="28dp"
         android:layout_marginEnd="28dp"
@@ -76,23 +76,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
                 android:layout_marginTop="8dp"
-                android:text="Nombre Alumno"
+                android:text="Cargando..."
                 android:textColor="@color/colorPrimary"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/txtv_calificación"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="68dp"
-                android:layout_marginTop="16dp"
-                android:text="Calificación"
-                android:textColor="#FFFFFF"
-                app:layout_constraintStart_toEndOf="@+id/textNombre"
-                app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </FrameLayout>
 

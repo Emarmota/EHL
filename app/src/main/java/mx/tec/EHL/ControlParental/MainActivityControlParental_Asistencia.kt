@@ -18,6 +18,7 @@ import mx.tec.EHL.Helper.PreferencesHelper
 import mx.tec.EHL.R
 import org.json.JSONArray
 import org.json.JSONObject
+import java.lang.NullPointerException
 
 class MainActivityControlParental_Asistencia : AppCompatActivity() {
     lateinit var activityAdapter: ControlParentalAdapter
@@ -30,10 +31,11 @@ class MainActivityControlParental_Asistencia : AppCompatActivity() {
         val btnback=findViewById<ImageView>(R.id.btn_backcpa)
         btnback.setOnClickListener{
             val intent= Intent(this@MainActivityControlParental_Asistencia, MainActivityControlParental::class.java)
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
         val textNombre = findViewById<TextView>(R.id.textNombre) //nombre del alumno
-/*
+
         var queue = Volley.newRequestQueue(this)
         val uri = "http://"+getString(R.string.ip_connection)+"/api/controlParentalAsistencias/"+sharedPref.getInt(Constant.PREF_ID)
         val listener = Response.Listener<JSONArray> { response ->
@@ -74,11 +76,15 @@ class MainActivityControlParental_Asistencia : AppCompatActivity() {
             }
         }
         val error = Response.ErrorListener { error ->
-            Log.e("MENSAJE_ERROR", error.message!!)
+            try {
+                Log.e("MENSAJE_ERROR", error.message!!)
+            }
+            catch (e:NullPointerException){}
+
         }
         val request = JsonArrayRequest(Request.Method.GET,uri,null,listener, error)
         queue.add(request)
-*/
+
     }
 
 }

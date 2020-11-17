@@ -18,32 +18,33 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar">
 
-        <activity android:name=".Alumno.MainActivity_Alumno_Ajustes" />
-        <activity android:name=".Alumno.MainActivity_Alumno_Grupos" />
-        <activity android:name=".Profesor.activity_main_maestro_ajustes" />
-        <activity android:name=".ControlParental.MainActivityControlParental_NiveldeConocimiento" />
-        <activity android:name=".ControlParental.MainActivityControlParental_Asistencia" />
-        <activity android:name=".ControlParental.MainActivityControlParental_Calificaciones" />
-        <activity android:name=".ControlParental.MainActivityControlParental" />
-        <activity android:name=".Profesor.activity_main_maestro_edicioncquiz" />
-        <activity android:name=".Profesor.activity_main_maestro_creacioncquiz" />
-        <activity android:name=".Profesor.activity_main_maestro_creacionmemorama" />
-        <activity android:name=".Profesor.activity_main_maestro_trabajos" />
-        <activity android:name=".Profesor.activity_main_maestro_boleta" />
-        <activity android:name=".Profesor.activity_main_maestro_alumnos" />
-        <activity android:name=".Profesor.activity_main_maestro" />
-        <activity android:name=".Alumno.MainActivity_Alumno_Actividades" />
-        <activity android:name=".Alumno.MainActivity_Alumno" />
+        <activity android:name=".Alumno.MainActivity_Alumno_Ajustes" android:screenOrientation="portrait"/>
+        <activity android:name=".Alumno.MainActivity_Alumno_Grupos" android:screenOrientation="portrait"/>
+        <activity android:name=".Profesor.activity_main_maestro_ajustes" android:screenOrientation="portrait"/>
+        <activity android:name=".ControlParental.MainActivityControlParental_NiveldeConocimiento" android:screenOrientation="portrait"/>
+        <activity android:name=".ControlParental.MainActivityControlParental_Asistencia" android:screenOrientation="portrait"/>
+        <activity android:name=".ControlParental.MainActivityControlParental_Calificaciones" android:screenOrientation="portrait"/>
+        <activity android:name=".ControlParental.MainActivityControlParental" android:screenOrientation="portrait"/>
+        <activity android:name=".Profesor.activity_main_maestro_edicioncquiz" android:screenOrientation="portrait"/>
+        <activity android:name=".Profesor.activity_main_maestro_creacioncquiz" android:screenOrientation="portrait"/>
+        <activity android:name=".Profesor.activity_main_maestro_creacionmemorama" android:screenOrientation="portrait"/>
+        <activity android:name=".Profesor.activity_main_maestro_trabajos" android:screenOrientation="portrait"/>
+        <activity android:name=".Profesor.activity_main_maestro_boleta" android:screenOrientation="portrait"/>
+        <activity android:name=".Profesor.activity_main_maestro_alumnos" android:screenOrientation="portrait"/>
+        <activity android:name=".Profesor.activity_main_maestro" android:screenOrientation="portrait"/>
+        <activity android:name=".Alumno.MainActivity_Alumno_Actividades" android:screenOrientation="portrait"/>
+        <activity android:name=".Alumno.MainActivity_Alumno" android:screenOrientation="portrait"/>
         <activity
             android:name=".SplashScreen"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
+        <activity android:name=".MainActivity" android:screenOrientation="portrait" />
         <uses-library android:name="org.apache.http.legacy" android:required="false"/>
 
     </application>

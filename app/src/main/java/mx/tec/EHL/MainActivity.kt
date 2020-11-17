@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
             }
             val error = Response.ErrorListener {error ->
-                Log.e("MENSAJE_ERROR",error.message!!)
+//                Log.e("MENSAJE_ERROR",error.message!!)
             }
             val request = JsonArrayRequest(Request.Method.GET, uri,null, listener,error)
             queue.add(request)

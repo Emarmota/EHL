@@ -7,7 +7,7 @@ import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import mx.tec.EHL.Adapter.ProfesorAdapter
-import mx.tec.EHL.PopUpClass
+import mx.tec.EHL.PopUpClassAñadirAlumno
 import mx.tec.EHL.R
 
 class activity_main_maestro_alumnos : AppCompatActivity() {
@@ -16,8 +16,6 @@ class activity_main_maestro_alumnos : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_maestro_alumnos)
-
-
 
         activityAdapter = ProfesorAdapter(this,object: ProfesorAdapter.OnAdapterListener{},R.layout.adapter_activity_maestro_alumnos,R.layout.adapter_activity_maestro_alumnos_asistencia)
         val list_Activity_alumno = findViewById<RecyclerView>(R.id.rvPadre)
@@ -29,7 +27,7 @@ class activity_main_maestro_alumnos : AppCompatActivity() {
         val popupButton =
             findViewById<ImageView>(R.id.imageView8)
         popupButton.setOnClickListener { v ->
-            val popUpClass = PopUpClass()
+            val popUpClass = PopUpClassAñadirAlumno(this)
             popUpClass.showPopupWindow(v)
         }
 
@@ -38,10 +36,5 @@ class activity_main_maestro_alumnos : AppCompatActivity() {
             val intent= Intent(this@activity_main_maestro_alumnos, activity_main_maestro::class.java)
             startActivity(intent)
         }
-
-
-
     }
-
-
 }

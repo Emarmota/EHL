@@ -5,13 +5,19 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.widget.Button
 import android.widget.ImageView
+import mx.tec.EHL.Helper.PreferencesHelper
 import mx.tec.EHL.MainActivity
 import mx.tec.EHL.R
 
 class MainActivityControlParental : AppCompatActivity() {
+    lateinit var sharedpref: PreferencesHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_control_parental)
+
+        sharedpref = PreferencesHelper(this)
+
         val btn_alumnos=findViewById<Button>(R.id.btn_alumnos)
         btn_alumnos.setOnClickListener{
             val intent= Intent(this@MainActivityControlParental, MainActivityControlParental_Calificaciones::class.java)
@@ -33,6 +39,8 @@ class MainActivityControlParental : AppCompatActivity() {
         val btnback=findViewById<ImageView>(R.id.btn_backcp)
         btnback.setOnClickListener{
             val intent= Intent(this@MainActivityControlParental, MainActivity::class.java)
+            sharedpref.clear()
+            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
         }
     }

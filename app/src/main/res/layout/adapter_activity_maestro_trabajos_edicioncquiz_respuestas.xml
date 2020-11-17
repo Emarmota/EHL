@@ -7,7 +7,7 @@
 
     <androidx.cardview.widget.CardView
         android:id="@+id/cardView"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="50dp"
         app:cardBackgroundColor="#636C6C6C"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,27 +20,16 @@
 
             <EditText
                 android:id="@+id/editTextPregunta"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="42dp"
-                android:layout_marginTop="3dp"
-                android:layout_marginEnd="24dp"
+                android:layout_width="291dp"
+                android:layout_height="43dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginTop="4dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 android:text="Pregunta1"
-                app:layout_constraintEnd_toStartOf="@+id/radioButton"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Pregunta1" />
-
-            <RadioButton
-                android:id="@+id/radioButton"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:layout_marginEnd="103dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/editTextPregunta" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

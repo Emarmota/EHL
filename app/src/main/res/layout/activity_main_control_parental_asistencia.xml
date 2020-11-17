@@ -47,7 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="52dp"
-        android:layout_marginTop="8dp"
+        android:layout_marginTop="4dp"
         android:text="/ Asistencias"
         android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
@@ -55,14 +55,11 @@
 
     <FrameLayout
         android:id="@+id/frameLayout"
-        android:layout_width="352dp"
-        android:layout_height="54dp"
-        android:layout_marginStart="28dp"
+        android:layout_width="334dp"
+        android:layout_height="31dp"
+        android:layout_marginStart="30dp"
         android:layout_marginTop="28dp"
-        android:layout_marginEnd="28dp"
         android:background="#2EFFFFFF"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtv_Actividades">
 
@@ -75,10 +72,10 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="4dp"
-                android:layout_marginTop="8dp"
-                android:text="Nombre Alumno"
+                android:layout_marginTop="3dp"
+                android:text="Cargando..."
                 android:textColor="@color/colorPrimary"
-                android:textSize="24sp"
+                android:textSize="18sp"
                 android:textStyle="bold"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
@@ -90,8 +87,7 @@
         android:id="@+id/rvPadre"
         android:layout_width="313dp"
         android:layout_height="446dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.297"
+        android:layout_marginStart="30dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/frameLayout"
         tools:listitem="@layout/adapter_activity_controlparental_asistencias" />

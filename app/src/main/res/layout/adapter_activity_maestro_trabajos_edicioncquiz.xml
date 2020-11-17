@@ -26,23 +26,13 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="40dp"
                 android:layout_marginTop="16dp"
-                android:text="Pregunta1"
+                android:text="Quiz"
                 android:textColor="@color/colorPrimary"
                 android:textSize="20sp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:text="Pregunta1" />
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="116dp"
-                android:layout_marginTop="20dp"
-                android:text="Respuesta correcta"
-                app:layout_constraintStart_toEndOf="@+id/textGrupo"
-                app:layout_constraintTop_toTopOf="parent"
-                tools:text="Respuesta correcta" />
         </androidx.constraintlayout.widget.ConstraintLayout>
     </androidx.cardview.widget.CardView>
 

@@ -21,6 +21,11 @@
 
     <style name="btn_nada" parent="android:Widget.Button">
         <item name="android:background">@drawable/button_nada</item>
-        <item name="android:textColor">#FFFFFF</item>
+
     </style>
+
+    <style name="spinner_bg" parent="android:Widget.Spinner">
+    <item name="android:textColor">#FF0000</item>
+    </style>
+
 </resources>

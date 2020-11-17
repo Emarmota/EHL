@@ -31,28 +31,17 @@ class PopUpClassAñadirPregunta {
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
 
         //Initialize the elements of our window, install the handler
-        val test30 = popupView.findViewById<TextView>(R.id.titleTextAñadirPregunta)
-        test30.setText(R.string.textTitleAñadirPregunta)
-        val test31 = popupView.findViewById<TextView>(R.id.textViewIngresaNuevaPregunta)
-        test31.setText(R.string.textViewIngresaNuevaPregunta)
-        val test32 = popupView.findViewById<TextView>(R.id.textViewIngresaRespuesta)
-        test32.setText(R.string.textViewIngresaRespuesta)
-        val test33 = popupView.findViewById<EditText>(R.id.editTextTextIngresarNuevaPregunta)
-        val test34 = popupView.findViewById<EditText>(R.id.editTextIngresaReespuesta)
-
+        val pregunta = popupView.findViewById<EditText>(R.id.txt_pregunta)
+        val respcorrect = popupView.findViewById<EditText>(R.id.txt_respuestacorrecta)
+        val resp1 = popupView.findViewById<EditText>(R.id.txt_resp1)
+        val resp2 = popupView.findViewById<EditText>(R.id.txt_resp2)
 
         val buttonAñadir =
             popupView.findViewById<Button>(R.id.ButtonAñadir)
         buttonAñadir.setOnClickListener { //As an example, display the message
-            Toast.makeText(view.context, "Se ha agregado la nueva pregunta al CQuiz", Toast.LENGTH_SHORT)
-                .show()
-        }
-
-
-        //Handler for clicking on the inactive zone of the window
-        popupView.setOnTouchListener { v, event -> //Close the window when clicked
+            Toast.makeText(view.context, "Se ha agregado la nueva pregunta al CQuiz", Toast.LENGTH_SHORT).show()
             popupWindow.dismiss()
-            true
         }
+
     }
 }

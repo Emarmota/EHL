@@ -13,6 +13,7 @@ import com.android.volley.toolbox.Volley
 import mx.tec.EHL.Helper.Constant
 import mx.tec.EHL.Helper.PreferencesHelper
 import org.json.JSONArray
+import java.lang.NullPointerException
 
 
 class PopUpClassCambiarContraseñaMaestro(context:Context) {
@@ -74,7 +75,10 @@ class PopUpClassCambiarContraseñaMaestro(context:Context) {
                 val listener = Response.Listener<JSONArray> { response ->
                 }
                 val error = Response.ErrorListener { error ->
-                    Log.e("MENSAJE_ERROR", error.message!!)
+                    try {
+                        Log.e("MENSAJE_ERROR", error.message!!)
+                    }
+                    catch (e: NullPointerException){}
                 }
                 val request = JsonArrayRequest(Request.Method.GET,uri,null,listener, error)
                 queue.add(request)
