@@ -47,18 +47,32 @@ class ControlParentalAdapter (val context : Context, var elementos: ArrayList<Ar
         holder.bindData(elem)
 
         if(layoutInflaterChild != null ) {
-            //println(elementos!![position]+" -> NUEVOS ELEMENTOS    " + position + "    "+((cantChild!![position]) + ((cantChild!![position+1]) - (elementos!!.size-1)))+ "    "+elementosChild!![position])
-            val logic = ((cantChild!![position]) + ((cantChild!![position+1]) - (elementos!!.size-1)))
             var auxMatrix : ArrayList<ArrayList<String>>?
             auxMatrix  = arrayListOf(arrayListOf())
-            for( i in (cantChild!![position])..logic  ){
-                if(i == (cantChild!![position])){
+            var inicio = 0
+            var final  = 0
+            if(position == 0){
+                inicio = 0
+                final = (cantChild!![position])-1
+                //println(inicio.toString()+ "   "+ final+ "   "+(cantChild!![position]))
+
+            }else{
+                for(i  in 0..(position-1)){
+                    inicio += cantChild!![i]
+                }
+                for(i  in 0..position){
+                    final += cantChild!![i]
+                }
+                final -= 1
+            }
+            for( i in inicio..final  ){
+                if(i == inicio){
                     auxMatrix!![0] = elementosChild!![i]
                 }else{
                     auxMatrix!!.add(elementosChild!![i])
                 }
             }
-            auxMatrix!!.removeAll(listOf("",null))
+            //println("MATRIZ AUX SIZE"+((auxMatrix!!.size)-1))
             for(i in 0..auxMatrix!!.size-1){
                 println("MATRIZ AUX : "+auxMatrix!![i])
             }
@@ -83,15 +97,14 @@ class ControlParentalAdapter (val context : Context, var elementos: ArrayList<Ar
         return elementos!!.size
     }
     private fun DataOrder(){
-
         if(layoutInflaterChild != null ){
             var newElementos = arrayListOf( arrayListOf<String>())
             elementosChild = arrayListOf(arrayListOf())
-            cantChild = arrayListOf(0,1)
+            cantChild = arrayListOf()
             var countNew = 0
             var childCount = 0
             var cantChildAux = 0
-            var cantChildRepet = 1
+            var cantChildRepet = 0
             for(i in 0..elementos!!.size-1){
                 if(i == 0){
                     newElementos.set(countNew++,elementos!![i])
@@ -101,6 +114,7 @@ class ControlParentalAdapter (val context : Context, var elementos: ArrayList<Ar
                     if(i != 0 && elementos!![i-1][0] != elementos!![i][0] ){
                         newElementos.add(countNew++,elementos!![i])
                         elementosChild!!.add(childCount++, elementos!![i].slice(2..3) as ArrayList<String>)
+                        cantChild!!.add(cantChildRepet, cantChildAux)
                         cantChildAux = 1
                         cantChildRepet++
                     }else{
@@ -108,18 +122,13 @@ class ControlParentalAdapter (val context : Context, var elementos: ArrayList<Ar
                         cantChildAux++
                     }
                 }
-                if(cantChildRepet == 1){
-                    cantChild!!.set(cantChildRepet, cantChildAux)
-                }else{
-                    cantChild!!.add(cantChildRepet, cantChildAux)
-                }
             }
+            cantChild!!.add(cantChildRepet, cantChildAux)
             elementos = newElementos
             start = true
 
         }
     }
-
 
     private fun SetRecycler(elementos: ArrayList<ArrayList<String>>, recyclerView: RecyclerView?, layoutInflaterChild:Int){
         val childRecyclerAdapter = ControlParentalAdapterChild(context, elementos, object: ControlParentalAdapter.OnAdapterListener{}, layoutInflaterChild)

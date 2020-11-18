@@ -16,7 +16,7 @@ import mx.tec.EHL.R
 import java.lang.Exception
 import java.util.ArrayList
 
-class ProfesorAdapterChild (val context: Context, val elementos:  ArrayList<ArrayList<String>>?, var listener: ProfesorAdapter.OnAdapterListener, var layoutInflater: Int) : RecyclerView.Adapter<ProfesorAdapterChild.ActivityViewHolder>(){
+class ProfesorAdapterChild (val context: Context, val elementos:  ArrayList<ArrayList<String>>?, var listener: ProfesorAdapterChild.OnAdapterListener, var layoutInflater: Int) : RecyclerView.Adapter<ProfesorAdapterChild.ActivityViewHolder>(){
 
     class ActivityViewHolder(val view: View) : RecyclerView.ViewHolder(view){
         var button1 : RadioButton? = null
@@ -24,6 +24,7 @@ class ProfesorAdapterChild (val context: Context, val elementos:  ArrayList<Arra
         var button3 : ImageButton? = null
         var txt_primario : TextView? = null
         var txt_secundario : TextView? = null
+        var idAlumno : Int? = null
         init {
             try{ txt_primario = view.findViewById(R.id.txt_primario) }
             catch(e: Exception){ }
@@ -39,6 +40,9 @@ class ProfesorAdapterChild (val context: Context, val elementos:  ArrayList<Arra
         fun bindData(elemento: ArrayList<String>){
             if(txt_primario != null)  txt_primario !!.text = elemento!![0]
             if(txt_secundario != null) txt_secundario !!.text = elemento!![1]
+            else{
+                idAlumno = elemento!![1].toInt()
+            }
         }
     }
 
@@ -50,7 +54,10 @@ class ProfesorAdapterChild (val context: Context, val elementos:  ArrayList<Arra
         val elem = elementos!![position]
         holder.bindData(elem)
         if(holder.button1 != null){
-            holder.button1!!.setOnClickListener { println("BOTON 1") }
+            holder.button1!!.setOnClickListener {
+                println("BOTON 1")
+            }
+
         }
         if(holder.button2 != null){
             holder.button2!!.setOnClickListener { println("BOTON 2") }
@@ -64,6 +71,10 @@ class ProfesorAdapterChild (val context: Context, val elementos:  ArrayList<Arra
 
     override fun getItemCount(): Int {
         return elementos!!.size
+    }
+    interface OnAdapterListener {
+        fun addProfileToFalta(id : Int)
+
     }
 
 }

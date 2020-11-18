@@ -61,7 +61,8 @@ class activity_main_maestro_alumnos : AppCompatActivity() {
                                     elemento.getString("nombreGrupo"),
                                     "N/A",
                                     elemento.getString("nombreCompleto"),
-                                    "N/A"
+                                    elemento.getString("idAlumno"),
+
                             )
                     )
                 }else{
@@ -70,7 +71,7 @@ class activity_main_maestro_alumnos : AppCompatActivity() {
                                     elemento.getString("nombreGrupo"),
                                     "N/A",
                                     elemento.getString("nombreCompleto"),
-                                    "N/A"
+                                    elemento.getString("idAlumno"),
                             )
                     )
                 }
