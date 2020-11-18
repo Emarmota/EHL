@@ -4,6 +4,8 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
+import android.widget.CheckBox
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -13,6 +15,7 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import mx.tec.EHL.Adapter.ControlParentalAdapter
 import mx.tec.EHL.Adapter.ProfesorAdapter
+import mx.tec.EHL.Adapter.ProfesorAdapterChild
 import mx.tec.EHL.Helper.Constant
 import mx.tec.EHL.Helper.PreferencesHelper
 import mx.tec.EHL.PopUpClassAñadirAlumno
@@ -21,10 +24,10 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.NullPointerException
 
-class activity_main_maestro_alumnos : AppCompatActivity() {
+class activity_main_maestro_alumnos : AppCompatActivity(), ProfesorAdapterChild.OnAdapterListener {
     lateinit var activityAdapter: ProfesorAdapter
     val sharedPref by lazy { PreferencesHelper(this) }
-
+    var buttonConfirmar : Button? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_maestro_alumnos)
@@ -57,22 +60,24 @@ class activity_main_maestro_alumnos : AppCompatActivity() {
                 elemento = response.getJSONObject(i)
                 if(i == 0){
                     lista.set(i,
-                            arrayListOf(
-                                    elemento.getString("nombreGrupo"),
-                                    "N/A",
-                                    elemento.getString("nombreCompleto"),
-                                    elemento.getString("idAlumno"),
+                        arrayListOf(
+                                elemento.getString("nombreGrupo"),
+                                elemento.getString("idGrupo"),
+                                elemento.getString("nombreCompleto"),
+                                elemento.getString("idAlumno"),
+                                elemento.getString("idGrupo")
 
-                            )
+                                )
                     )
                 }else{
                     lista.add(i,
-                            arrayListOf(
-                                    elemento.getString("nombreGrupo"),
-                                    "N/A",
-                                    elemento.getString("nombreCompleto"),
-                                    elemento.getString("idAlumno"),
-                            )
+                        arrayListOf(
+                                elemento.getString("nombreGrupo"),
+                                elemento.getString("idGrupo"),
+                                elemento.getString("nombreCompleto"),
+                                elemento.getString("idAlumno"),
+                                elemento.getString("idGrupo")
+                        )
                     )
                 }
             }
@@ -100,22 +105,36 @@ class activity_main_maestro_alumnos : AppCompatActivity() {
         }
         val request = JsonArrayRequest(Request.Method.GET,uri,null,listener, error)
         queue.add(request)
+        buttonConfirmar=findViewById(R.id.buttonConfirmar)
 
 
+    }
+    override fun ListaAlumnosFalta(listaAlumnosFalta: ArrayList<Int>, listaGrupos: ArrayList<Int>, checkBox: ArrayList<CheckBox>) {
+        buttonConfirmar!!.setOnClickListener{
+            for(i in 0..listaAlumnosFalta.size-1){
+                println(listaAlumnosFalta[i].toString() + "   "+ listaGrupos[i])
+                var queue = Volley.newRequestQueue(this)
+                val uri = "http://"+getString(R.string.ip_connection)+"/api/alumnosFaltas/"+listaAlumnosFalta[i].toString()+"/"+listaGrupos[i].toString()
+                val listener = Response.Listener<JSONArray> { response ->
+                    println(response)
+                }
+                val error = Response.ErrorListener { error ->
+                    try {
+                        Log.e("MENSAJE_ERROR", error.message!!)
+                    }
+                    catch (e: NullPointerException){}
+                }
+                val request = JsonArrayRequest(Request.Method.GET,uri,null,listener, error)
+                queue.add(request)
+                buttonConfirmar=findViewById(R.id.buttonConfirmar)
+            }
 
 
+            for(i in 0..checkBox.size-1){
+                checkBox[0].isChecked = false
+            }
 
-
-
-
-
-
-
-
-
-
-
-
+        }
 
     }
 }

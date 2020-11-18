@@ -90,7 +90,7 @@
         tools:listitem="@layout/adapter_activity_maestro_alumnos" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/buttonConfirmar"
         style="@style/btn_sinrelleno"
         android:layout_width="116dp"
         android:layout_height="46dp"

@@ -5,6 +5,8 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.CheckBox
 import android.widget.RadioButton
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -20,6 +22,7 @@ class ProfesorAdapter (val context : Context, var elementos: ArrayList<ArrayList
         var recyclerViewChild : RecyclerView? = null
         var txt_primario : TextView? = null
         var txt_secundario : TextView? = null
+        var buttonConfirmar : Button? = null
 
         init {
             try{ txt_primario = view.findViewById(R.id.txt_primario) }
@@ -29,6 +32,8 @@ class ProfesorAdapter (val context : Context, var elementos: ArrayList<ArrayList
             if(child){
                 recyclerViewChild = view.findViewById(R.id.rvHijo)
             }
+            try{ buttonConfirmar=view.findViewById(R.id.buttonConfirmar) }
+            catch (e: Exception){ }
         }
         fun bindData(elemento: ArrayList<String>?){
             if(txt_primario != null)  txt_primario !!.text = elemento!![0]
@@ -81,16 +86,21 @@ class ProfesorAdapter (val context : Context, var elementos: ArrayList<ArrayList
             SetRecycler(auxMatrix!!,holder.recyclerViewChild, layoutInflaterChild!!)
         }
 
+        if(holder.buttonConfirmar != null) {
+            holder.buttonConfirmar!!.setOnClickListener {
+                println("CONFIRMAR...")
+            }
+        }
+
+
 
     }
 
     interface OnAdapterListener {
-        /*
-        fun onClick(: )
-        fun onUpdate(: )
-        fun onDelete(: )
+        fun AddFalta(){
 
-         */
+        }
+
     }
 
     override fun getItemCount(): Int {
@@ -111,17 +121,17 @@ class ProfesorAdapter (val context : Context, var elementos: ArrayList<ArrayList
             for(i in 0..elementos!!.size-1){
                 if(i == 0){
                     newElementos.set(countNew++,elementos!![i])
-                    elementosChild!!.set(childCount++, elementos!![i].slice(2..3) as ArrayList<String>)
+                    elementosChild!!.set(childCount++, elementos!![i].slice(2..elementos!![i].size-1) as ArrayList<String>)
                     cantChildAux++
                 }else{
                     if(i != 0 && elementos!![i-1][0] != elementos!![i][0] ){
                         newElementos.add(countNew++,elementos!![i])
-                        elementosChild!!.add(childCount++, elementos!![i].slice(2..3) as ArrayList<String>)
+                        elementosChild!!.add(childCount++, elementos!![i].slice(2..elementos!![i].size-1) as ArrayList<String>)
                         cantChild!!.add(cantChildRepet, cantChildAux)
                         cantChildAux = 1
                         cantChildRepet++
                     }else{
-                        elementosChild!!.add(childCount++, elementos!![i].slice(2..3) as ArrayList<String>)
+                        elementosChild!!.add(childCount++, elementos!![i].slice(2..elementos!![i].size-1) as ArrayList<String>)
                         cantChildAux++
                     }
                 }
@@ -136,8 +146,8 @@ class ProfesorAdapter (val context : Context, var elementos: ArrayList<ArrayList
 
     private fun SetRecycler(elementos: ArrayList<ArrayList<String>>, recyclerView: RecyclerView?, layoutInflaterChild:Int){
         val childRecyclerAdapter = ProfesorAdapterChild(context, elementos,  object: ProfesorAdapterChild.OnAdapterListener{
-            override fun addProfileToFalta(id: Int) {
-
+            override fun ListaAlumnosFalta(listaAlumnosFalta: ArrayList<Int>, listaGrupos: ArrayList<Int>, checkBox: ArrayList<CheckBox>) {
+                TODO("Not yet implemented")
             }
         }, layoutInflaterChild)
         recyclerView!!.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
