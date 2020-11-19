@@ -53,12 +53,50 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtv_maestroB" />
 
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cardView2"
+        android:layout_width="match_parent"
+        android:layout_height="50dp"
+        android:layout_marginTop="10dp"
+        app:cardBackgroundColor="#2EFFFFFF"
+        app:layout_constraintTop_toBottomOf="@+id/txtv_boleta">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/textNombre"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="80dp"
+                android:layout_marginTop="16dp"
+                android:text="AlumnoA"
+                android:textColor="@color/colorPrimary"
+                android:textSize="20sp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="AlumnoA" />
+
+            <TextView
+                android:id="@+id/textView6"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="116dp"
+                android:layout_marginTop="20dp"
+                android:text="Calificacion"
+                app:layout_constraintStart_toEndOf="@+id/textNombre"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="Calificacion" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.cardview.widget.CardView>
+
     <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvPadre"
         android:layout_width="378dp"
         android:layout_height="520dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginStart="16dp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/txtv_boleta"
-        tools:listitem="@layout/adapter_activity_maestro_boleta_alumno" />
+        app:layout_constraintTop_toBottomOf="@+id/cardView2"
+        tools:listitem="@layout/adapter_activity_maestro_boleta_calificaciones" />
 </androidx.constraintlayout.widget.ConstraintLayout>

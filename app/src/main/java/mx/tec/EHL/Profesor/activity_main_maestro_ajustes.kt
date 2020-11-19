@@ -15,22 +15,36 @@ import android.util.Log
 import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
 import androidx.core.app.ActivityCompat.startActivityForResult
+import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.Volley
 import com.google.firebase.FirebaseApp
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.ktx.storage
 import kotlinx.android.synthetic.main.activity_main_maestro_ajustes.*
+import mx.tec.EHL.Adapter.ProfesorAdapter
+import mx.tec.EHL.Helper.Constant
+import mx.tec.EHL.Helper.PreferencesHelper
 import mx.tec.EHL.MainActivity
 import mx.tec.EHL.PopUpClassCambiarContraseñaMaestro
 import mx.tec.EHL.PopUpClassContacto
 import mx.tec.EHL.R
+import org.json.JSONArray
+import org.json.JSONObject
 import java.io.IOException
+import java.lang.NullPointerException
 
 class activity_main_maestro_ajustes : AppCompatActivity() {
 
     private val STOAGE_PERMISSION_CODE : Int =1000
     val FILE = 1
+    val sharedPref by lazy { PreferencesHelper(this) }
 
     private var imageData : ByteArray?=null
     val storage = Firebase.storage("gs://my-project-d35b1.appspot.com")
@@ -116,14 +130,29 @@ class activity_main_maestro_ajustes : AppCompatActivity() {
 
     private fun saveImageData(){
         Toast.makeText(this, "imagen guardada", Toast.LENGTH_LONG).show()
-        var uploadTask = storageRef.child("carpeta/maestro1.jpg").putBytes(imageData!!)
+        var pathString = "maestro/maestro"+sharedPref.getInt(Constant.PREF_ID)+".jpg"
+        var uploadTask = storageRef.child(pathString).putBytes(imageData!!)
         uploadTask.addOnSuccessListener { taskSnapshot ->
+
+            var queue = Volley.newRequestQueue(this)
+            val uri = "http://"+getString(R.string.ip_connection)+"/api/actualizarMaestroFotoAvatar/"+sharedPref.getInt(Constant.PREF_ID)+"/"+pathString
+            val listener = Response.Listener<JSONArray> { response ->
+            }
+            val error = Response.ErrorListener { error ->
+                try {
+                    Log.e("MENSAJE_ERROR", error.message!!)
+                }
+                catch (e: NullPointerException){}
+            }
+            val request = JsonArrayRequest(Request.Method.GET,uri,null,listener, error)
+            queue.add(request)
+
+
 
         }
         uploadTask.addOnFailureListener{
             Log.i("valio", it.message!!)
         }
-
         val ref = storageRef.child("carpeta/maestro1.jpg")
         uploadTask.continueWithTask { task ->
             if (!task.isSuccessful) {

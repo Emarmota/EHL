@@ -1,8 +1,9 @@
 package mx.tec.EHL
 
+import android.app.Activity
 import android.content.Context
-import android.content.res.ColorStateList
 import android.graphics.Color
+import android.text.InputFilter
 import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
@@ -96,6 +97,8 @@ class PopUpClassAñadirAlumno(context: Context) {
             Toast.makeText(view.context, "El alumno " + nombreAlumno!!.text.toString() + " ha sido agregado", Toast.LENGTH_SHORT).show()
             AgregarAlumno(context)
             popupWindow.dismiss()
+            val activity = context as Activity
+            activity.recreate()
         }
 
 
@@ -138,11 +141,16 @@ class PopUpClassAñadirAlumno(context: Context) {
                     if(parent!!.getItemAtPosition(position).toString() == "Añadir grupo" ){
                         // Create TextVieew
                         val textView = TextView(context)
+
                         textView.setText("Nombre del grupo nuevo")
                         textView.setTextColor(Color.parseColor("#000000"))
                         textView.textSize = 18f
                         // Create EditText
                         textoEmergente = EditText(context)
+                        val filterArray = arrayOfNulls<InputFilter>(1)
+                        filterArray[0] = InputFilter.LengthFilter(16)
+                        textoEmergente!!.setFilters(filterArray)
+
                         textoEmergente!!.layoutParams = LinearLayout.LayoutParams(800,100)
                         textoEmergente!!.setPadding(20, 20, 20, 20)
                         textoEmergente!!.setTextColor(Color.parseColor("#000000"))

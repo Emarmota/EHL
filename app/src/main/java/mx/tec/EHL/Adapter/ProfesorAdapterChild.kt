@@ -43,6 +43,7 @@ class ProfesorAdapterChild(val context: Context, val elementos: ArrayList<ArrayL
 
 
 
+
         }
         fun bindData(elemento: ArrayList<String>){
             if(txt_primario != null)  txt_primario !!.text = elemento!![0]
@@ -79,7 +80,12 @@ class ProfesorAdapterChild(val context: Context, val elementos: ArrayList<ArrayL
         if(holder.button3 != null){
             holder.button3!!.setOnClickListener {
                 val intent = Intent(context, activity_main_maestro_boleta::class.java)
-                context.startActivity(intent) }
+                intent.putExtra("idAlumno",holder.idAlumno)
+                intent.putExtra("idGrupo",holder.idGrupo)
+                context.startActivity(intent)
+
+
+            }
         }
         if(holder.button4 != null) {
             holder.button4!!.setOnCheckedChangeListener { buttonView, isChecked ->
