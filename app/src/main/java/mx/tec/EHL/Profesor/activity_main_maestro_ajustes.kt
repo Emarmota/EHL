@@ -39,6 +39,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.io.IOException
 import java.lang.NullPointerException
+import java.net.URLEncoder
 
 class activity_main_maestro_ajustes : AppCompatActivity() {
 
@@ -135,7 +136,7 @@ class activity_main_maestro_ajustes : AppCompatActivity() {
         uploadTask.addOnSuccessListener { taskSnapshot ->
 
             var queue = Volley.newRequestQueue(this)
-            val uri = "http://"+getString(R.string.ip_connection)+"/api/actualizarMaestroFotoAvatar/"+sharedPref.getInt(Constant.PREF_ID)+"/"+pathString
+            val uri = "http://"+getString(R.string.ip_connection)+"/api/actualizarMaestroFotoAvatar/"+sharedPref.getInt(Constant.PREF_ID)+"/"+URLEncoder.encode(pathString,"utf-8")
             val listener = Response.Listener<JSONArray> { response ->
             }
             val error = Response.ErrorListener { error ->
