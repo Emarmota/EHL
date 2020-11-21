@@ -1,11 +1,11 @@
 package mx.tec.EHL.Profesor
 
-import android.app.AlertDialog
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
-import android.widget.Button
 import android.widget.ImageView
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -14,11 +14,13 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
+import com.google.firebase.ktx.Firebase
+import com.google.firebase.storage.FirebaseStorage
+import com.google.firebase.storage.ktx.storage
 import mx.tec.EHL.Adapter.ProfesorAdapter
 import mx.tec.EHL.Helper.Constant
 import mx.tec.EHL.Helper.PreferencesHelper
-import mx.tec.EHL.PopUpClassAñadirGuias
-import mx.tec.EHL.PopUpClassCambiarContraseñaMaestro
+import mx.tec.EHL.PopUpClassAñadirCQuiz
 import mx.tec.EHL.R
 import org.json.JSONArray
 import org.json.JSONObject
@@ -28,24 +30,27 @@ import java.util.*
 class activity_main_maestro_trabajos : AppCompatActivity() {
     lateinit var activityAdapter: ProfesorAdapter
     val sharedPref by lazy { PreferencesHelper(this) }
+    //PopupWindow display method
+
+    private val STOAGE_PERMISSION_CODE : Int =1000
+    val FILE = 1
+
+    private var imageData : ByteArray?=null
+    val storage = Firebase.storage("gs://my-project-d35b1.appspot.com")
+    val storageRef = storage.reference
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_maestro_trabajos)
 
-            val popupButton =
-                findViewById<ImageView>(R.id.btnAddGuia)
-            popupButton.setOnClickListener { v ->
-                val popUpClass = PopUpClassAñadirGuias(this)
-                popUpClass.showPopupWindow(v)
+            val btnAddGuia = findViewById<ImageView>(R.id.btnAddGuia)
+            btnAddGuia.setOnClickListener {
+                openContent()
             }
             val btnAddCQuiz = findViewById<ImageView>(R.id.btnAddCQuiz)
-            btnAddCQuiz.setOnClickListener {
-                val intent = Intent(
-                    this@activity_main_maestro_trabajos,
-                    activity_main_maestro_creacioncquiz::class.java
-                )
-                startActivity(intent)
+            btnAddCQuiz.setOnClickListener {v ->
+                val a = PopUpClassAñadirCQuiz(this)
+                a.showPopupWindow(v)
             }
 
             val btnback = findViewById<ImageView>(R.id.btn_backmmt)
@@ -57,19 +62,63 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
             }
 
 
-            /*
 
-        activityAdapter = ProfesorAdapter(this,null,object: ProfesorAdapter.OnAdapterListener{},R.layout.adapter_activity_maestro_trabajos,null)
-        val rvPadre = findViewById<RecyclerView>(R.id.rvPadre)
-        rvPadre.apply {
-            layoutManager = LinearLayoutManager(applicationContext)
-            adapter = activityAdapter
-        }
-         */
+
+            var queue1 = Volley.newRequestQueue(this)
+            val uri1 =
+                    "http://" + getString(R.string.ip_connection) + "/api/maestroTrabajosGuias/" + sharedPref.getInt(
+                            Constant.PREF_ID
+                    )
+            val listener1 = Response.Listener<JSONArray> { response ->
+                val lista: ArrayList<ArrayList<String>>
+                lista = arrayListOf(arrayListOf())
+                var elemento: JSONObject
+                for (i in 0 until response.length()) {
+                    elemento = response.getJSONObject(i)
+                    if (i == 0) {
+                        lista.set(
+                                i,
+                                arrayListOf(
+                                        elemento.getString("nombreActividad"),
+                                        "N/A"
+                                )
+                        )
+                    } else {
+                        lista.add(
+                                i,
+                                arrayListOf(
+                                        elemento.getString("nombreActividad"),
+                                        "N/A"
+                                )
+                        )
+                    }
+                }
+                activityAdapter = ProfesorAdapter(this,lista,object: ProfesorAdapter.OnAdapterListener{},R.layout.adapter_activity_maestro_trabajos,null)
+                val rvPadre = findViewById<RecyclerView>(R.id.rvPadre)
+                rvPadre.apply {
+                    layoutManager = LinearLayoutManager(applicationContext)
+                    adapter = activityAdapter
+                }
+
+            }
+            val error1 = Response.ErrorListener { error ->
+                try {
+                    Log.e("MENSAJE_ERROR", error.message!!)
+                } catch (e: NullPointerException) {
+                }
+
+            }
+            val request1 = JsonArrayRequest(Request.Method.GET, uri1, null, listener1, error1)
+            queue1.add(request1)
+
+
+
+
+
 
             var queue = Volley.newRequestQueue(this)
             val uri =
-                "http://" + getString(R.string.ip_connection) + "/api/maestroTrabajos/" + sharedPref.getInt(
+                "http://" + getString(R.string.ip_connection) + "/api/maestroTrabajosCQuiz/" + sharedPref.getInt(
                     Constant.PREF_ID
                 )
             val listener = Response.Listener<JSONArray> { response ->
@@ -90,7 +139,7 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
                         lista.add(
                             i,
                             arrayListOf(
-                                elemento.getString("nombreGrupo"),
+                                elemento.getString("nombreActividad"),
                                 "N/A"
                             )
                         )
@@ -120,5 +169,43 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
             queue.add(request)
 
         }
+
+
+    fun openContent(){
+        var intent = Intent()
+        intent.type = "*/*"
+        intent.action = Intent.ACTION_GET_CONTENT
+        startActivityForResult(intent, FILE)
+
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        if(requestCode == FILE){
+            try{
+                var fileUri = data?.data!!
+                uploadFile(fileUri)
+            }
+            catch (e : NullPointerException){
+                Toast.makeText(this,"No selecciono ningun archivo",Toast.LENGTH_SHORT).show()
+            }
+
+        }
+        super.onActivityResult(requestCode, resultCode, data)
+    }
+
+    fun uploadFile(fileUri: Uri){
+        var metaCursor = this.contentResolver.query(fileUri, arrayOf(MediaStore.MediaColumns.DISPLAY_NAME), null, null, null)!!
+        metaCursor.moveToFirst()
+        var fileName = metaCursor.getString(0)
+        metaCursor.close()
+
+        var storageRef = FirebaseStorage.getInstance().reference.child("files").child(fileName)
+        storageRef.putFile(fileUri).addOnSuccessListener {
+            Toast.makeText(this, "Se ha subido el archivo correctamente", Toast.LENGTH_LONG).show()
+        }
+    }
+
+
+
 
 }

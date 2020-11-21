@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import mx.tec.EHL.R
 import java.lang.Exception
+import java.lang.NullPointerException
 
 class ProfesorAdapter (val context : Context, var elementos: ArrayList<ArrayList<String>>?,var listener: OnAdapterListener, var layoutInflater: Int, var layoutInflaterChild:Int?) : RecyclerView.Adapter<ProfesorAdapter.ActivityViewHolder>(){
     var elementosChild : ArrayList<ArrayList<String>>? = null
@@ -107,8 +108,14 @@ class ProfesorAdapter (val context : Context, var elementos: ArrayList<ArrayList
         if(start == false){
             DataOrder()
         }
-        return elementos!!.size
+        try {
+            return elementos!!.size
+        }
+        catch (e:NullPointerException){
+            return 0
+        }
     }
+
     private fun DataOrder(){
         if(layoutInflaterChild != null ){
             var newElementos = arrayListOf( arrayListOf<String>())
@@ -118,26 +125,31 @@ class ProfesorAdapter (val context : Context, var elementos: ArrayList<ArrayList
             var childCount = 0
             var cantChildAux = 0
             var cantChildRepet = 0
-            for(i in 0..elementos!!.size-1){
-                if(i == 0){
-                    newElementos.set(countNew++,elementos!![i])
-                    elementosChild!!.set(childCount++, elementos!![i].slice(2..elementos!![i].size-1) as ArrayList<String>)
-                    cantChildAux++
-                }else{
-                    if(i != 0 && elementos!![i-1][0] != elementos!![i][0] ){
-                        newElementos.add(countNew++,elementos!![i])
-                        elementosChild!!.add(childCount++, elementos!![i].slice(2..elementos!![i].size-1) as ArrayList<String>)
-                        cantChild!!.add(cantChildRepet, cantChildAux)
-                        cantChildAux = 1
-                        cantChildRepet++
-                    }else{
-                        elementosChild!!.add(childCount++, elementos!![i].slice(2..elementos!![i].size-1) as ArrayList<String>)
+            try{
+                for(i in 0..elementos!!.size-1){
+                    if(i == 0){
+                        newElementos.set(countNew++,elementos!![i])
+                        elementosChild!!.set(childCount++, elementos!![i].slice(2..elementos!![i].size-1) as ArrayList<String>)
                         cantChildAux++
+                    }else{
+                        if(i != 0 && elementos!![i-1][0] != elementos!![i][0] ){
+                            newElementos.add(countNew++,elementos!![i])
+                            elementosChild!!.add(childCount++, elementos!![i].slice(2..elementos!![i].size-1) as ArrayList<String>)
+                            cantChild!!.add(cantChildRepet, cantChildAux)
+                            cantChildAux = 1
+                            cantChildRepet++
+                        }else{
+                            elementosChild!!.add(childCount++, elementos!![i].slice(2..elementos!![i].size-1) as ArrayList<String>)
+                            cantChildAux++
+                        }
                     }
                 }
+                cantChild!!.add(cantChildRepet, cantChildAux)
+                elementos = newElementos
             }
-            cantChild!!.add(cantChildRepet, cantChildAux)
-            elementos = newElementos
+            catch (e: NullPointerException){}
+
+
             start = true
 
         }
