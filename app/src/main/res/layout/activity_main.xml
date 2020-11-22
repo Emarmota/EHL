@@ -97,7 +97,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/editTextTextPassword" />
 
             <Button
-                android:id="@+id/button2"
+                android:id="@+id/txtContact"
                 style="@style/btn_nada"
                 android:layout_width="90dp"
                 android:layout_height="34dp"

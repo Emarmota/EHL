@@ -6,8 +6,12 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
 import android.util.Log
+import android.view.LayoutInflater
+import android.view.View
 import android.widget.ImageView
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.android.volley.Request
@@ -17,6 +21,8 @@ import com.android.volley.toolbox.Volley
 import com.google.firebase.ktx.Firebase
 import com.google.firebase.storage.FirebaseStorage
 import com.google.firebase.storage.ktx.storage
+import kotlinx.android.synthetic.main.a_alertdialog_guia.*
+import kotlinx.android.synthetic.main.a_alertdialog_guia.view.*
 import mx.tec.EHL.Adapter.ProfesorAdapter
 import mx.tec.EHL.Helper.Constant
 import mx.tec.EHL.Helper.PreferencesHelper
@@ -34,7 +40,7 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
 
     private val STOAGE_PERMISSION_CODE : Int =1000
     val FILE = 1
-
+    var save = false
     private var imageData : ByteArray?=null
     val storage = Firebase.storage("gs://my-project-d35b1.appspot.com")
     val storageRef = storage.reference
@@ -45,8 +51,25 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
 
             val btnAddGuia = findViewById<ImageView>(R.id.btnAddGuia)
             btnAddGuia.setOnClickListener {
-                openContent()
+
+                val view = LayoutInflater.from(this).inflate(R.layout.a_alertdialog_guia, null)
+
+                val builder = AlertDialog.Builder(this)
+                        .setView(view)
+
+                val dialog = builder.show()
+
+                dialog.btnagregarguia.setOnClickListener {
+                    openContent()
+                }
+
+                view.btnaceptarguia.setOnClickListener {
+                    save=true
+                    //dialog.dismiss()
+
+                }
             }
+
             val btnAddCQuiz = findViewById<ImageView>(R.id.btnAddCQuiz)
             btnAddCQuiz.setOnClickListener {v ->
                 val a = PopUpClassAñadirCQuiz(this)
@@ -60,9 +83,6 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
                 startActivity(intent)
             }
-
-
-
 
             var queue1 = Volley.newRequestQueue(this)
             val uri1 =
@@ -110,10 +130,6 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
             }
             val request1 = JsonArrayRequest(Request.Method.GET, uri1, null, listener1, error1)
             queue1.add(request1)
-
-
-
-
 
 
             var queue = Volley.newRequestQueue(this)
@@ -202,10 +218,13 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
         var storageRef = FirebaseStorage.getInstance().reference.child("files").child(fileName)
         storageRef.putFile(fileUri).addOnSuccessListener {
             Toast.makeText(this, "Se ha subido el archivo correctamente", Toast.LENGTH_LONG).show()
+            save=false
+            nombrartexto(fileName)
         }
     }
 
-
-
-
+    fun nombrartexto(nombre: String)
+    {
+        txtarchivo.text= nombre
+    }
 }

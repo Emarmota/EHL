@@ -4,9 +4,12 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.view.LayoutInflater
 import android.widget.Button
 import android.widget.EditText
+import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AlertDialog
 import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
@@ -37,7 +40,19 @@ class MainActivity : AppCompatActivity() {
 
         val editTextTextPersonName = findViewById<EditText>(R.id.editTextTextPersonName)
         val editTextTextPassword = findViewById<EditText>(R.id.editTextTextPassword)
+        val listencontact = findViewById<TextView>(R.id.txtContact)
+
         var queue = Volley.newRequestQueue(this)
+
+        listencontact.setOnClickListener {
+            val view = LayoutInflater.from(this).inflate(R.layout.activity_popup_contacto, null)
+
+            val builder = AlertDialog.Builder(this)
+                    .setView(view)
+
+            val dialog = builder.show()
+        }
+
 
         val buttonIngresar=findViewById<Button>(R.id.buttonIngresar)
         buttonIngresar.setOnClickListener{
@@ -52,9 +67,7 @@ class MainActivity : AppCompatActivity() {
                 }
                 catch (e : Exception){
                     Toast.makeText(this,"No existe el usuario",Toast.LENGTH_SHORT).show()
-
                 }
-
             }
             val error = Response.ErrorListener {error ->
 //                Log.e("MENSAJE_ERROR",error.message!!)
@@ -63,9 +76,6 @@ class MainActivity : AppCompatActivity() {
             queue.add(request)
 
         }
-
-
-
     }
 
 
@@ -85,8 +95,9 @@ class MainActivity : AppCompatActivity() {
             val intent= Intent(this@MainActivity,MainActivityControlParental::class.java)
             startActivity(intent)
         }
-
     }
+
+
     private fun saveSession(id: Int,pass: String){
         sharedPref.put(Constant.PREF_ID, id)
         sharedPref.put(Constant.PREF_PASSWORD, pass)

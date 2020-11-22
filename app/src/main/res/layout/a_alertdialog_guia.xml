@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:gravity="center"
+    android:paddingLeft="10dp"
+    android:paddingRight="10dp">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="#9EF8EDED"
+        android:backgroundTint="#FFFFFF"
+        app:cardCornerRadius="5dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="10dp">
+
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="left"
+                android:padding="10dp"
+                android:text="Añadir Guía"
+                android:textColor="#050505"
+                android:textSize="20sp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/tv_nombrealum"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Nombre de la guía: "
+                android:textColor="#050505"
+                android:textSize="18sp" />
+
+            <EditText
+                android:id="@+id/txt_NombreGuia"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                android:maxLength="16"
+                android:textColor="#050505" />
+
+            <TextView
+                android:id="@+id/tv_ingresargrupo"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Asingar a grupo"
+                android:textColor="#050505"
+                android:textSize="18sp" />
+
+            <FrameLayout
+                android:layout_width="match_parent"
+                android:layout_height="42dp"
+                android:background="#FFFFFF">
+
+                <Spinner
+                    android:id="@+id/spinner_grupoguia"
+                    style="@style/spinner_bg"
+                    android:layout_width="match_parent"
+                    android:layout_height="40dp"
+                    android:layout_marginTop="10dp" />
+            </FrameLayout>
+
+            <LinearLayout
+                android:id="@+id/container"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/btnagregarguia"
+                    style="@style/btn_normal"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Agregar archivo" />
+
+                <TextView
+                    android:id="@+id/txtarchivo"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Nombre del archivo."
+                    android:textColor="#000000" />
+
+                <Button
+                    android:id="@+id/btnaceptarguia"
+                    style="@style/btn_sinrelleno"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="30dp"
+                    android:text="Aceptar"
+                    android:textColor="#050505" />
+
+            </LinearLayout>
+
+        </LinearLayout>
+    </androidx.cardview.widget.CardView>
+</LinearLayout>

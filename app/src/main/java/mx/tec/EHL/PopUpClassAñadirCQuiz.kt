@@ -59,9 +59,6 @@ class PopUpClassAñadirCQuiz(context: Context) {
         nombreAlumno = popupView.findViewById(R.id.txt_NombreAlum)
         val grupoSpinner = popupView.findViewById<Spinner>(R.id.spinner_grupo)
 
-
-
-
         var queue = Volley.newRequestQueue(context)
         val uri = "http://"+context.getString(R.string.ip_connection)+"/api/alumnosGruposMaestro/"+sharedPref.getInt(Constant.PREF_ID)
         val listener = Response.Listener<JSONArray> { response ->
@@ -86,22 +83,19 @@ class PopUpClassAñadirCQuiz(context: Context) {
         val request = JsonArrayRequest(Request.Method.GET, uri, null, listener, error)
         queue.add(request)
 
+        try {
+            val continuarButton = popupView.findViewById<Button>(R.id.continuarButton)
+            continuarButton.setOnClickListener { //As an example, display the message
+                Toast.makeText(view.context, "El alumno " + nombreAlumno!!.text.toString() + " ha sido agregado", Toast.LENGTH_SHORT).show()
+                AgregarCQuiz(context)
+                popupWindow.dismiss()
 
-
-
-
-        val continuarButton = popupView.findViewById<Button>(R.id.continuarButton)
-        continuarButton.setOnClickListener { //As an example, display the message
-            Toast.makeText(view.context, "El alumno " + nombreAlumno!!.text.toString() + " ha sido agregado", Toast.LENGTH_SHORT).show()
-            AgregarCQuiz(context)
-            popupWindow.dismiss()
-            
-            val intent = Intent(context, activity_main_maestro_creacioncquiz::class.java)
-            intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
-            context.startActivity(intent)
+                val intent = Intent(context, activity_main_maestro_creacioncquiz::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                context.startActivity(intent)
+            }
         }
-
-
+        catch (e: java.lang.NullPointerException){}
     }
 
     private fun AgregarCQuiz(context : Context){
@@ -110,7 +104,8 @@ class PopUpClassAñadirCQuiz(context: Context) {
         if(anadirConGrupo){
             grupoAlumno = textoEmergente!!.text.toString()
             uri = "http://"+context.getString(R.string.ip_connection)+"/api/maestroAgregarAlumnoConGrupo/"+sharedPref.getInt(Constant.PREF_ID)+"/"+URLEncoder.encode( nombreAlumno!!.text.toString(), "utf-8")+"/"+usuarioAlumno!!.text.toString()+"/"+contraseñaAlumno!!.text.toString()+"/"+URLEncoder.encode(grupoAlumno, "utf-8")+"/"+(usuarioAlumno!!.text.toString()+"_cp")+"/"+(usuarioAlumno!!.text.toString()+"_cp")
-        }else{
+        }
+        else{
             uri = "http://"+context.getString(R.string.ip_connection)+"/api/maestroAgregarAlumnoSinGrupo/"+URLEncoder.encode( nombreAlumno!!.text.toString(), "utf-8")+"/"+usuarioAlumno!!.text.toString()+"/"+contraseñaAlumno!!.text.toString()+"/"+URLEncoder.encode(grupoAlumno, "utf-8")+"/"+(usuarioAlumno!!.text.toString()+"_cp")+"/"+(usuarioAlumno!!.text.toString()+"_cp")
         }
 
@@ -124,7 +119,6 @@ class PopUpClassAñadirCQuiz(context: Context) {
         }
         val request = JsonArrayRequest(Request.Method.GET, uri, null, listener, error)
         queue.add(request)
-
     }
 
     private fun SetSpinnerValues( popupView : View, grupoSpinner: Spinner,  lista : List<String>){
@@ -168,8 +162,4 @@ class PopUpClassAñadirCQuiz(context: Context) {
                 }
             }
     }
-
-
-
-
 }
