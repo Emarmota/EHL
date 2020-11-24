@@ -1,13 +1,13 @@
 <resources>
     <string name="app_name">EHL</string>
 
+    <!--
 
-    <string name="ip_connection">192.168.100.2:3000</string>
+        <string name="ip_connection">192.168.100.2:3000</string>
+            -->
 
 
-<!--
     <string name="ip_connection">192.168.50.22:3000</string>
-    -->
     <string-array name="gruposlocal">
         <item>Grupo 1</item>
         <item>Grupo 2</item>

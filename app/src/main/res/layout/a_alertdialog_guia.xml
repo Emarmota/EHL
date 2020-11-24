@@ -74,6 +74,12 @@
                 android:id="@+id/container"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
+                android:orientation="vertical"></LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/LinearLayout"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
                 android:orientation="vertical">
 
                 <Button
@@ -83,13 +89,6 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="30dp"
                     android:text="Agregar archivo" />
-
-                <TextView
-                    android:id="@+id/txtarchivo"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="Nombre del archivo."
-                    android:textColor="#000000" />
 
                 <Button
                     android:id="@+id/btnaceptarguia"

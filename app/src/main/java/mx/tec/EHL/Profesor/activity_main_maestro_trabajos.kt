@@ -1,16 +1,17 @@
 package mx.tec.EHL.Profesor
 
 import android.content.Intent
+import android.graphics.Color
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.MediaStore
+import android.text.InputFilter
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
-import android.widget.ImageView
-import android.widget.TextView
-import android.widget.Toast
+import android.view.ViewGroup
+import android.widget.*
 import androidx.appcompat.app.AlertDialog
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -31,6 +32,7 @@ import mx.tec.EHL.R
 import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.NullPointerException
+import java.net.URLEncoder
 import java.util.*
 
 class activity_main_maestro_trabajos : AppCompatActivity() {
@@ -44,6 +46,7 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
     private var imageData : ByteArray?=null
     val storage = Firebase.storage("gs://my-project-d35b1.appspot.com")
     val storageRef = storage.reference
+    var nombreGuia : EditText? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -51,21 +54,45 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
 
             val btnAddGuia = findViewById<ImageView>(R.id.btnAddGuia)
             btnAddGuia.setOnClickListener {
-
                 val view = LayoutInflater.from(this).inflate(R.layout.a_alertdialog_guia, null)
+                val grupoSpinner = view.findViewById<Spinner>(R.id.spinner_grupoguia)
+                var queue = Volley.newRequestQueue(this)
+                val uri = "http://"+getString(R.string.ip_connection)+"/api/alumnosGruposMaestro/"+sharedPref.getInt(Constant.PREF_ID)
+                val listener = Response.Listener<JSONArray> { response ->
+                    val lista : List<String>
+                    lista = arrayListOf()
+                    var elemento : JSONObject
+                    for(i in 0 until response.length()){
+                        elemento = response.getJSONObject(i)
+                        lista.add(i,
+                                elemento.getString("nombreGrupo")
+                        )
+                    }
+                    lista.add("Añadir grupo")
+                    SetSpinnerValues(view, grupoSpinner, lista)
+                }
+                val error = Response.ErrorListener { error ->
+                    try {
+                        Log.e("MENSAJE_ERROR", error.message!!)
+                    }
+                    catch (e: NullPointerException){}
+                }
+                val request = JsonArrayRequest(Request.Method.GET, uri, null, listener, error)
+                queue.add(request)
+
 
                 val builder = AlertDialog.Builder(this)
                         .setView(view)
 
                 val dialog = builder.show()
-
+                nombreGuia = view.findViewById(R.id.txt_NombreGuia)
                 dialog.btnagregarguia.setOnClickListener {
                     openContent()
                 }
 
                 view.btnaceptarguia.setOnClickListener {
-                    save=true
-                    //dialog.dismiss()
+                    uploadFile(fileUri!!)
+                    dialog.dismiss()
 
                 }
             }
@@ -100,7 +127,7 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
                                 i,
                                 arrayListOf(
                                         elemento.getString("nombreActividad"),
-                                        "N/A"
+                                        elemento.getString("id")
                                 )
                         )
                     } else {
@@ -108,7 +135,7 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
                                 i,
                                 arrayListOf(
                                         elemento.getString("nombreActividad"),
-                                        "N/A"
+                                        elemento.getString("id")
                                 )
                         )
                     }
@@ -184,6 +211,18 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
             val request = JsonArrayRequest(Request.Method.GET, uri, null, listener, error)
             queue.add(request)
 
+
+
+
+
+
+
+
+
+
+
+
+
         }
 
 
@@ -194,12 +233,11 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
         startActivityForResult(intent, FILE)
 
     }
-
+    var fileUri : Uri? = null
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         if(requestCode == FILE){
             try{
-                var fileUri = data?.data!!
-                uploadFile(fileUri)
+                fileUri = data?.data!!
             }
             catch (e : NullPointerException){
                 Toast.makeText(this,"No selecciono ningun archivo",Toast.LENGTH_SHORT).show()
@@ -219,12 +257,74 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
         storageRef.putFile(fileUri).addOnSuccessListener {
             Toast.makeText(this, "Se ha subido el archivo correctamente", Toast.LENGTH_LONG).show()
             save=false
-            nombrartexto(fileName)
+            var queue = Volley.newRequestQueue(this)
+            var uri = ""
+            if(anadirConGrupo){
+                grupoAlumno = textoEmergente!!.text.toString()
+                uri = "http://"+getString(R.string.ip_connection)+"/api/maestroAgregarGuiaConGrupo/"+sharedPref.getInt(Constant.PREF_ID)+"/"+ URLEncoder.encode( grupoAlumno, "utf-8")+"/"+ URLEncoder.encode( nombreGuia!!.text.toString(), "utf-8")+"/"+URLEncoder.encode( fileUri.toString(), "utf-8")
+            }
+            else{
+                uri = "http://"+getString(R.string.ip_connection)+"/api/maestroAgregarGuiaSinGrupo/"+URLEncoder.encode( grupoAlumno, "utf-8")+"/"+ URLEncoder.encode( nombreGuia!!.text.toString(), "utf-8")+"/"+URLEncoder.encode( fileUri.toString(), "utf-8")
+            }
+
+            val listener = Response.Listener<JSONArray> { response ->
+            }
+            val error = Response.ErrorListener { error ->
+                try {
+                    Log.e("MENSAJE_ERROR", error.message!!)
+                }
+                catch (e: NullPointerException){}
+            }
+            val request = JsonArrayRequest(Request.Method.GET, uri, null, listener, error)
+            queue.add(request)
+
         }
     }
 
-    fun nombrartexto(nombre: String)
-    {
-        txtarchivo.text= nombre
+
+
+    var grupoAlumno = ""
+    var textoEmergente : EditText? = null
+    var anadirConGrupo = false
+    private fun SetSpinnerValues(popupView : View, grupoSpinner: Spinner, lista : List<String>){
+        val adapter: ArrayAdapter<String> = ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, lista )
+        grupoSpinner.adapter = adapter
+
+        grupoSpinner.onItemSelectedListener = object : AdapterView.OnItemSelectedListener {
+            override fun onNothingSelected(p0: AdapterView<*>?) {
+            }
+            override fun onItemSelected(parent: AdapterView<*>?, view: View, position: Int, id: Long)
+            {
+                val linearLayout = popupView.findViewById<LinearLayout>(R.id.container)
+
+                if(parent!!.getItemAtPosition(position).toString() == "Añadir grupo" ){
+                    // Create TextVieew
+                    val textView = TextView(view.context)
+
+                    textView.setText("Nombre del grupo nuevo")
+                    textView.setTextColor(Color.parseColor("#000000"))
+                    textView.textSize = 18f
+                    // Create EditText
+                    textoEmergente = EditText(view.context)
+                    val filterArray = arrayOfNulls<InputFilter>(1)
+                    filterArray[0] = InputFilter.LengthFilter(16)
+                    textoEmergente!!.setFilters(filterArray)
+
+                    textoEmergente!!.layoutParams = ViewGroup.LayoutParams(800,100)
+                    textoEmergente!!.setPadding(20, 20, 20, 20)
+                    textoEmergente!!.setTextColor(Color.parseColor("#000000"))
+                    // Add EditText and textView to LinearLayout
+                    linearLayout?.addView(textView)
+                    linearLayout?.addView(textoEmergente)
+                    grupoAlumno = textoEmergente!!.text.toString()
+                    anadirConGrupo = true
+                }else{
+                    linearLayout?.removeAllViews()
+                    grupoAlumno = parent!!.getItemAtPosition(position).toString()
+                    println(grupoAlumno)
+                    anadirConGrupo = false
+                }
+            }
+        }
     }
 }

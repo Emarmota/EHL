@@ -1,19 +1,25 @@
 package mx.tec.EHL.Adapter
 
 
+import android.app.Activity
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Button
-import android.widget.CheckBox
-import android.widget.RadioButton
-import android.widget.TextView
+import android.widget.*
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.Volley
+import mx.tec.EHL.Helper.Constant
 import mx.tec.EHL.R
+import org.json.JSONArray
 import java.lang.Exception
 import java.lang.NullPointerException
+import java.net.URLEncoder
 
 class ProfesorAdapter (val context : Context, var elementos: ArrayList<ArrayList<String>>?,var listener: OnAdapterListener, var layoutInflater: Int, var layoutInflaterChild:Int?) : RecyclerView.Adapter<ProfesorAdapter.ActivityViewHolder>(){
     var elementosChild : ArrayList<ArrayList<String>>? = null
@@ -24,8 +30,11 @@ class ProfesorAdapter (val context : Context, var elementos: ArrayList<ArrayList
         var txt_primario : TextView? = null
         var txt_secundario : TextView? = null
         var buttonConfirmar : Button? = null
-
+        var button1 : ImageView? = null
+        var idActividad : String? = null
         init {
+            try{ button1 = view.findViewById(R.id.button1) }
+            catch (e: Exception){ }
             try{ txt_primario = view.findViewById(R.id.txt_primario) }
             catch(e: Exception){ }
             try{ txt_secundario = view.findViewById(R.id.txt_secundario) }
@@ -39,6 +48,9 @@ class ProfesorAdapter (val context : Context, var elementos: ArrayList<ArrayList
         fun bindData(elemento: ArrayList<String>?){
             if(txt_primario != null)  txt_primario !!.text = elemento!![0]
             if(txt_secundario != null) txt_secundario !!.text = elemento!![1]
+            else{
+                idActividad = elemento!![1]
+            }
 
         }
     }
@@ -53,6 +65,28 @@ class ProfesorAdapter (val context : Context, var elementos: ArrayList<ArrayList
     override fun onBindViewHolder(holder: ActivityViewHolder, position: Int) {
         val elem = elementos!![position]
         holder.bindData(elem)
+
+
+        if(holder.button1 != null){
+            holder.button1!!.setOnClickListener {
+                println("BOTON 2" + holder.idActividad)
+                var queue = Volley.newRequestQueue(context)
+                var uri = "http://"+context.getString(R.string.ip_connection)+"/api/maestroQuitarGuia/"+ holder.idActividad
+                val listener = Response.Listener<JSONArray> { response ->
+                }
+                val error = Response.ErrorListener { error ->
+                    try {
+                        Log.e("MENSAJE_ERROR", error.message!!)
+                    }
+                    catch (e: NullPointerException){}
+                }
+                val request = JsonArrayRequest(Request.Method.DELETE, uri, null, listener, error)
+                queue.add(request)
+                val activity = context as Activity
+                activity.recreate()
+            }
+        }
+
 
         if(layoutInflaterChild != null ) {
             var auxMatrix : ArrayList<ArrayList<String>>?
@@ -106,7 +140,11 @@ class ProfesorAdapter (val context : Context, var elementos: ArrayList<ArrayList
 
     override fun getItemCount(): Int {
         if(start == false){
-            DataOrder()
+            println(elementos!!.toString() + " <<---- ELEMENTOSS")
+            if(elementos?.get(0)!!.isNullOrEmpty() == false)
+                DataOrder()
+            else
+                return 0
         }
         try {
             return elementos!!.size

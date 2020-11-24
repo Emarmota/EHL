@@ -1,15 +1,26 @@
 package mx.tec.EHL
 
+import android.app.Activity
 import android.content.Context
+import android.util.Log
 import android.view.Gravity
 import android.view.LayoutInflater
 import android.view.View
 import android.widget.*
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.Volley
+import mx.tec.EHL.Helper.Constant
+import org.json.JSONArray
+import java.net.URLEncoder
 
 
-class PopUpClassAñadirPregunta {
+class PopUpClassAñadirPregunta(context: Context) {
+    val context = context
+
     //PopupWindow display method
-    fun showPopupWindow(view: View) {
+    fun showPopupWindow(view: View, nombreActividad :String?) {
 
 
         //Create a View object yourself through inflater
@@ -34,14 +45,36 @@ class PopUpClassAñadirPregunta {
         val pregunta = popupView.findViewById<EditText>(R.id.txt_pregunta)
         val respcorrect = popupView.findViewById<EditText>(R.id.txt_respuestacorrecta)
         val resp1 = popupView.findViewById<EditText>(R.id.txt_resp1)
-        val resp2 = popupView.findViewById<EditText>(R.id.txt_resp2)
 
-        val buttonAñadir =
-            popupView.findViewById<Button>(R.id.ButtonAñadir)
+        val buttonAñadir = popupView.findViewById<Button>(R.id.ButtonAñadir)
         buttonAñadir.setOnClickListener { //As an example, display the message
+            AgregarPregunta(nombreActividad!!,pregunta.text.toString(),respcorrect.text.toString(),resp1.text.toString())
             Toast.makeText(view.context, "Se ha agregado la nueva pregunta al CQuiz", Toast.LENGTH_SHORT).show()
             popupWindow.dismiss()
+            val activity = context as Activity
+            activity.recreate()
         }
 
     }
+
+
+    fun AgregarPregunta(nombreActividad : String, pregunta : String, respuestaCorrecta : String, respuesta : String){
+        var queue = Volley.newRequestQueue(context)
+        var uri = "http://"+context.getString(R.string.ip_connection)+"/api/maestroAgregarPregunta/"+nombreActividad+"/"+ URLEncoder.encode( pregunta, "utf-8")+"/"+ URLEncoder.encode( respuestaCorrecta, "utf-8")+"/"+ URLEncoder.encode( respuesta, "utf-8")
+        val listener = Response.Listener<JSONArray> {
+        }
+        val error = Response.ErrorListener { error ->
+            try {
+                Log.e("MENSAJE_ERROR", error.message!!)
+            }
+            catch (e: NullPointerException){}
+        }
+        val request = JsonArrayRequest(Request.Method.GET, uri, null, listener, error)
+        queue.add(request)
+    }
+
+
+
+
+
 }

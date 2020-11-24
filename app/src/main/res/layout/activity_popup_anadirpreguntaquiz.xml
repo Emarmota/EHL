@@ -78,22 +78,6 @@
                 android:inputType="textPersonName"
                 android:textColor="#050505" />
 
-            <TextView
-                android:id="@+id/textViewIngresaRespuesta"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Ingresa respuesta:"
-                android:textColor="#050505"
-                android:textSize="18sp" />
-
-            <EditText
-                android:id="@+id/txt_resp2"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:ems="10"
-                android:inputType="textPersonName"
-                android:textColor="#050505" />
-
             <Button
                 android:id="@+id/ButtonAñadir"
                 style="@style/btn_sinrelleno"

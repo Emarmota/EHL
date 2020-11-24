@@ -19,7 +19,7 @@
             android:layout_height="match_parent">
 
             <EditText
-                android:id="@+id/editTextPregunta"
+                android:id="@+id/txt_primario"
                 android:layout_width="291dp"
                 android:layout_height="43dp"
                 android:layout_marginStart="16dp"

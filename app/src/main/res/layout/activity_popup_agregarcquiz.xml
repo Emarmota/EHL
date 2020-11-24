@@ -37,7 +37,7 @@
                 android:id="@+id/tv_nombrealum"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="Ingresar nombre completo:"
+                android:text="Ingresar nombre de la actividad"
                 android:textColor="#050505"
                 android:textSize="18sp" />
 

@@ -1,6 +1,5 @@
 package mx.tec.EHL
 
-import android.app.Activity
 import android.content.Context
 import android.content.Intent
 import android.graphics.Color
@@ -26,9 +25,7 @@ class PopUpClassAñadirCQuiz(context: Context) {
     val context = context
     val sharedPref by lazy { PreferencesHelper(context) }
     var grupoAlumno = ""
-    var nombreAlumno :EditText? = null
-    var usuarioAlumno :EditText? = null
-    var contraseñaAlumno :EditText? = null
+    var nombreActividad :EditText? = null
     var textoEmergente : EditText? = null
 
     var anadirConGrupo = false
@@ -56,7 +53,7 @@ class PopUpClassAñadirCQuiz(context: Context) {
         popupWindow.showAtLocation(view, Gravity.CENTER, 0, 0)
 
         //Initialize the elements of our window, install the handler
-        nombreAlumno = popupView.findViewById(R.id.txt_NombreAlum)
+        nombreActividad = popupView.findViewById(R.id.txt_NombreAlum)
         val grupoSpinner = popupView.findViewById<Spinner>(R.id.spinner_grupo)
 
         var queue = Volley.newRequestQueue(context)
@@ -86,12 +83,13 @@ class PopUpClassAñadirCQuiz(context: Context) {
         try {
             val continuarButton = popupView.findViewById<Button>(R.id.continuarButton)
             continuarButton.setOnClickListener { //As an example, display the message
-                Toast.makeText(view.context, "El alumno " + nombreAlumno!!.text.toString() + " ha sido agregado", Toast.LENGTH_SHORT).show()
+                Toast.makeText(view.context, "El alumno " + nombreActividad!!.text.toString() + " ha sido agregado", Toast.LENGTH_SHORT).show()
                 AgregarCQuiz(context)
                 popupWindow.dismiss()
 
                 val intent = Intent(context, activity_main_maestro_creacioncquiz::class.java)
                 intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
+                intent.putExtra("nombreActividad",nombreActividad!!.text.toString())
                 context.startActivity(intent)
             }
         }
@@ -103,13 +101,14 @@ class PopUpClassAñadirCQuiz(context: Context) {
         var uri = ""
         if(anadirConGrupo){
             grupoAlumno = textoEmergente!!.text.toString()
-            uri = "http://"+context.getString(R.string.ip_connection)+"/api/maestroAgregarAlumnoConGrupo/"+sharedPref.getInt(Constant.PREF_ID)+"/"+URLEncoder.encode( nombreAlumno!!.text.toString(), "utf-8")+"/"+usuarioAlumno!!.text.toString()+"/"+contraseñaAlumno!!.text.toString()+"/"+URLEncoder.encode(grupoAlumno, "utf-8")+"/"+(usuarioAlumno!!.text.toString()+"_cp")+"/"+(usuarioAlumno!!.text.toString()+"_cp")
+            uri = "http://"+context.getString(R.string.ip_connection)+"/api/maestroAgregarCQuizConGrupo/"+sharedPref.getInt(Constant.PREF_ID)+"/"+URLEncoder.encode( grupoAlumno, "utf-8")+"/"+URLEncoder.encode( nombreActividad!!.text.toString(), "utf-8")
         }
         else{
-            uri = "http://"+context.getString(R.string.ip_connection)+"/api/maestroAgregarAlumnoSinGrupo/"+URLEncoder.encode( nombreAlumno!!.text.toString(), "utf-8")+"/"+usuarioAlumno!!.text.toString()+"/"+contraseñaAlumno!!.text.toString()+"/"+URLEncoder.encode(grupoAlumno, "utf-8")+"/"+(usuarioAlumno!!.text.toString()+"_cp")+"/"+(usuarioAlumno!!.text.toString()+"_cp")
+            println(grupoAlumno + "<<-- GRUPO")
+            uri = "http://"+context.getString(R.string.ip_connection)+"/api/maestroAgregarCQuizSinGrupo/"+URLEncoder.encode( grupoAlumno, "utf-8")+"/"+URLEncoder.encode( nombreActividad!!.text.toString(), "utf-8")
         }
 
-        val listener = Response.Listener<JSONArray> { response ->
+        val listener = Response.Listener<JSONArray> {
         }
         val error = Response.ErrorListener { error ->
             try {

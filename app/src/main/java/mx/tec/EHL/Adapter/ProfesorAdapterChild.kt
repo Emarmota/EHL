@@ -18,10 +18,8 @@ class ProfesorAdapterChild(val context: Context, val elementos: ArrayList<ArrayL
     val listaAlumnosGrupos = arrayListOf<Int>()
     val listaAlumnosFaltaCheckBox = arrayListOf<CheckBox>()
     class ActivityViewHolder(val view: View) : RecyclerView.ViewHolder(view){
-        var button1 : RadioButton? = null
-        var button2 : RadioButton? = null
-        var button3 : ImageButton? = null
-        var button4 : CheckBox? = null
+
+        var button3 : CheckBox? = null
         var txt_primario : TextView? = null
         var txt_secundario : TextView? = null
         var idAlumno : Int? = null
@@ -32,17 +30,9 @@ class ProfesorAdapterChild(val context: Context, val elementos: ArrayList<ArrayL
             catch (e: Exception){ }
             try{ txt_secundario = view.findViewById(R.id.txt_secundario) }
             catch (e: Exception){ }
-            try{ button1 = view.findViewById(R.id.radioButton) }
-            catch (e: Exception){ }
-            try{ button2 = view.findViewById(R.id.radioButton2) }
-            catch (e: Exception){ }
-            try{ button3 = view.findViewById(R.id.imageButton) }
-            catch (e: Exception){ }
-            try{ button4 = view.findViewById(R.id.checkBox1) }
-            catch (e: Exception){ }
 
-
-
+            try{ button3 = view.findViewById(R.id.checkBox1) }
+            catch (e: Exception){ }
 
         }
         fun bindData(elemento: ArrayList<String>){
@@ -66,38 +56,18 @@ class ProfesorAdapterChild(val context: Context, val elementos: ArrayList<ArrayL
     override fun onBindViewHolder(holder: ActivityViewHolder, position: Int) {
         val elem = elementos!![position]
         holder.bindData(elem)
-        if(holder.button1 != null){
-            holder.button1!!.setOnClickListener {
-            }
-            holder.button1!!.setOnCheckedChangeListener(CompoundButton.OnCheckedChangeListener { buttonView, isChecked ->
-                println("BOTON 1")
-            })
 
-        }
-        if(holder.button2 != null){
-            holder.button2!!.setOnClickListener { println("BOTON 2") }
-        }
-        if(holder.button3 != null){
-            holder.button3!!.setOnClickListener {
-                val intent = Intent(context, activity_main_maestro_boleta::class.java)
-                intent.putExtra("idAlumno",holder.idAlumno)
-                intent.putExtra("idGrupo",holder.idGrupo)
-                context.startActivity(intent)
-
-
-            }
-        }
-        if(holder.button4 != null) {
-            holder.button4!!.setOnCheckedChangeListener { buttonView, isChecked ->
+        if(holder.button3 != null) {
+            holder.button3!!.setOnCheckedChangeListener { buttonView, isChecked ->
                 if(isChecked){
                     listaAlumnosFalta.add(holder.idAlumno!!.toInt())
-                    listaAlumnosFaltaCheckBox.add( holder.button4!!)
+                    listaAlumnosFaltaCheckBox.add( holder.button3!!)
                     listaAlumnosGrupos.add(holder.idGrupo!!.toInt())
                     alumnosFalta.ListaAlumnosFalta(listaAlumnosFalta, listaAlumnosGrupos,listaAlumnosFaltaCheckBox)
 
                 }else{
                     listaAlumnosFalta.remove(holder.idAlumno!!.toInt())
-                    listaAlumnosFaltaCheckBox.remove(holder.button4!!)
+                    listaAlumnosFaltaCheckBox.remove(holder.button3!!)
                     listaAlumnosGrupos.remove(holder.idGrupo!!.toInt())
 
                     alumnosFalta.ListaAlumnosFalta(listaAlumnosFalta,listaAlumnosGrupos,listaAlumnosFaltaCheckBox)
