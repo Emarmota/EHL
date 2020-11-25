@@ -53,6 +53,8 @@ class activity_main_maestro_alumnos : AppCompatActivity(), ProfesorAdapterChild.
         var queue = Volley.newRequestQueue(this)
         val uri = "http://"+getString(R.string.ip_connection)+"/api/maestroAlumnos/"+sharedPref.getInt(Constant.PREF_ID)
         val listener = Response.Listener<JSONArray> { response ->
+            println(response.toString())
+
             val lista : ArrayList<ArrayList<String>>
             lista = arrayListOf(arrayListOf())
             var elemento : JSONObject

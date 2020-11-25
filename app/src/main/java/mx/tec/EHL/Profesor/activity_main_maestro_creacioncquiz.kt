@@ -43,6 +43,8 @@ class activity_main_maestro_creacioncquiz : AppCompatActivity(), ProfesorAdapter
         val uri = "http://"+getString(R.string.ip_connection)+"/api/maestroVerCQuiz/"+nombreActividad
         val listener = Response.Listener<JSONArray> { response ->
             val lista : ArrayList<ArrayList<String>>
+            println(response.toString())
+
             lista = arrayListOf(arrayListOf())
             var elemento : JSONObject
             for(i in 0 until response.length()){
@@ -51,23 +53,24 @@ class activity_main_maestro_creacioncquiz : AppCompatActivity(), ProfesorAdapter
                     lista.set(i,
                         arrayListOf(
                             elemento.getString("pregunta"),
-                            "s",
-                            elemento.getString("respuestaCorrecta"),
-                            elemento.getString("respuesta")
+                            "N/A",
+                            elemento.getString("respuesta"),
+                            "1"
+
                         )
                     )
                 }else{
                     lista.add(i,
                         arrayListOf(
                             elemento.getString("pregunta"),
-                            "s",
-                            elemento.getString("respuestaCorrecta"),
-                            elemento.getString("respuesta")
+                            "N/A",
+                            elemento.getString("respuesta"),
+                            "2"
+
                         )
                     )
                 }
             }
-
             activityAdapter = ProfesorAdapter(this,lista, object : ProfesorAdapter.OnAdapterListener {},R.layout.adapter_activity_maestro_trabajos_edicioncquiz,R.layout.adapter_activity_maestro_trabajos_edicioncquiz_respuestas)
             val rvPadre = findViewById<RecyclerView>(R.id.rvPadre)
             rvPadre.apply {
