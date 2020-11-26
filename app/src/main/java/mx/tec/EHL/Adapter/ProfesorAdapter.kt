@@ -71,7 +71,7 @@ class ProfesorAdapter (val context : Context, var elementos: ArrayList<ArrayList
             holder.button1!!.setOnClickListener {
                 println("BOTON 2" + holder.idActividad)
                 var queue = Volley.newRequestQueue(context)
-                var uri = "http://"+context.getString(R.string.ip_connection)+"/api/maestroQuitarGuia/"+ holder.idActividad
+                var uri = "http://"+context.getString(R.string.ip_connection)+"/api/maestroQuitarActividad/"+ holder.idActividad
                 val listener = Response.Listener<JSONArray> { response ->
                 }
                 val error = Response.ErrorListener { error ->
@@ -197,7 +197,6 @@ class ProfesorAdapter (val context : Context, var elementos: ArrayList<ArrayList
     private fun SetRecycler(elementos: ArrayList<ArrayList<String>>, recyclerView: RecyclerView?, layoutInflaterChild:Int){
         val childRecyclerAdapter = ProfesorAdapterChild(context, elementos,  object: ProfesorAdapterChild.OnAdapterListener{
             override fun ListaAlumnosFalta(listaAlumnosFalta: ArrayList<Int>, listaGrupos: ArrayList<Int>, checkBox: ArrayList<CheckBox>) {
-                TODO("Not yet implemented")
             }
         }, layoutInflaterChild)
         recyclerView!!.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)

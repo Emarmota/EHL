@@ -21,7 +21,7 @@
             <TextView
                 android:id="@+id/txt_primario"
                 android:layout_width="117dp"
-                android:layout_height="25dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="84dp"
                 android:layout_marginTop="12dp"
                 android:paddingBottom="5sp"
@@ -41,6 +41,16 @@
                 android:textColor="#FFFFFF"
                 app:layout_constraintStart_toEndOf="@+id/txt_primario"
                 app:layout_constraintTop_toTopOf="parent" />
+
+            <ImageView
+                android:id="@+id/button1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="56dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:srcCompat="@android:drawable/ic_media_next" />
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -1,13 +1,24 @@
 package mx.tec.EHL.Adapter
 
+import android.app.Activity
 import android.content.Context
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.android.volley.Request
+import com.android.volley.Response
+import com.android.volley.toolbox.JsonArrayRequest
+import com.android.volley.toolbox.Volley
+import mx.tec.EHL.MainActivity
 import mx.tec.EHL.R
+import org.json.JSONArray
+import java.lang.Exception
+import java.lang.NullPointerException
 
 class AlumnoAdapter (val context : Context, var elementos: ArrayList<ArrayList<String>>?, var listener: OnAdapterListener, var layoutInflater: Int, var layoutInflaterChild:Int?) : RecyclerView.Adapter<AlumnoAdapter.ActivityViewHolder>(){
     var elementosChild : ArrayList<ArrayList<String>>? = null
@@ -18,9 +29,11 @@ class AlumnoAdapter (val context : Context, var elementos: ArrayList<ArrayList<S
         var recyclerViewChild : RecyclerView? = null
         var txt_primario : TextView? = null
         var txt_secundario : TextView? = null
+        var button1 : ImageView? = null
         init {
             txt_primario = view.findViewById(R.id.txt_primario)
             txt_secundario = view.findViewById(R.id.txt_secundario)
+            try { button1 = view.findViewById(R.id.button1) } catch (e : Exception){}
             if(child){
                 recyclerViewChild = view.findViewById(R.id.rvHijo)
             }else{
@@ -44,6 +57,11 @@ class AlumnoAdapter (val context : Context, var elementos: ArrayList<ArrayList<S
     override fun onBindViewHolder(holder: ActivityViewHolder, position: Int) {
         val elem = elementos!![position]
         holder.bindData(elem)
+        if(holder.button1 != null){
+            holder.button1!!.setOnClickListener {
+                onClick.OnClick( holder.button1!!, holder.txt_primario!!.text.toString() )
+            }
+        }
 
         if(layoutInflaterChild != null ) {
             var auxMatrix : ArrayList<ArrayList<String>>?
@@ -78,14 +96,12 @@ class AlumnoAdapter (val context : Context, var elementos: ArrayList<ArrayList<S
             SetRecycler(auxMatrix!!,holder.recyclerViewChild, layoutInflaterChild!!)
         }
     }
-
+    var onClick: AlumnoAdapter.OnAdapterListener
+    init {
+        onClick = context as AlumnoAdapter.OnAdapterListener
+    }
     interface OnAdapterListener {
-        /*
-        fun onClick(: )
-        fun onUpdate(: )
-        fun onDelete(: )
-
-         */
+        fun OnClick(button:ImageView, nameActivity: String)
     }
 
     override fun getItemCount(): Int {
@@ -107,17 +123,17 @@ class AlumnoAdapter (val context : Context, var elementos: ArrayList<ArrayList<S
             for(i in 0..elementos!!.size-1){
                 if(i == 0){
                     newElementos.set(countNew++,elementos!![i])
-                    elementosChild!!.set(childCount++, elementos!![i].slice(2..3) as ArrayList<String>)
+                    elementosChild!!.set(childCount++, elementos!![i].slice(2..elementos!![i].size-1) as ArrayList<String>)
                     cantChildAux++
                 }else{
                     if(i != 0 && elementos!![i-1][0] != elementos!![i][0] ){
                         newElementos.add(countNew++,elementos!![i])
-                        elementosChild!!.add(childCount++, elementos!![i].slice(2..3) as ArrayList<String>)
+                        elementosChild!!.add(childCount++, elementos!![i].slice(2..elementos!![i].size-1) as ArrayList<String>)
                         cantChild!!.add(cantChildRepet, cantChildAux)
                         cantChildAux = 1
                         cantChildRepet++
                     }else{
-                        elementosChild!!.add(childCount++, elementos!![i].slice(2..3) as ArrayList<String>)
+                        elementosChild!!.add(childCount++, elementos!![i].slice(2..elementos!![i].size-1) as ArrayList<String>)
                         cantChildAux++
                     }
                 }
@@ -130,7 +146,10 @@ class AlumnoAdapter (val context : Context, var elementos: ArrayList<ArrayList<S
     }
 
     private fun SetRecycler(elementos: ArrayList<ArrayList<String>>, recyclerView: RecyclerView?, layoutInflaterChild:Int){
-        val childRecyclerAdapter = AlumnoAdapterChild(context,elementos, object: AlumnoAdapter.OnAdapterListener{}, layoutInflaterChild)
+        val childRecyclerAdapter = AlumnoAdapterChild(context,elementos, object: AlumnoAdapter.OnAdapterListener{
+            override fun OnClick(button: ImageView, nameActivity: String) {
+            }
+        }, layoutInflaterChild)
         recyclerView!!.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
         recyclerView!!.adapter = childRecyclerAdapter
     }

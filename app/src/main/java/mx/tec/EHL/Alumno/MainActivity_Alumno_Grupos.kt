@@ -60,7 +60,11 @@ class MainActivity_Alumno_Grupos : AppCompatActivity() {
                     )
                 }
             }
-            activityAdapter = AlumnoAdapter(this,lista,object: AlumnoAdapter.OnAdapterListener{},R.layout.adapter_activity_alumno_grupos,null)
+            activityAdapter = AlumnoAdapter(this,lista,object: AlumnoAdapter.OnAdapterListener{
+                override fun OnClick(button: ImageView, nameActivity: String) {
+                    TODO("Not yet implemented")
+                }
+            },R.layout.adapter_activity_alumno_grupos,null)
             val list_Activity_alumno = findViewById<RecyclerView>(R.id.rvPadre)
             list_Activity_alumno.apply {
                 layoutManager = LinearLayoutManager(applicationContext)

@@ -79,7 +79,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvPadre"
         android:layout_width="349dp"
-        android:layout_height="427dp"
+        android:layout_height="400dp"
         android:layout_marginStart="29dp"
         android:layout_marginTop="24dp"
         android:layout_marginEnd="29dp"
@@ -94,8 +94,7 @@
         style="@style/btn_sinrelleno"
         android:layout_width="116dp"
         android:layout_height="46dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="28dp"
+        android:layout_marginEnd="16dp"
         android:text="Confirmar"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/rvPadre" />

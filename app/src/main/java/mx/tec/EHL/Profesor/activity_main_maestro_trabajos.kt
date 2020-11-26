@@ -25,6 +25,7 @@ import com.google.firebase.storage.ktx.storage
 import kotlinx.android.synthetic.main.a_alertdialog_guia.*
 import kotlinx.android.synthetic.main.a_alertdialog_guia.view.*
 import mx.tec.EHL.Adapter.ProfesorAdapter
+import mx.tec.EHL.Adapter.ProfesorAdapterChild
 import mx.tec.EHL.Helper.Constant
 import mx.tec.EHL.Helper.PreferencesHelper
 import mx.tec.EHL.PopUpClassAñadirCQuiz
@@ -34,8 +35,9 @@ import org.json.JSONObject
 import java.lang.NullPointerException
 import java.net.URLEncoder
 import java.util.*
+import kotlin.collections.ArrayList
 
-class activity_main_maestro_trabajos : AppCompatActivity() {
+class activity_main_maestro_trabajos : AppCompatActivity(), ProfesorAdapterChild.OnAdapterListener {
     lateinit var activityAdapter: ProfesorAdapter
     val sharedPref by lazy { PreferencesHelper(this) }
     //PopupWindow display method
@@ -146,6 +148,7 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
                     layoutManager = LinearLayoutManager(applicationContext)
                     adapter = activityAdapter
                 }
+                rvPadre
 
             }
             val error1 = Response.ErrorListener { error ->
@@ -175,7 +178,8 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
                             i,
                             arrayListOf(
                                 elemento.getString("nombreActividad"),
-                                "N/A"
+                                elemento.getString("id")
+
                             )
                         )
                     } else {
@@ -183,7 +187,8 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
                             i,
                             arrayListOf(
                                 elemento.getString("nombreActividad"),
-                                "N/A"
+                                elemento.getString("id")
+
                             )
                         )
                     }
@@ -327,4 +332,10 @@ class activity_main_maestro_trabajos : AppCompatActivity() {
             }
         }
     }
+
+    override fun ListaAlumnosFalta(listaAlumnosFalta: ArrayList<Int>, listaGrupos: ArrayList<Int>, checkBox: ArrayList<CheckBox>) {
+
+    }
+
+
 }

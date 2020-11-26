@@ -131,7 +131,6 @@ class activity_main_maestro_alumnos : AppCompatActivity(), ProfesorAdapterChild.
                 buttonConfirmar=findViewById(R.id.buttonConfirmar)
             }
 
-
             for(i in 0..checkBox.size-1){
                 checkBox[0].isChecked = false
             }
@@ -139,4 +138,6 @@ class activity_main_maestro_alumnos : AppCompatActivity(), ProfesorAdapterChild.
         }
 
     }
+
+
 }
