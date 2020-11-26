@@ -30,6 +30,8 @@ class AlumnoAdapter (val context : Context, var elementos: ArrayList<ArrayList<S
         var txt_primario : TextView? = null
         var txt_secundario : TextView? = null
         var button1 : ImageView? = null
+        var basura : String? = null
+
         init {
             txt_primario = view.findViewById(R.id.txt_primario)
             txt_secundario = view.findViewById(R.id.txt_secundario)
@@ -41,9 +43,11 @@ class AlumnoAdapter (val context : Context, var elementos: ArrayList<ArrayList<S
             }
         }
         fun bindData(elemento: ArrayList<String>?){
-            txt_primario !!.text = elemento!![0]
-            txt_secundario !!.text = elemento!![1]
-
+            if(txt_primario != null)  txt_primario !!.text = elemento!![0]
+            if(txt_secundario != null) txt_secundario !!.text = elemento!![1]
+            else{
+                basura = elemento!![1]
+            }
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityViewHolder {

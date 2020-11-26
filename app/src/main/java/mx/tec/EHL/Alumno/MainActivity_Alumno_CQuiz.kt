@@ -3,6 +3,7 @@ package mx.tec.EHL.Alumno
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.CheckBox
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +21,7 @@ import org.json.JSONObject
 import java.lang.NullPointerException
 import java.net.URLEncoder
 
-class MainActivity_Alumno_CQuiz : AppCompatActivity(),  AlumnoAdapter.OnAdapterListener {
+class MainActivity_Alumno_CQuiz : AppCompatActivity(),  AlumnoAdapter.OnAdapterListener, AlumnoAdapterChild.OnAdapterListener {
     lateinit var activityAdapter: AlumnoAdapter
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -44,7 +45,7 @@ class MainActivity_Alumno_CQuiz : AppCompatActivity(),  AlumnoAdapter.OnAdapterL
                             elemento.getString("pregunta"),
                             "N/A",
                             elemento.getString("respuesta"),
-                            "1"
+                            elemento.getString("id")
 
                         )
                     )
@@ -54,7 +55,7 @@ class MainActivity_Alumno_CQuiz : AppCompatActivity(),  AlumnoAdapter.OnAdapterL
                             elemento.getString("pregunta"),
                             "N/A",
                             elemento.getString("respuesta"),
-                            "2"
+                            elemento.getString("id")
 
                         )
                     )
@@ -84,6 +85,23 @@ class MainActivity_Alumno_CQuiz : AppCompatActivity(),  AlumnoAdapter.OnAdapterL
     }
 
     override fun OnClick(button: ImageView, nameActivity: String) {
+
+    }
+
+    override fun RespuestaSeleccionada(position: Int, listaCheckBox: ArrayList<CheckBox>, seleccionCheckBox: ArrayList<CheckBox>) {
+        println("LISTA TOTAL DE BOTONES"+listaCheckBox.size)
+        println("POSITION"+position)
+        println("BOTON SELECCIONADO"+seleccionCheckBox.toString())
+        for(i in 0..listaCheckBox.size-1){
+            println("NOMBRE DE BOTONES"+listaCheckBox[i].toString())
+            if(seleccionCheckBox[0].toString()  == listaCheckBox[i].toString() && position == 0){
+                listaCheckBox[i+1].isChecked = false
+            }
+            else if(seleccionCheckBox[0].toString()  == listaCheckBox[i].toString() && position == 1){
+                listaCheckBox[i-1].isChecked = false
+            }
+        }
+
 
     }
 }
