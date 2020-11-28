@@ -9,6 +9,8 @@ import android.widget.RadioButton
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import mx.tec.EHL.R
+import org.json.JSONArray
+import org.json.JSONObject
 import java.lang.Exception
 import java.util.ArrayList
 
@@ -47,6 +49,9 @@ class AlumnoAdapterChild (val context: Context, val elementos:  ArrayList<ArrayL
         return ActivityViewHolder(LayoutInflater.from(context).inflate(layoutInflater,parent,false))
     }
 
+
+
+
     override fun onBindViewHolder(holder: ActivityViewHolder, position: Int) {
         val elem = elementos!![position]
         holder.bindData(elem)
@@ -56,11 +61,11 @@ class AlumnoAdapterChild (val context: Context, val elementos:  ArrayList<ArrayL
             holder.button1!!.setOnCheckedChangeListener { buttonView, isChecked ->
                 if(isChecked){
                     holder.seleccionCheckBox.set(0,holder.button1!!)
+                    //holder.seleccionRespuesta.add(JSONObject().put("respuesta"+position.toString(),holder.txt_primario!!.text.toString()))
                     respuestaSeleccion.RespuestaSeleccionada(position, ActivityViewHolder.listaCheckBox, holder.seleccionCheckBox)
-
-
                 }else{
                     holder.seleccionCheckBox.set(0,holder.button1!!)
+                    //holder.seleccionRespuesta.remove(JSONObject().get("respuesta"+position.toString()))
                     respuestaSeleccion.RespuestaSeleccionada(position,ActivityViewHolder.listaCheckBox, holder.seleccionCheckBox)
 
                 }
@@ -68,6 +73,8 @@ class AlumnoAdapterChild (val context: Context, val elementos:  ArrayList<ArrayL
         }
 
     }
+
+    
 
     override fun getItemCount(): Int {
         return elementos!!.size
@@ -80,5 +87,12 @@ class AlumnoAdapterChild (val context: Context, val elementos:  ArrayList<ArrayL
     interface OnAdapterListener {
         fun RespuestaSeleccionada(position : Int, listaCheckBox: ArrayList<CheckBox>, seleccionCheckBox:  ArrayList<CheckBox>)
     }
+
+
+
+
+
+
+
 
 }

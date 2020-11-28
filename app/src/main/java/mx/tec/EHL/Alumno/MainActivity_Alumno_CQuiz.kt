@@ -13,8 +13,6 @@ import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
 import mx.tec.EHL.Adapter.AlumnoAdapter
 import mx.tec.EHL.Adapter.AlumnoAdapterChild
-import mx.tec.EHL.Adapter.ProfesorAdapter
-import mx.tec.EHL.DataBase.Tablas.Alumno
 import mx.tec.EHL.R
 import org.json.JSONArray
 import org.json.JSONObject
@@ -23,6 +21,7 @@ import java.net.URLEncoder
 
 class MainActivity_Alumno_CQuiz : AppCompatActivity(),  AlumnoAdapter.OnAdapterListener, AlumnoAdapterChild.OnAdapterListener {
     lateinit var activityAdapter: AlumnoAdapter
+    val seleccionRespuesta = arrayListOf(JSONObject())
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -88,7 +87,11 @@ class MainActivity_Alumno_CQuiz : AppCompatActivity(),  AlumnoAdapter.OnAdapterL
 
     }
 
-    override fun RespuestaSeleccionada(position: Int, listaCheckBox: ArrayList<CheckBox>, seleccionCheckBox: ArrayList<CheckBox>) {
+
+
+
+
+    override fun RespuestaSeleccionada(position: Int, listaCheckBox: java.util.ArrayList<CheckBox>, seleccionCheckBox: java.util.ArrayList<CheckBox>) {
         println("LISTA TOTAL DE BOTONES"+listaCheckBox.size)
         println("POSITION"+position)
         println("BOTON SELECCIONADO"+seleccionCheckBox.toString())
