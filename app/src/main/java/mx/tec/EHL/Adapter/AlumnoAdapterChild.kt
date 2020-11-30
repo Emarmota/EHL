@@ -62,11 +62,11 @@ class AlumnoAdapterChild (val context: Context, val elementos:  ArrayList<ArrayL
                 if(isChecked){
                     holder.seleccionCheckBox.set(0,holder.button1!!)
                     //holder.seleccionRespuesta.add(JSONObject().put("respuesta"+position.toString(),holder.txt_primario!!.text.toString()))
-                    respuestaSeleccion.RespuestaSeleccionada(position, ActivityViewHolder.listaCheckBox, holder.seleccionCheckBox)
+                    respuestaSeleccion.RespuestaSeleccionada(position, ActivityViewHolder.listaCheckBox, holder.seleccionCheckBox,holder.idPregunta!!.toInt(),holder.txt_primario!!.text.toString())
                 }else{
                     holder.seleccionCheckBox.set(0,holder.button1!!)
                     //holder.seleccionRespuesta.remove(JSONObject().get("respuesta"+position.toString()))
-                    respuestaSeleccion.RespuestaSeleccionada(position,ActivityViewHolder.listaCheckBox, holder.seleccionCheckBox)
+                    respuestaSeleccion.RespuestaSeleccionada(position,ActivityViewHolder.listaCheckBox, holder.seleccionCheckBox,holder.idPregunta!!.toInt(),holder.txt_primario!!.text.toString())
 
                 }
             }
@@ -85,7 +85,7 @@ class AlumnoAdapterChild (val context: Context, val elementos:  ArrayList<ArrayL
         respuestaSeleccion = context as OnAdapterListener
     }
     interface OnAdapterListener {
-        fun RespuestaSeleccionada(position : Int, listaCheckBox: ArrayList<CheckBox>, seleccionCheckBox:  ArrayList<CheckBox>)
+        fun RespuestaSeleccionada(position : Int, listaCheckBox: ArrayList<CheckBox>, seleccionCheckBox:  ArrayList<CheckBox>, idPregunta: Int, seleccionRespuesta : String)
     }
 
 

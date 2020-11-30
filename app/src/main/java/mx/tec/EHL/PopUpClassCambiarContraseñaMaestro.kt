@@ -63,13 +63,15 @@ class PopUpClassCambiarContraseñaMaestro(context:Context) {
         val buttonHecho =
             popupView.findViewById<Button>(R.id.ButtonHecho)
             buttonHecho.setOnClickListener { //As an example, display the message
-            if(test13.text.toString() != sharedPref.getString(Constant.PREF_PASSWORD)){
-                Toast.makeText(context, "La contraseña actual no es correcta",Toast.LENGTH_SHORT)
-
+            if(test15.text.toString() == "" || test17.text.toString() == "" || test13.text.toString() == "" ){
+                Toast.makeText(context, "Completa todos los campos",Toast.LENGTH_SHORT).show()
             }else if (test15.text.toString() != test17.text.toString()){
-                Toast.makeText(context, "Confirmacion de contraseña incorrecta",Toast.LENGTH_SHORT)
-
-            }else{
+                Toast.makeText(context, "Confirmacion de contraseña incorrecta",Toast.LENGTH_SHORT).show()
+                test15.requestFocus()
+            }else if(test13.text.toString() != sharedPref.getString(Constant.PREF_PASSWORD)){
+                Toast.makeText(context, "La contraseña actual no es correcta",Toast.LENGTH_SHORT).show()
+                test13.requestFocus()
+            } else{
                 var queue = Volley.newRequestQueue(context)
                 val uri = "http://"+context.getString(R.string.ip_connection)+"/api/maestroAjustes/"+sharedPref.getInt(Constant.PREF_ID)+"/"+test17.text.toString()
                 val listener = Response.Listener<JSONArray> { response ->

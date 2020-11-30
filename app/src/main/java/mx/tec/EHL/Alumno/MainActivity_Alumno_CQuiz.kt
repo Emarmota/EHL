@@ -11,6 +11,7 @@ import com.android.volley.Request
 import com.android.volley.Response
 import com.android.volley.toolbox.JsonArrayRequest
 import com.android.volley.toolbox.Volley
+import kotlinx.android.synthetic.main.activity_main_alumno_c_quiz.*
 import mx.tec.EHL.Adapter.AlumnoAdapter
 import mx.tec.EHL.Adapter.AlumnoAdapterChild
 import mx.tec.EHL.R
@@ -22,11 +23,12 @@ import java.net.URLEncoder
 class MainActivity_Alumno_CQuiz : AppCompatActivity(),  AlumnoAdapter.OnAdapterListener, AlumnoAdapterChild.OnAdapterListener {
     lateinit var activityAdapter: AlumnoAdapter
     val seleccionRespuesta = arrayListOf(JSONObject())
+    lateinit var listaPreguntas : MutableList<MutableList<String>>
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_alumno_c_quiz)
-
+        listaPreguntas = mutableListOf(mutableListOf())
         val nameActivity = intent.getStringExtra("nameActivity");
         var queue = Volley.newRequestQueue(this)
         val uri = "http://"+getString(R.string.ip_connection)+"/api/alumnoActividadResolver/"+ URLEncoder.encode( nameActivity, "utf-8")
@@ -70,6 +72,13 @@ class MainActivity_Alumno_CQuiz : AppCompatActivity(),  AlumnoAdapter.OnAdapterL
                 layoutManager = LinearLayoutManager(applicationContext)
                 adapter = activityAdapter
             }
+
+
+            buttonEntregar.setOnClickListener{
+                for (i in 1..listaPreguntas.size-1){
+                    println(listaPreguntas[i])
+                }
+            }
         }
         val error = Response.ErrorListener { error ->
             try {
@@ -90,20 +99,58 @@ class MainActivity_Alumno_CQuiz : AppCompatActivity(),  AlumnoAdapter.OnAdapterL
 
 
 
+    var borrar1 = false
+    var borrar2 = false
+    var nueva = true
+    override fun RespuestaSeleccionada(position: Int, listaCheckBox: java.util.ArrayList<CheckBox>, seleccionCheckBox: java.util.ArrayList<CheckBox>, idPregunta: Int, seleccionRespuesta: String) {
+        //println("LISTA TOTAL DE BOTONES"+listaCheckBox.size)
+        nueva = true
 
-    override fun RespuestaSeleccionada(position: Int, listaCheckBox: java.util.ArrayList<CheckBox>, seleccionCheckBox: java.util.ArrayList<CheckBox>) {
-        println("LISTA TOTAL DE BOTONES"+listaCheckBox.size)
-        println("POSITION"+position)
-        println("BOTON SELECCIONADO"+seleccionCheckBox.toString())
+
         for(i in 0..listaCheckBox.size-1){
-            println("NOMBRE DE BOTONES"+listaCheckBox[i].toString())
+            //println("NOMBRE DE BOTONES"+listaCheckBox[i].toString())
             if(seleccionCheckBox[0].toString()  == listaCheckBox[i].toString() && position == 0){
                 listaCheckBox[i+1].isChecked = false
+                //println("AST" + idPregunta.toString()+ " "+ seleccionRespuesta)
+                borrar1 = true
+                nueva = false
             }
             else if(seleccionCheckBox[0].toString()  == listaCheckBox[i].toString() && position == 1){
                 listaCheckBox[i-1].isChecked = false
+                //println("TSA" + idPregunta.toString()+ " "+ seleccionRespuesta)
+                borrar2 = true
+                nueva = false
+
+            }
+            if(borrar1 == true && borrar2 == true){
+                for (i in 1..listaPreguntas.size-1){
+                    println(listaPreguntas[i][0])
+                    if (listaPreguntas[i][0] == idPregunta.toString()){
+                        println("SE BORRA "+ idPregunta.toString() + "   "+seleccionRespuesta + "   "+ listaPreguntas[i] + "  " +i )
+                        //listaPreguntas[i].removeAt(0)
+                        //listaPreguntas[i].removeAt(0)
+                        //listaPreguntas.remove(listaPreguntas[i][0])
+                        //listaPreguntas.remove(listaPreguntas[i][1])
+                        println(listaPreguntas)
+                        borrar1 = false
+                        borrar2 = false
+                        nueva = true
+                        break
+                    }
+                }
+            }
+            if((borrar1 == false && borrar2 == false) || nueva == true){
+                listaPreguntas.add(
+                        arrayListOf(
+                                (idPregunta).toString(),
+                                seleccionRespuesta
+                        )
+                )
+                println("BOTON SELECCIONADO  "+seleccionCheckBox[0].toString() + idPregunta.toString()+ " "+ seleccionRespuesta)
+                nueva = false
             }
         }
+
 
 
     }
