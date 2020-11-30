@@ -63,7 +63,7 @@ class MainActivity_Alumno_CQuiz : AppCompatActivity(),  AlumnoAdapter.OnAdapterL
                 }
             }
             activityAdapter = AlumnoAdapter(this,lista,object: AlumnoAdapter.OnAdapterListener{
-                override fun OnClick(button: ImageView, nameActivity: String) {
+                override fun OnClick(button: ImageView, nameActivity: String, tipo: String) {
                 }
             },R.layout.adapter_activity_alumno_cquiz_title,R.layout.adapter_activity_alumno_cquiz)
 
@@ -92,7 +92,7 @@ class MainActivity_Alumno_CQuiz : AppCompatActivity(),  AlumnoAdapter.OnAdapterL
 
     }
 
-    override fun OnClick(button: ImageView, nameActivity: String) {
+    override fun OnClick(button: ImageView, nameActivity: String, tipo: String) {
 
     }
 

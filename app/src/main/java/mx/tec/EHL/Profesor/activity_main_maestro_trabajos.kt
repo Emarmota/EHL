@@ -266,10 +266,10 @@ class activity_main_maestro_trabajos : AppCompatActivity(), ProfesorAdapterChild
             var uri = ""
             if(anadirConGrupo){
                 grupoAlumno = textoEmergente!!.text.toString()
-                uri = "http://"+getString(R.string.ip_connection)+"/api/maestroAgregarGuiaConGrupo/"+sharedPref.getInt(Constant.PREF_ID)+"/"+ URLEncoder.encode( grupoAlumno, "utf-8")+"/"+ URLEncoder.encode( nombreGuia!!.text.toString(), "utf-8")+"/"+URLEncoder.encode( fileUri.toString(), "utf-8")
+                uri = "http://"+getString(R.string.ip_connection)+"/api/maestroAgregarGuiaConGrupo/"+sharedPref.getInt(Constant.PREF_ID)+"/"+ URLEncoder.encode( grupoAlumno, "utf-8")+"/"+ URLEncoder.encode( nombreGuia!!.text.toString(), "utf-8")+"/"+URLEncoder.encode( fileName, "utf-8")
             }
             else{
-                uri = "http://"+getString(R.string.ip_connection)+"/api/maestroAgregarGuiaSinGrupo/"+URLEncoder.encode( grupoAlumno, "utf-8")+"/"+ URLEncoder.encode( nombreGuia!!.text.toString(), "utf-8")+"/"+URLEncoder.encode( fileUri.toString(), "utf-8")
+                uri = "http://"+getString(R.string.ip_connection)+"/api/maestroAgregarGuiaSinGrupo/"+URLEncoder.encode( grupoAlumno, "utf-8")+"/"+ URLEncoder.encode( nombreGuia!!.text.toString(), "utf-8")+"/"+URLEncoder.encode( fileName, "utf-8")
             }
 
             val listener = Response.Listener<JSONArray> { response ->

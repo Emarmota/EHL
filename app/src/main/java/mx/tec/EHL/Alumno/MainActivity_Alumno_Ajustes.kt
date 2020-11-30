@@ -80,8 +80,7 @@ class MainActivity_Alumno_Ajustes : AppCompatActivity() {
     override fun onRequestPermissionsResult(requestCode: Int, permissions: Array<out String>, grantResults: IntArray) {
         when(requestCode){
             STOAGE_PERMISSION_CODE -> {
-                if(grantResults.isNotEmpty() && grantResults[0] ==
-                        PackageManager.PERMISSION_GRANTED){
+                if(grantResults.isNotEmpty() && grantResults[0] == PackageManager.PERMISSION_GRANTED){
                     startdowloadFile()
                 }
                 else{

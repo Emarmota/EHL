@@ -1,8 +1,6 @@
 package mx.tec.EHL.Adapter
 
-import android.app.Activity
 import android.content.Context
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,13 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.android.volley.Request
-import com.android.volley.Response
-import com.android.volley.toolbox.JsonArrayRequest
-import com.android.volley.toolbox.Volley
-import mx.tec.EHL.MainActivity
 import mx.tec.EHL.R
-import org.json.JSONArray
 import java.lang.Exception
 import java.lang.NullPointerException
 
@@ -31,7 +23,6 @@ class AlumnoAdapter (val context : Context, var elementos: ArrayList<ArrayList<S
         var txt_secundario : TextView? = null
         var button1 : ImageView? = null
         var basura : String? = null
-
         init {
             txt_primario = view.findViewById(R.id.txt_primario)
             txt_secundario = view.findViewById(R.id.txt_secundario)
@@ -48,6 +39,9 @@ class AlumnoAdapter (val context : Context, var elementos: ArrayList<ArrayList<S
             else{
                 basura = elemento!![1]
             }
+            if(elemento.size > 2){
+                basura = elemento!![2]
+            }
         }
     }
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ActivityViewHolder {
@@ -63,7 +57,7 @@ class AlumnoAdapter (val context : Context, var elementos: ArrayList<ArrayList<S
         holder.bindData(elem)
         if(holder.button1 != null){
             holder.button1!!.setOnClickListener {
-                onClick.OnClick( holder.button1!!, holder.txt_primario!!.text.toString() )
+                onClick.OnClick( holder.button1!!, holder.txt_primario!!.text.toString(), holder.basura!! )
             }
         }
 
@@ -105,14 +99,23 @@ class AlumnoAdapter (val context : Context, var elementos: ArrayList<ArrayList<S
         onClick = context as AlumnoAdapter.OnAdapterListener
     }
     interface OnAdapterListener {
-        fun OnClick(button:ImageView, nameActivity: String)
+        fun OnClick(button:ImageView, nameActivity: String, tipo : String)
     }
 
     override fun getItemCount(): Int {
         if(start == false){
-            DataOrder()
+            println(elementos!!.toString() + " <<---- ELEMENTOSS")
+            if(elementos?.get(0)!!.isNullOrEmpty() == false)
+                DataOrder()
+            else
+                return 0
         }
-        return elementos!!.size
+        try {
+            return elementos!!.size
+        }
+        catch (e: NullPointerException){
+            return 0
+        }
     }
 
     private fun DataOrder(){
@@ -151,7 +154,7 @@ class AlumnoAdapter (val context : Context, var elementos: ArrayList<ArrayList<S
 
     private fun SetRecycler(elementos: ArrayList<ArrayList<String>>, recyclerView: RecyclerView?, layoutInflaterChild:Int){
         val childRecyclerAdapter = AlumnoAdapterChild(context,elementos, object: AlumnoAdapter.OnAdapterListener{
-            override fun OnClick(button: ImageView, nameActivity: String) {
+            override fun OnClick(button: ImageView, nameActivity: String, tipo: String) {
             }
         }, layoutInflaterChild)
         recyclerView!!.layoutManager = LinearLayoutManager(context,RecyclerView.VERTICAL,false)
