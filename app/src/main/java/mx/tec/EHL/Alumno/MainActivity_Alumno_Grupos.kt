@@ -19,7 +19,7 @@ import org.json.JSONArray
 import org.json.JSONObject
 import java.lang.NullPointerException
 
-class MainActivity_Alumno_Grupos : AppCompatActivity() {
+class MainActivity_Alumno_Grupos : AppCompatActivity(),AlumnoAdapter.OnAdapterListener {
     lateinit var activityAdapter: AlumnoAdapter
     val sharedPref by lazy { PreferencesHelper(this) }
 
@@ -61,8 +61,7 @@ class MainActivity_Alumno_Grupos : AppCompatActivity() {
                 }
             }
             activityAdapter = AlumnoAdapter(this,lista,object: AlumnoAdapter.OnAdapterListener{
-                override fun OnClick(button: ImageView, nameActivity: String) {
-                    TODO("Not yet implemented")
+                override fun OnClick(button: ImageView, nameActivity: String, tipo: String) {
                 }
             },R.layout.adapter_activity_alumno_grupos,null)
             val list_Activity_alumno = findViewById<RecyclerView>(R.id.rvPadre)
@@ -79,5 +78,9 @@ class MainActivity_Alumno_Grupos : AppCompatActivity() {
         }
         val request = JsonArrayRequest(Request.Method.GET,uri,null,listener, error)
         queue.add(request)
+    }
+
+    override fun OnClick(button: ImageView, nameActivity: String, tipo: String) {
+
     }
 }

@@ -1,8 +1,10 @@
 package mx.tec.EHL.Profesor
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.widget.Button
 import android.widget.CheckBox
 import android.widget.ImageView
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -35,6 +37,11 @@ class activity_main_maestro_creacioncquiz : AppCompatActivity(), ProfesorAdapter
         popupButton10.setOnClickListener { v ->
             val popUpClass = PopUpClassAñadirPregunta(this)
             popUpClass.showPopupWindow(v,nombreActividad)
+        }
+        val btnAceptar = findViewById<Button>(R.id.button3)
+        btnAceptar.setOnClickListener {
+            val intent = Intent(this@activity_main_maestro_creacioncquiz, activity_main_maestro_trabajos::class.java)
+            startActivity(intent)
         }
 
 

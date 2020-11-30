@@ -1,5 +1,6 @@
 package mx.tec.EHL.Profesor
 
+import android.app.Activity
 import android.content.Intent
 import android.graphics.Color
 import android.net.Uri
@@ -94,6 +95,7 @@ class activity_main_maestro_trabajos : AppCompatActivity(), ProfesorAdapterChild
 
                 view.btnaceptarguia.setOnClickListener {
                     uploadFile(fileUri!!)
+
                     dialog.dismiss()
 
                 }
@@ -261,6 +263,8 @@ class activity_main_maestro_trabajos : AppCompatActivity(), ProfesorAdapterChild
         var storageRef = FirebaseStorage.getInstance().reference.child("files").child(fileName)
         storageRef.putFile(fileUri).addOnSuccessListener {
             Toast.makeText(this, "Se ha subido el archivo correctamente", Toast.LENGTH_LONG).show()
+            val activity = this@activity_main_maestro_trabajos as Activity
+            activity.recreate()
             save=false
             var queue = Volley.newRequestQueue(this)
             var uri = ""

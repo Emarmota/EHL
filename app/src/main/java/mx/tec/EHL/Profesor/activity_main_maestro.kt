@@ -40,7 +40,6 @@ class activity_main_maestro : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main_maestro)
-
         sharedpref = PreferencesHelper(this)
         loadWithGlide()
 

@@ -58,7 +58,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="40dp"
         android:layout_marginTop="8dp"
-        android:text="@string/txtv_actividadC"
+        android:text="Actividad/Realizar CQuiz"
         android:textColor="#FFFFFF"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txtv_maestroC" />

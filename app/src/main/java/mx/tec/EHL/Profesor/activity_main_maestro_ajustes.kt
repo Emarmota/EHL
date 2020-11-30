@@ -97,6 +97,8 @@ class activity_main_maestro_ajustes : AppCompatActivity() {
             val intent= Intent(this@activity_main_maestro_ajustes, activity_main_maestro::class.java)
             intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP)
             startActivity(intent)
+            val activity = activity_main_maestro::class.java as Activity
+            activity.recreate()
         }
     }
 
